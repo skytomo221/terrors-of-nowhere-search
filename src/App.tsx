@@ -29,6 +29,16 @@ export default function App() {
   const [selectedWiki, setSelectedWiki] =
     React.useState<keyof typeof wikis>("ton-jp.wiki");
 
+  const createUrl = (terror: Terror) => {
+    if (terror.links) {
+      return terror.links[selectedWiki];
+    }
+    if (selectedWiki === "terror.moe") {
+      return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name.toLocaleLowerCase().replace(' ', '_'));
+    }
+    return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name);
+  }
+
   return (
     <div>
       <div>
@@ -54,10 +64,7 @@ export default function App() {
       {search(terrors, searchWord).map((terror) => (
         <div key={terror.name}>
           <a
-            href={
-              (terror.links && terror.links[selectedWiki]) ||
-              wikis[selectedWiki].terrorsLink.replace("$terror", terror.name)
-            }
+            href={createUrl(terror)}
           >
             {terror.name}
           </a>

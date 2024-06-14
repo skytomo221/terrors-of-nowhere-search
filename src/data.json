@@ -4,6 +4,16 @@
       "name": "ton-jp.wiki",
       "url": "https://ton-jp.wiki",
       "terrorsLink": "https://www.ton-jp.com/html/terrors/$terror.html"
+    },
+    "wikiwiki.jp": {
+      "name": "wikiwiki.jp",
+      "url": "https://wikiwiki.jp/ton_jp/",
+      "terrorsLink": "https://wikiwiki.jp/ton_jp/$terror"
+    },
+    "terror.moe": {
+      "name": "terror.moe",
+      "url": "https://terror.moe",
+      "terrorsLink": "https://terror.moe/terrors/$terror"
     }
   },
   "terrors": [
@@ -509,7 +519,10 @@
     },
     {
       "name": "MeetballMan",
-      "type": "special"
+      "type": "special",
+      "links": {
+        "wikiwiki.jp": "https://wikiwiki.jp/ton_jp/The MeatBallMan"
+      }
     },
     {
       "name": "MysticMoon",
