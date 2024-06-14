@@ -38,7 +38,7 @@ export default function App() {
         "$terror",
         terror.name
           .toLocaleLowerCase()
-          .replace(/[.[\]]/, "")
+          .replace(/[.[\]’]/g, "")
           .replace(" ", "_"),
       );
     }
