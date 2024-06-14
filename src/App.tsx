@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import data from './data.json';
+import data from "./data.json";
 
 type Terror = {
   name: string;
@@ -8,24 +8,26 @@ type Terror = {
 };
 
 function search(terrors: Terror[], rawKeyword: string) {
-  const sorted = terrors.map((terror) => {
-    const target = terror.name.toLowerCase();
-    const keyword = rawKeyword.toLowerCase();
-    if (target === keyword) return { terror, rank: 0 };
-    if (target.startsWith(keyword)) return { terror, rank: 1 };
-    if (target.endsWith(keyword)) return { terror, rank: 2 };
-    if (target.includes(keyword)) return { terror, rank: 3 };
-    return { terror, rank: -1 };
-  })
+  const sorted = terrors
+    .map((terror) => {
+      const target = terror.name.toLowerCase();
+      const keyword = rawKeyword.toLowerCase();
+      if (target === keyword) return { terror, rank: 0 };
+      if (target.startsWith(keyword)) return { terror, rank: 1 };
+      if (target.endsWith(keyword)) return { terror, rank: 2 };
+      if (target.includes(keyword)) return { terror, rank: 3 };
+      return { terror, rank: -1 };
+    })
     .filter(({ rank }) => rank >= 0)
-    .sort((a, b) => a.rank - b.rank)
+    .sort((a, b) => a.rank - b.rank);
   return sorted.map(({ terror }) => terror);
 }
 
 export default function App() {
   const { terrors, wikis } = data;
-  const [searchWord, setSearchWord] = React.useState('');
-  const [selectedWiki, setSelectedWiki] = React.useState<keyof typeof wikis>('ton-jp.wiki');
+  const [searchWord, setSearchWord] = React.useState("");
+  const [selectedWiki, setSelectedWiki] =
+    React.useState<keyof typeof wikis>("ton-jp.wiki");
 
   return (
     <div>
@@ -53,8 +55,8 @@ export default function App() {
         <div key={terror.name}>
           <a
             href={
-              (terror.links && terror.links[selectedWiki])
-              || wikis[selectedWiki].terrorsLink.replace('$terror', terror.name)
+              (terror.links && terror.links[selectedWiki]) ||
+              wikis[selectedWiki].terrorsLink.replace("$terror", terror.name)
             }
           >
             {terror.name}
