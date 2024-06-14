@@ -30,11 +30,11 @@ export default function App() {
     React.useState<keyof typeof wikis>("ton-jp.wiki");
 
   const createUrl = (terror: Terror) => {
-    if (terror.links) {
+    if (terror.links && terror.links[selectedWiki]) {
       return terror.links[selectedWiki];
     }
     if (selectedWiki === "terror.moe") {
-      return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name.toLocaleLowerCase().replace(' ', '_'));
+      return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name.toLocaleLowerCase().replace(/[.[\]]/, '').replace(' ', '_'));
     }
     return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name);
   }
