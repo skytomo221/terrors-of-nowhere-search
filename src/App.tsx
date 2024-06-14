@@ -38,8 +38,8 @@ export default function App() {
         "$terror",
         terror.name
           .toLocaleLowerCase()
-          .replace(/[.[\]’]/g, "")
-          .replace(" ", "_"),
+          .replaceAll(/[.[\]’]/g, "")
+          .replaceAll(" ", "_"),
       );
     }
     return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name);
