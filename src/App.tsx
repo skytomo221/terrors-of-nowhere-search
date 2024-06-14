@@ -34,10 +34,16 @@ export default function App() {
       return terror.links[selectedWiki];
     }
     if (selectedWiki === "terror.moe") {
-      return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name.toLocaleLowerCase().replace(/[.[\]]/, '').replace(' ', '_'));
+      return wikis[selectedWiki].terrorsLink.replace(
+        "$terror",
+        terror.name
+          .toLocaleLowerCase()
+          .replace(/[.[\]]/, "")
+          .replace(" ", "_"),
+      );
     }
     return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name);
-  }
+  };
 
   return (
     <div>
@@ -64,11 +70,7 @@ export default function App() {
       </div>
       {search(terrors, searchWord).map((terror) => (
         <div key={terror.name}>
-          <a
-            href={createUrl(terror)}
-          >
-            {terror.name}
-          </a>
+          <a href={createUrl(terror)}>{terror.name}</a>
         </div>
       ))}
     </div>
