@@ -1,0 +1,538 @@
+{
+  "wikis": {
+    "ton-jp.wiki": {
+      "name": "ton-jp.wiki",
+      "url": "https://ton-jp.wiki",
+      "terrorsLink": "https://www.ton-jp.com/html/terrors/$terror.html"
+    }
+  },
+  "terrors": [
+    {
+      "name": "Huggy",
+      "type": "normal"
+    },
+    {
+      "name": "Corrupted Toys",
+      "type": "normal"
+    },
+    {
+      "name": "Demented Spongebob",
+      "type": "normal"
+    },
+    {
+      "name": "Specimen 8",
+      "type": "normal"
+    },
+    {
+      "name": "HER",
+      "type": "normal"
+    },
+    {
+      "name": "Tails Doll",
+      "type": "normal"
+    },
+    {
+      "name": "Black Sun",
+      "type": "normal"
+    },
+    {
+      "name": "Aku Ball",
+      "type": "normal"
+    },
+    {
+      "name": "Ao Oni",
+      "type": "normal"
+    },
+    {
+      "name": "Toren’s Shadow",
+      "type": "normal"
+    },
+    {
+      "name": "[CENSORED]",
+      "type": "normal"
+    },
+    {
+      "name": "WhiteNight",
+      "type": "normal"
+    },
+    {
+      "name": "An Arbiter",
+      "type": "normal"
+    },
+    {
+      "name": "Squidward",
+      "type": "normal"
+    },
+    {
+      "name": "Comedy",
+      "type": "normal"
+    },
+    {
+      "name": "Purple Guy",
+      "type": "normal"
+    },
+    {
+      "name": "Spongefly Swarm",
+      "type": "normal"
+    },
+    {
+      "name": "Hush",
+      "type": "normal"
+    },
+    {
+      "name": "MopeMope",
+      "type": "normal"
+    },
+    {
+      "name": "Sawrunner",
+      "type": "normal"
+    },
+    {
+      "name": "Imposter",
+      "type": "normal"
+    },
+    {
+      "name": "Something",
+      "type": "normal"
+    },
+    {
+      "name": "Starved",
+      "type": "normal"
+    },
+    {
+      "name": "The Painter",
+      "type": "normal"
+    },
+    {
+      "name": "The Guidance",
+      "type": "normal"
+    },
+    {
+      "name": "With Many Voices",
+      "type": "normal"
+    },
+    {
+      "name": "Nextbots",
+      "type": "normal"
+    },
+    {
+      "name": "Harvest",
+      "type": "normal"
+    },
+    {
+      "name": "Smileghost",
+      "type": "normal"
+    },
+    {
+      "name": "Karol_Corpse",
+      "type": "normal"
+    },
+    {
+      "name": "Mario Has Logged In",
+      "type": "normal"
+    },
+    {
+      "name": "Big Bird",
+      "type": "normal"
+    },
+    {
+      "name": "Dev Bytes",
+      "type": "normal"
+    },
+    {
+      "name": "Luigi & Luigi Dolls",
+      "type": "normal"
+    },
+    {
+      "name": "V2",
+      "type": "normal"
+    },
+    {
+      "name": "Withered Bonnie",
+      "type": "normal"
+    },
+    {
+      "name": "The Boys",
+      "type": "normal"
+    },
+    {
+      "name": "Something Wicked",
+      "type": "normal"
+    },
+    {
+      "name": "Seek",
+      "type": "normal"
+    },
+    {
+      "name": "Rush",
+      "type": "normal"
+    },
+    {
+      "name": "Sonic",
+      "type": "normal"
+    },
+    {
+      "name": "Bad Batter",
+      "type": "normal"
+    },
+    {
+      "name": "Signus",
+      "type": "normal"
+    },
+    {
+      "name": "Mirror",
+      "type": "normal"
+    },
+    {
+      "name": "Legs",
+      "type": "normal"
+    },
+    {
+      "name": "The Old Man",
+      "type": "normal"
+    },
+    {
+      "name": "Judgement Bird",
+      "type": "normal"
+    },
+    {
+      "name": "Slender",
+      "type": "normal"
+    },
+    {
+      "name": "Maul-A-Child",
+      "type": "normal"
+    },
+    {
+      "name": "Garten Goers",
+      "type": "normal"
+    },
+    {
+      "name": "Don’t Touch Me",
+      "type": "normal"
+    },
+    {
+      "name": "Specimen 2",
+      "type": "normal"
+    },
+    {
+      "name": "Specimen 10",
+      "type": "normal"
+    },
+    {
+      "name": "The Lifebringer",
+      "type": "normal"
+    },
+    {
+      "name": "Pale Association",
+      "type": "normal"
+    },
+    {
+      "name": "Toy Enforcer",
+      "type": "normal"
+    },
+    {
+      "name": "TBH",
+      "type": "normal"
+    },
+    {
+      "name": "DOOMBOX",
+      "type": "normal"
+    },
+    {
+      "name": "Christian Brutal Sniper",
+      "type": "normal"
+    },
+    {
+      "name": "Nosk",
+      "type": "normal"
+    },
+    {
+      "name": "Apocrean Harvester",
+      "type": "normal"
+    },
+    {
+      "name": "Arkus",
+      "type": "normal"
+    },
+    {
+      "name": "Cartoon Cat",
+      "type": "normal"
+    },
+    {
+      "name": "Wario Apparition",
+      "type": "normal"
+    },
+    {
+      "name": "Shinto",
+      "type": "normal"
+    },
+    {
+      "name": "Hell Bell",
+      "type": "normal"
+    },
+    {
+      "name": "Security",
+      "type": "normal"
+    },
+    {
+      "name": "The Swarm",
+      "type": "normal"
+    },
+    {
+      "name": "Shiteyanyo",
+      "type": "normal"
+    },
+    {
+      "name": "Bacteria",
+      "type": "normal"
+    },
+    {
+      "name": "Tiffany",
+      "type": "normal"
+    },
+    {
+      "name": "HoovyDundy",
+      "type": "normal"
+    },
+    {
+      "name": "Haket",
+      "type": "normal"
+    },
+    {
+      "name": "Akumii-Kari",
+      "type": "normal"
+    },
+    {
+      "name": "Lunatic Cultist",
+      "type": "normal"
+    },
+    {
+      "name": "Sturm",
+      "type": "normal"
+    },
+    {
+      "name": "Punishing Bird",
+      "type": "normal"
+    },
+    {
+      "name": "Prisoner",
+      "type": "normal"
+    },
+    {
+      "name": "Red Bus",
+      "type": "normal"
+    },
+    {
+      "name": "Waterwraith",
+      "type": "normal"
+    },
+    {
+      "name": "Astrum Aureus",
+      "type": "normal"
+    },
+    {
+      "name": "Snarbolax",
+      "type": "normal"
+    },
+    {
+      "name": "All-Around-Helpers",
+      "type": "normal"
+    },
+    {
+      "name": "Sakuya Izayoi",
+      "type": "normal"
+    },
+    {
+      "name": "Arrival",
+      "type": "normal"
+    },
+    {
+      "name": "Miros Birds",
+      "type": "normal"
+    },
+    {
+      "name": "BFF",
+      "type": "normal"
+    },
+    {
+      "name": "Scavenger",
+      "type": "normal"
+    },
+    {
+      "name": "lain",
+      "type": "normal"
+    },
+    {
+      "name": "Feddys",
+      "type": "alternate"
+    },
+    {
+      "name": "TBH SPY",
+      "type": "alternate"
+    },
+    {
+      "name": "Tragedy",
+      "type": "alternate"
+    },
+    {
+      "name": "Voidwalker",
+      "type": "alternate"
+    },
+    {
+      "name": "Paradise Bird",
+      "type": "alternate"
+    },
+    {
+      "name": "Overseer",
+      "type": "alternate"
+    },
+    {
+      "name": "Lord’s Signal",
+      "type": "alternate"
+    },
+    {
+      "name": "Rabid Snarbolax",
+      "type": "alternate"
+    },
+    {
+      "name": "MR MEGA",
+      "type": "alternate"
+    },
+    {
+      "name": "Eggman’s Announcement",
+      "type": "alternate"
+    },
+    {
+      "name": "Knight of Toren",
+      "type": "alternate"
+    },
+    {
+      "name": "Decayed Sponge",
+      "type": "alternate"
+    },
+    {
+      "name": "Mona & The Mountain",
+      "type": "alternate"
+    },
+    {
+      "name": "Furnace",
+      "type": "alternate"
+    },
+    {
+      "name": "Army In Black",
+      "type": "alternate"
+    },
+    {
+      "name": "Lone Agent - Bliss",
+      "type": "alternate"
+    },
+    {
+      "name": "Glaggle Gang",
+      "type": "alternate"
+    },
+    {
+      "name": "WHITEFACE",
+      "type": "alternate"
+    },
+    {
+      "name": "sm64.z64",
+      "type": "alternate"
+    },
+    {
+      "name": "The Red Mist",
+      "type": "alternate"
+    },
+    {
+      "name": "Sanic",
+      "type": "alternate"
+    },
+    {
+      "name": "S.T.G.M",
+      "type": "alternate"
+    },
+    {
+      "name": "Convict Squad",
+      "type": "alternate"
+    },
+    {
+      "name": "Fusion Pilot",
+      "type": "alternate"
+    },
+    {
+      "name": "Dev Maulers",
+      "type": "alternate"
+    },
+    {
+      "name": "_ - Lisa",
+      "type": "alternate"
+    },
+    {
+      "name": "Apathy",
+      "type": "alternate"
+    },
+    {
+      "name": "Angry Munci",
+      "type": "alternate"
+    },
+    {
+      "name": "Ambush",
+      "type": "alternate"
+    },
+    {
+      "name": "Roblander",
+      "type": "alternate"
+    },
+    {
+      "name": "Walpurgisnacht",
+      "type": "alternate"
+    },
+    {
+      "name": "Sakuya The Ripper",
+      "type": "alternate"
+    },
+    {
+      "name": "Teuthida",
+      "type": "alternate"
+    },
+    {
+      "name": "Judas",
+      "type": "alternate"
+    },
+    {
+      "name": "The Navigator",
+      "type": "alternate"
+    },
+    {
+      "name": "Try Not To Touch ME",
+      "type": "alternate"
+    },
+    {
+      "name": "MeetballMan",
+      "type": "special"
+    },
+    {
+      "name": "MysticMoon",
+      "type": "special"
+    },
+    {
+      "name": "Twilight",
+      "type": "special"
+    },
+    {
+      "name": "BloodMoon",
+      "type": "special"
+    },
+    {
+      "name": "Solstice",
+      "type": "special"
+    },
+    {
+      "name": "Who are you?",
+      "type": "special",
+      "links": {
+        "ton-jp.wiki": "https://www.ton-jp.com/html/showstar.html"
+      }
+    }
+  ]
+}
