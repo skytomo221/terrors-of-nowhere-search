@@ -41,6 +41,7 @@ export default function App() {
 
   return (
     <div>
+      <h1>Terrors of Nowhere Search</h1>
       <div>
         <select
           name="pets"
