@@ -1,6 +1,7 @@
 import React from "react";
 
 import data from "./data.json";
+import images from './images';
 
 type Terror = {
   name: string;
@@ -23,6 +24,13 @@ function search(terrors: Terror[], rawKeyword: string) {
   return sorted.map(({ terror }) => terror);
 }
 
+function toSnakeCase(str: string) {
+  return str
+    .toLocaleLowerCase()
+    .replaceAll(/[.[\]’]/g, "")
+    .replaceAll(" ", "_")
+}
+
 export default function App() {
   const { terrors, wikis } = data;
   const [searchWord, setSearchWord] = React.useState("");
@@ -36,10 +44,7 @@ export default function App() {
     if (selectedWiki === "terror.moe") {
       return wikis[selectedWiki].terrorsLink.replace(
         "$terror",
-        terror.name
-          .toLocaleLowerCase()
-          .replaceAll(/[.[\]’]/g, "")
-          .replaceAll(" ", "_"),
+        toSnakeCase(terror.name),
       );
     }
     return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name);
@@ -48,7 +53,7 @@ export default function App() {
   return (
     <div>
       <h1>Terrors of Nowhere Search</h1>
-      <div>
+      <div className="search">
         <select
           name="pets"
           id="pet-select"
@@ -68,11 +73,14 @@ export default function App() {
           placeholder="検索……"
         />
       </div>
-      {search(terrors, searchWord).map((terror) => (
-        <div key={terror.name}>
-          <a href={createUrl(terror)}>{terror.name}</a>
-        </div>
-      ))}
+      <div className="terror-box">
+        {search(terrors, searchWord).map((terror) => (
+          <a key={terror.name} href={createUrl(terror)}>
+            <img className="terror" src={images[toSnakeCase(terror.name)]} alt={terror.name} />
+            <div>{terror.name}</div>
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
