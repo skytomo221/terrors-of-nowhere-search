@@ -53,7 +53,7 @@ export default function App() {
   return (
     <div>
       <h1>Terrors of Nowhere Search</h1>
-      <div>
+      <div className="search">
         <select
           name="pets"
           id="pet-select"
