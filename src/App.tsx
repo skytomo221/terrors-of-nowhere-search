@@ -76,7 +76,7 @@ export default function App() {
       <div className="terror-box">
         {search(terrors, searchWord).map((terror) => (
           <a key={terror.name} href={createUrl(terror)}>
-            <div><img className="terror" src={images[toSnakeCase(terror.name)]} alt={terror.name} /></div>
+            <img className="terror" src={images[toSnakeCase(terror.name)]} alt={terror.name} />
             <div>{terror.name}</div>
           </a>
         ))}

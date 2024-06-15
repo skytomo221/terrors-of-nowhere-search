@@ -16,7 +16,8 @@ a {
 }
 
 a:hover {
-  color: yellow;
+  filter: hue-rotate(90deg) saturate(500%);
+  transform: scale(1.1);
 }
 
 .terror-box {
@@ -33,6 +34,7 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 img.terror {
