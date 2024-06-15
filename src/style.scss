@@ -6,4 +6,36 @@
 
 html {
   font-family: PixelMplus10 Regular, sans-serif;
+  color: whitesmoke;
+  background-color: black;
+}
+
+a {
+  color: red;
+  text-decoration: none;
+}
+
+a:hover {
+  color: yellow;
+}
+
+.terror-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.terror-box>* {
+  flex: 1 1 200px;
+  flex-direction: column;
+}
+
+.terror-box a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+img.terror {
+  image-rendering: pixelated;
+  width: 100px;
 }
