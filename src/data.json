@@ -151,7 +151,10 @@
     },
     {
       "name": "Luigi & Luigi Dolls",
-      "type": "normal"
+      "type": "normal",
+      "links": {
+        "wikiwiki.jp": "https://wikiwiki.jp/ton_jp/Luigi%20-%20Luigi%20Dolls"
+      }
     },
     {
       "name": "V2",
@@ -423,7 +426,11 @@
     },
     {
       "name": "Mona & The Mountain",
-      "type": "alternate"
+      "type": "alternate",
+      "links": {
+        "wikiwiki.jp": "https://wikiwiki.jp/ton_jp/Mona%20-%20the%20Mountain",
+        "terror.moe": "https://terror.moe/terrors/mona_and_the_mountain"
+      }
     },
     {
       "name": "Furnace",
@@ -434,8 +441,11 @@
       "type": "alternate"
     },
     {
-      "name": "Lone Agent - Bliss",
-      "type": "alternate"
+      "name": "Bliss",
+      "type": "alternate",
+      "links": {
+        "ton-jp.wiki": "https://www.ton-jp.com/html/terrors/Lone%20Agent%20-%20Bliss.html"
+      }
     },
     {
       "name": "Glaggle Gang",
@@ -447,7 +457,11 @@
     },
     {
       "name": "sm64.z64",
-      "type": "alternate"
+      "type": "alternate",
+      "image": "sm64_z64",
+      "links": {
+        "terror.moe": "https://terror.moe/terrors/sm64_z64"
+      }
     },
     {
       "name": "The Red Mist",
@@ -474,7 +488,10 @@
       "type": "alternate"
     },
     {
-      "name": "_ - Lisa",
+      "name": "Lisa",
+      "links": {
+        "terror.moe": "https://terror.moe/terrors/lisa"
+      },
       "type": "alternate"
     },
     {
@@ -518,34 +535,39 @@
       "type": "alternate"
     },
     {
-      "name": "MeetballMan",
+      "name": "Meatball Man",
       "type": "special",
       "links": {
+        "ton-jp.wiki": "https://www.ton-jp.com/html/terrors/MeetballMan.html",
         "wikiwiki.jp": "https://wikiwiki.jp/ton_jp/The MeatBallMan"
       }
     },
     {
-      "name": "MysticMoon",
-      "type": "special"
+      "name": "Mystic Moon",
+      "type": "special",
+      "links": {
+        "ton-jp.wiki": "https://wikiwiki.jp/ton_jp/MysticMoon",
+        "wikiwiki.jp": "https://wikiwiki.jp/ton_jp/Psychosis"
+      }
     },
     {
       "name": "Twilight",
-      "type": "special"
+      "type": "special",
+      "links": {
+        "wikiwiki.jp": "https://wikiwiki.jp/ton_jp/Apocalypse%20Bird"
+      }
     },
     {
-      "name": "BloodMoon",
-      "type": "special"
+      "name": "Blood Moon",
+      "type": "special",
+      "links": {
+        "ton-jp.wiki": "https://wikiwiki.jp/ton_jp/BloodMoon",
+        "wikiwiki.jp": "https://wikiwiki.jp/ton_jp/Virus"
+      }
     },
     {
       "name": "Solstice",
       "type": "special"
-    },
-    {
-      "name": "Who are you?",
-      "type": "special",
-      "links": {
-        "ton-jp.wiki": "https://www.ton-jp.com/html/showstar.html"
-      }
     }
   ]
 }

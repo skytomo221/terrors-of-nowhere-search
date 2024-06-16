@@ -1,10 +1,11 @@
 import React from "react";
 
 import data from "./data.json";
-import images from './images';
+import images from "./images";
 
 type Terror = {
   name: string;
+  image?: string;
   links?: Record<string, string>;
 };
 
@@ -76,7 +77,7 @@ export default function App() {
       <div className="terror-box">
         {search(terrors, searchWord).map((terror) => (
           <a key={terror.name} href={createUrl(terror)}>
-            <img className="terror" src={images[toSnakeCase(terror.name)]} alt={terror.name} />
+            <img className="terror" src={images[toSnakeCase(terror.image ?? terror.name)]} alt={terror.name} />
             <div>{terror.name}</div>
           </a>
         ))}
