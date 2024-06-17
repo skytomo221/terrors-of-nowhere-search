@@ -19,7 +19,8 @@
   "terrors": [
     {
       "name": "Huggy",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Corrupted Toys",
@@ -27,19 +28,24 @@
     },
     {
       "name": "Demented Spongebob",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true,
+      "mysticName": "SPONGEBOB"
     },
     {
       "name": "Specimen 8",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "HER",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Tails Doll",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Black Sun",
@@ -51,7 +57,8 @@
     },
     {
       "name": "Ao Oni",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Toren’s Shadow",
@@ -59,15 +66,19 @@
     },
     {
       "name": "[CENSORED]",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "WhiteNight",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true,
+      "mysticName": "FOLLOWER"
     },
     {
       "name": "An Arbiter",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Squidward",
@@ -79,11 +90,13 @@
     },
     {
       "name": "Purple Guy",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Spongefly Swarm",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Hush",
@@ -115,7 +128,8 @@
     },
     {
       "name": "The Guidance",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "With Many Voices",
@@ -127,7 +141,8 @@
     },
     {
       "name": "Harvest",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Smileghost",
@@ -135,11 +150,14 @@
     },
     {
       "name": "Karol_Corpse",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Mario Has Logged In",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true,
+      "mysticName": "MARIO"
     },
     {
       "name": "Big Bird",
@@ -147,11 +165,15 @@
     },
     {
       "name": "Dev Bytes",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true,
+      "mysticName": "DEVBYTE_N"
     },
     {
       "name": "Luigi & Luigi Dolls",
       "type": "normal",
+      "mystic": true,
+      "mysticName": "LUIGI",
       "links": {
         "wikiwiki.jp": "https://wikiwiki.jp/ton_jp/Luigi%20-%20Luigi%20Dolls"
       }
@@ -162,7 +184,8 @@
     },
     {
       "name": "Withered Bonnie",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "The Boys",
@@ -182,11 +205,14 @@
     },
     {
       "name": "Sonic",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true,
+      "mysticName": "FAKER"
     },
     {
       "name": "Bad Batter",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Signus",
@@ -210,7 +236,8 @@
     },
     {
       "name": "Slender",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Maul-A-Child",
@@ -226,7 +253,8 @@
     },
     {
       "name": "Specimen 2",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Specimen 10",
@@ -234,7 +262,8 @@
     },
     {
       "name": "The Lifebringer",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Pale Association",
@@ -258,7 +287,8 @@
     },
     {
       "name": "Nosk",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Apocrean Harvester",
@@ -282,7 +312,8 @@
     },
     {
       "name": "Hell Bell",
-      "type": "normal"
+      "type": "normal",
+      "mystic": true
     },
     {
       "name": "Security",
@@ -546,7 +577,7 @@
       "name": "Mystic Moon",
       "type": "special",
       "links": {
-        "ton-jp.wiki": "https://wikiwiki.jp/ton_jp/MysticMoon",
+        "ton-jp.wiki": "https://www.ton-jp.com/html/terrors/MysticMoon.html",
         "wikiwiki.jp": "https://wikiwiki.jp/ton_jp/Psychosis"
       }
     },

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import data from "./data.json";
 import images from "./images";
 
 type Terror = {
   name: string;
+  type: string;
   image?: string;
+  mystic?: boolean;
+  mysticName?: string;
   links?: Record<string, string>;
 };
 
@@ -37,6 +40,29 @@ export default function App() {
   const [searchWord, setSearchWord] = React.useState("");
   const [selectedWiki, setSelectedWiki] =
     React.useState<keyof typeof wikis>("ton-jp.wiki");
+  const [hoveredMysticMoon, setHoveredMysticMoon] = React.useState(false);
+  const [twoDigitRandomNumber, setTwoDigitRandomNumber] = React.useState("");
+  const [sixDigitRandomNumber, setSixDigitRandomNumber] = React.useState("");
+  const [transformationTime, setTransformationTime] = React.useState(0);
+
+  useEffect(() => {
+    setInterval(() => {
+      if (!hoveredMysticMoon) return;
+      setTransformationTime((time) => time + 50 / 1000);
+      setTwoDigitRandomNumber(Math.floor(Math.random() * 100).toString().padStart(2, '0'));
+      setSixDigitRandomNumber(Math.floor(Math.random() * 1000000).toString().padStart(6, '0'));
+    }, 50);
+  }, [hoveredMysticMoon]);
+
+  const createTerrorName = (terror: Terror) => {
+    if (hoveredMysticMoon && terror.mystic) {
+      const name = (terror.mysticName ?? terror.name).toLocaleUpperCase().replaceAll(" ", "_");
+      return (transformationTime % 12 < 2)
+        ? sixDigitRandomNumber
+        : `${twoDigitRandomNumber}_${name}_${twoDigitRandomNumber}`;
+    }
+    return terror.name;
+  }
 
   const createUrl = (terror: Terror) => {
     if (terror.links && terror.links[selectedWiki]) {
@@ -70,15 +96,27 @@ export default function App() {
         </select>
         <input
           value={searchWord}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
+          autoFocus
           onChange={(e) => setSearchWord(e.target.value)}
+          onKeyDown={(e) => {
+            const searchResult = search(terrors, searchWord);
+            if (searchResult.length > 0 && e.key === "Enter") {
+              window.location.href = createUrl(searchResult[0]);
+            }
+          }}
           placeholder="検索……"
         />
       </div>
       <div className="terror-box">
         {search(terrors, searchWord).map((terror) => (
-          <a key={terror.name} href={createUrl(terror)}>
+          <a key={terror.name} href={createUrl(terror)}
+            onFocus={() => terror.name === "Mystic Moon" && setHoveredMysticMoon(true)}
+            onMouseEnter={() => terror.name === "Mystic Moon" && setHoveredMysticMoon(true)}
+            onBlur={() => terror.name === "Mystic Moon" && setHoveredMysticMoon(false)}
+            onMouseLeave={() => terror.name === "Mystic Moon" && setHoveredMysticMoon(false)}>
             <img className="terror" src={images[toSnakeCase(terror.image ?? terror.name)]} alt={terror.name} />
-            <div>{terror.name}</div>
+            <div>{createTerrorName(terror)}</div>
           </a>
         ))}
       </div>
