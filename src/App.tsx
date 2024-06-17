@@ -71,6 +71,12 @@ export default function App() {
         <input
           value={searchWord}
           onChange={(e) => setSearchWord(e.target.value)}
+          onKeyDown={(e) => {
+            const searchResult = search(terrors, searchWord);
+            if (searchResult.length > 0 && e.key === "Enter") {
+              window.location.href = createUrl(searchResult[0]);
+            }
+          }}
           placeholder="検索……"
         />
       </div>
