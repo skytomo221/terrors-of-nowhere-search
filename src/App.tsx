@@ -70,6 +70,8 @@ export default function App() {
         </select>
         <input
           value={searchWord}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
+          autoFocus
           onChange={(e) => setSearchWord(e.target.value)}
           onKeyDown={(e) => {
             const searchResult = search(terrors, searchWord);
