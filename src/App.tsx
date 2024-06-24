@@ -74,6 +74,9 @@ export default function App() {
         toSnakeCase(terror.name),
       );
     }
+    if (selectedWiki === "wikiwiki.jp") {
+      return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name.replaceAll("’", "'"));
+    }
     return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name);
   };
 
