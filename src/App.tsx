@@ -15,7 +15,7 @@ type Terror = {
 function search(terrors: Terror[], rawKeyword: string) {
   const sorted = terrors
     .map((terror) => {
-      const target = terror.name.toLowerCase();
+      const target = terror.name.toLowerCase().replaceAll(/'|’/g, "");
       const keyword = rawKeyword.toLowerCase();
       if (target === keyword) return { terror, rank: 0 };
       if (target.startsWith(keyword)) return { terror, rank: 1 };
