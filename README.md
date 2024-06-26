@@ -1,15 +1,22 @@
-# 🚀 Welcome to your new awesome project!
+# Terrors of Nowhere Search
 
-This project has been created using **webpack-cli**, you can now run
+このサイトはVRChat上でプレイできる[Terrors of Nowhere](https://vrchat.com/home/world/wrld_a61cdabe-1218-4287-9ffc-2a4d1414e5bd)に登場するテラーの検索を行うためのサイトです。
+テラーにはそれぞれの選択したWikiページへのリンクがあります。
 
-```
+## ビルド方法
+
+このリポジトリをクローンして、ビルドを行うことでサイトを使用することもできます。
+
+このプロジェクトは**webpack-cli**を使用して作成されました。
+
+```console
 npm run build
 ```
 
-or
+または
 
-```
+```console
 yarn build
 ```
 
-to bundle your application
+でビルドを行うことができます。
