@@ -203,7 +203,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ App)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data.json */ \"./src/data.json\");\n/* harmony import */ var _images__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images */ \"./src/images.ts\");\n\n\n\nfunction search(terrors, rawKeyword) {\n    const sorted = terrors\n        .map((terror) => {\n        const target = terror.name.toLowerCase().replaceAll(/'|’/g, \"\");\n        const keyword = rawKeyword.toLowerCase();\n        if (target === keyword)\n            return { terror, rank: 0 };\n        if (target.startsWith(keyword))\n            return { terror, rank: 1 };\n        if (target.endsWith(keyword))\n            return { terror, rank: 2 };\n        if (target.includes(keyword))\n            return { terror, rank: 3 };\n        return { terror, rank: -1 };\n    })\n        .filter(({ rank }) => rank >= 0)\n        .sort((a, b) => a.rank - b.rank);\n    return sorted.map(({ terror }) => terror);\n}\nfunction toSnakeCase(str) {\n    return str\n        .toLocaleLowerCase()\n        .replaceAll(/[.[\\]’]/g, \"\")\n        .replaceAll(\" \", \"_\");\n}\nfunction App() {\n    const { terrors, wikis } = _data_json__WEBPACK_IMPORTED_MODULE_1__;\n    const [searchWord, setSearchWord] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(\"\");\n    const [selectedWiki, setSelectedWiki] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(\"ton-jp.wiki\");\n    const [hoveredMysticMoon, setHoveredMysticMoon] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(false);\n    const [twoDigitRandomNumber, setTwoDigitRandomNumber] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(\"\");\n    const [sixDigitRandomNumber, setSixDigitRandomNumber] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(\"\");\n    const [transformationTime, setTransformationTime] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(0);\n    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\n        setInterval(() => {\n            if (!hoveredMysticMoon)\n                return;\n            setTransformationTime((time) => time + 50 / 1000);\n            setTwoDigitRandomNumber(Math.floor(Math.random() * 100).toString().padStart(2, '0'));\n            setSixDigitRandomNumber(Math.floor(Math.random() * 1000000).toString().padStart(6, '0'));\n        }, 50);\n    }, [hoveredMysticMoon]);\n    const createTerrorName = (terror) => {\n        if (hoveredMysticMoon && terror.mystic) {\n            const name = (terror.mysticName ?? terror.name).toLocaleUpperCase().replaceAll(\" \", \"_\");\n            return (transformationTime % 12 < 2)\n                ? sixDigitRandomNumber\n                : `${twoDigitRandomNumber}_${name}_${twoDigitRandomNumber}`;\n        }\n        return terror.name;\n    };\n    const createUrl = (terror) => {\n        if (terror.links && terror.links[selectedWiki]) {\n            return terror.links[selectedWiki];\n        }\n        if (selectedWiki === \"terror.moe\") {\n            return wikis[selectedWiki].terrorsLink.replace(\"$terror\", toSnakeCase(terror.name));\n        }\n        if (selectedWiki === \"wikiwiki.jp\") {\n            return wikis[selectedWiki].terrorsLink.replace(\"$terror\", terror.name.replaceAll(\"’\", \"'\"));\n        }\n        return wikis[selectedWiki].terrorsLink.replace(\"$terror\", terror.name);\n    };\n    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null,\n        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h1\", null, \"Terrors of Nowhere Search\"),\n        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", { className: \"search\" },\n            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"select\", { name: \"pets\", id: \"pet-select\", onChange: (e) => {\n                    setSelectedWiki(e.target.value);\n                } }, Object.keys(wikis).map((wiki) => (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"option\", { key: wiki, value: wiki }, wiki)))),\n            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"input\", { value: searchWord, \n                // eslint-disable-next-line jsx-a11y/no-autofocus\n                autoFocus: true, onChange: (e) => setSearchWord(e.target.value), onKeyDown: (e) => {\n                    const searchResult = search(terrors, searchWord);\n                    if (searchResult.length > 0 && e.key === \"Enter\") {\n                        window.location.href = createUrl(searchResult[0]);\n                    }\n                }, placeholder: \"\\u691C\\u7D22\\u2026\\u2026\" })),\n        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", { className: \"terror-box\" }, search(terrors, searchWord).map((terror) => (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"a\", { key: terror.name, href: createUrl(terror), onFocus: () => terror.name === \"Mystic Moon\" && setHoveredMysticMoon(true), onMouseEnter: () => terror.name === \"Mystic Moon\" && setHoveredMysticMoon(true), onBlur: () => terror.name === \"Mystic Moon\" && setHoveredMysticMoon(false), onMouseLeave: () => terror.name === \"Mystic Moon\" && setHoveredMysticMoon(false) },\n            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"img\", { className: \"terror\", src: _images__WEBPACK_IMPORTED_MODULE_2__[\"default\"][toSnakeCase(terror.image ?? terror.name)], alt: terror.name }),\n            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, createTerrorName(terror))))))));\n}\n\n\n//# sourceURL=webpack://my-webpack-project/./src/App.tsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ App)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data.json */ \"./src/data.json\");\n/* harmony import */ var _images__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images */ \"./src/images.ts\");\n\n\n\nfunction search(terrors, rawKeyword) {\n    const sorted = terrors\n        .map((terror) => {\n        const target = terror.name.toLowerCase().replaceAll(/'|’/g, \"\");\n        const keyword = rawKeyword.toLowerCase();\n        if (target === keyword)\n            return { terror, rank: 0 };\n        if (target.startsWith(keyword))\n            return { terror, rank: 1 };\n        if (target.endsWith(keyword))\n            return { terror, rank: 2 };\n        if (target.includes(keyword))\n            return { terror, rank: 3 };\n        return { terror, rank: -1 };\n    })\n        .filter(({ rank }) => rank >= 0)\n        .sort((a, b) => a.rank - b.rank);\n    return sorted.map(({ terror }) => terror);\n}\nfunction toSnakeCase(str) {\n    return str\n        .toLocaleLowerCase()\n        .replaceAll(/[.[\\]’]/g, \"\")\n        .replaceAll(\" \", \"_\");\n}\nfunction App() {\n    const { terrors, wikis } = _data_json__WEBPACK_IMPORTED_MODULE_1__;\n    const [searchWord, setSearchWord] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(\"\");\n    const [selectedWiki, setSelectedWiki] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(\"ton-jp.wiki\");\n    const [hoveredMysticMoon, setHoveredMysticMoon] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(false);\n    const [twoDigitRandomNumber, setTwoDigitRandomNumber] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(\"\");\n    const [sixDigitRandomNumber, setSixDigitRandomNumber] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(\"\");\n    const [transformationTime, setTransformationTime] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(0);\n    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\n        setInterval(() => {\n            if (!hoveredMysticMoon)\n                return;\n            setTransformationTime((time) => time + 50 / 1000);\n            setTwoDigitRandomNumber(Math.floor(Math.random() * 100).toString().padStart(2, '0'));\n            setSixDigitRandomNumber(Math.floor(Math.random() * 1000000).toString().padStart(6, '0'));\n        }, 50);\n    }, [hoveredMysticMoon]);\n    const createTerrorName = (terror) => {\n        if (hoveredMysticMoon && terror.mystic) {\n            const name = (terror.mysticName ?? terror.name).toLocaleUpperCase().replaceAll(\" \", \"_\");\n            return (transformationTime % 12 < 2)\n                ? sixDigitRandomNumber\n                : `${twoDigitRandomNumber}_${name}_${twoDigitRandomNumber}`;\n        }\n        return terror.name;\n    };\n    const createUrl = (terror) => {\n        if (terror.links && terror.links[selectedWiki]) {\n            return terror.links[selectedWiki];\n        }\n        if (selectedWiki === \"wikiwiki.jp\") {\n            return wikis[selectedWiki].terrorsLink.replace(\"$terror\", terror.name.replaceAll(\"’\", \"'\"));\n        }\n        return wikis[selectedWiki].terrorsLink.replace(\"$terror\", toSnakeCase(terror.name));\n    };\n    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null,\n        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h1\", null, \"Terrors of Nowhere Search\"),\n        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", { className: \"search\" },\n            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"select\", { name: \"pets\", id: \"pet-select\", onChange: (e) => {\n                    setSelectedWiki(e.target.value);\n                } }, Object.keys(wikis).map((wiki) => (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"option\", { key: wiki, value: wiki }, wiki)))),\n            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"input\", { value: searchWord, \n                // eslint-disable-next-line jsx-a11y/no-autofocus\n                autoFocus: true, onChange: (e) => setSearchWord(e.target.value), onKeyDown: (e) => {\n                    const searchResult = search(terrors, searchWord);\n                    if (searchResult.length > 0 && e.key === \"Enter\") {\n                        window.location.href = createUrl(searchResult[0]);\n                    }\n                }, placeholder: \"\\u691C\\u7D22\\u2026\\u2026\" })),\n        react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", { className: \"terror-box\" }, search(terrors, searchWord).map((terror) => (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"a\", { key: terror.name, href: createUrl(terror), onFocus: () => terror.name === \"Mystic Moon\" && setHoveredMysticMoon(true), onMouseEnter: () => terror.name === \"Mystic Moon\" && setHoveredMysticMoon(true), onBlur: () => terror.name === \"Mystic Moon\" && setHoveredMysticMoon(false), onMouseLeave: () => terror.name === \"Mystic Moon\" && setHoveredMysticMoon(false) },\n            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"img\", { className: \"terror\", src: _images__WEBPACK_IMPORTED_MODULE_2__[\"default\"][toSnakeCase(terror.image ?? terror.name)], alt: terror.name }),\n            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, createTerrorName(terror))))))));\n}\n\n\n//# sourceURL=webpack://my-webpack-project/./src/App.tsx?");
 
 /***/ }),
 
@@ -235,7 +235,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
   \*************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("var map = {\n\t\"./aku_ball.png\": \"./src/assets/images/aku_ball.png\",\n\t\"./akumii-kari.png\": \"./src/assets/images/akumii-kari.png\",\n\t\"./all-around-helpers.png\": \"./src/assets/images/all-around-helpers.png\",\n\t\"./ambush.png\": \"./src/assets/images/ambush.png\",\n\t\"./an_arbiter.png\": \"./src/assets/images/an_arbiter.png\",\n\t\"./angry_munci.png\": \"./src/assets/images/angry_munci.png\",\n\t\"./ao_oni.png\": \"./src/assets/images/ao_oni.png\",\n\t\"./apathy.png\": \"./src/assets/images/apathy.png\",\n\t\"./apocrean_harvester.png\": \"./src/assets/images/apocrean_harvester.png\",\n\t\"./arkus.png\": \"./src/assets/images/arkus.png\",\n\t\"./army_in_black.png\": \"./src/assets/images/army_in_black.png\",\n\t\"./arrival.png\": \"./src/assets/images/arrival.png\",\n\t\"./astrum_aureus.png\": \"./src/assets/images/astrum_aureus.png\",\n\t\"./bacteria.png\": \"./src/assets/images/bacteria.png\",\n\t\"./bad_batter.png\": \"./src/assets/images/bad_batter.png\",\n\t\"./bff.png\": \"./src/assets/images/bff.png\",\n\t\"./big_bird.png\": \"./src/assets/images/big_bird.png\",\n\t\"./black_sun.png\": \"./src/assets/images/black_sun.png\",\n\t\"./bliss.png\": \"./src/assets/images/bliss.png\",\n\t\"./blood_moon.png\": \"./src/assets/images/blood_moon.png\",\n\t\"./cartoon_cat.png\": \"./src/assets/images/cartoon_cat.png\",\n\t\"./censored.png\": \"./src/assets/images/censored.png\",\n\t\"./christian_brutal_sniper.png\": \"./src/assets/images/christian_brutal_sniper.png\",\n\t\"./cold_night.png\": \"./src/assets/images/cold_night.png\",\n\t\"./comedy.png\": \"./src/assets/images/comedy.png\",\n\t\"./convict_squad.png\": \"./src/assets/images/convict_squad.png\",\n\t\"./corrupted_toys.png\": \"./src/assets/images/corrupted_toys.png\",\n\t\"./decayed_sponge.png\": \"./src/assets/images/decayed_sponge.png\",\n\t\"./demented_spongebob.png\": \"./src/assets/images/demented_spongebob.png\",\n\t\"./dev_bytes.png\": \"./src/assets/images/dev_bytes.png\",\n\t\"./dev_maulers.png\": \"./src/assets/images/dev_maulers.png\",\n\t\"./dont_touch_me.png\": \"./src/assets/images/dont_touch_me.png\",\n\t\"./doombox.png\": \"./src/assets/images/doombox.png\",\n\t\"./eggmans_announcement.png\": \"./src/assets/images/eggmans_announcement.png\",\n\t\"./feddys.png\": \"./src/assets/images/feddys.png\",\n\t\"./furnace.png\": \"./src/assets/images/furnace.png\",\n\t\"./fusion_pilot.png\": \"./src/assets/images/fusion_pilot.png\",\n\t\"./garten_goers.png\": \"./src/assets/images/garten_goers.png\",\n\t\"./glaggle_gang.png\": \"./src/assets/images/glaggle_gang.png\",\n\t\"./haket.png\": \"./src/assets/images/haket.png\",\n\t\"./harvest.png\": \"./src/assets/images/harvest.png\",\n\t\"./hell_bell.png\": \"./src/assets/images/hell_bell.png\",\n\t\"./her.png\": \"./src/assets/images/her.png\",\n\t\"./hoovydundy.png\": \"./src/assets/images/hoovydundy.png\",\n\t\"./huggy.png\": \"./src/assets/images/huggy.png\",\n\t\"./hush.png\": \"./src/assets/images/hush.png\",\n\t\"./imposter.png\": \"./src/assets/images/imposter.png\",\n\t\"./judas.png\": \"./src/assets/images/judas.png\",\n\t\"./judgement_bird.png\": \"./src/assets/images/judgement_bird.png\",\n\t\"./karol_corpse.png\": \"./src/assets/images/karol_corpse.png\",\n\t\"./knight_of_toren.png\": \"./src/assets/images/knight_of_toren.png\",\n\t\"./lain.gif\": \"./src/assets/images/lain.gif\",\n\t\"./legs.png\": \"./src/assets/images/legs.png\",\n\t\"./lisa.png\": \"./src/assets/images/lisa.png\",\n\t\"./lords_signal.png\": \"./src/assets/images/lords_signal.png\",\n\t\"./luigi_&_luigi_dolls.png\": \"./src/assets/images/luigi_&_luigi_dolls.png\",\n\t\"./lunatic_cultist.png\": \"./src/assets/images/lunatic_cultist.png\",\n\t\"./mario_has_logged_in.png\": \"./src/assets/images/mario_has_logged_in.png\",\n\t\"./maul-a-child.png\": \"./src/assets/images/maul-a-child.png\",\n\t\"./meatball_man.png\": \"./src/assets/images/meatball_man.png\",\n\t\"./miros_birds.png\": \"./src/assets/images/miros_birds.png\",\n\t\"./mirror.png\": \"./src/assets/images/mirror.png\",\n\t\"./mona_&_the_mountain.png\": \"./src/assets/images/mona_&_the_mountain.png\",\n\t\"./mopemope.png\": \"./src/assets/images/mopemope.png\",\n\t\"./mr_mega.png\": \"./src/assets/images/mr_mega.png\",\n\t\"./mystic_moon.png\": \"./src/assets/images/mystic_moon.png\",\n\t\"./nextbots.png\": \"./src/assets/images/nextbots.png\",\n\t\"./nosk.png\": \"./src/assets/images/nosk.png\",\n\t\"./overseer.png\": \"./src/assets/images/overseer.png\",\n\t\"./pale_association.png\": \"./src/assets/images/pale_association.png\",\n\t\"./paradise_bird.png\": \"./src/assets/images/paradise_bird.png\",\n\t\"./prisoner.png\": \"./src/assets/images/prisoner.png\",\n\t\"./punishing_bird.png\": \"./src/assets/images/punishing_bird.png\",\n\t\"./purple_guy.png\": \"./src/assets/images/purple_guy.png\",\n\t\"./rabid_snarbolax.png\": \"./src/assets/images/rabid_snarbolax.png\",\n\t\"./red_bus.png\": \"./src/assets/images/red_bus.png\",\n\t\"./roblander.png\": \"./src/assets/images/roblander.png\",\n\t\"./rush.png\": \"./src/assets/images/rush.png\",\n\t\"./sakuya_izayoi.png\": \"./src/assets/images/sakuya_izayoi.png\",\n\t\"./sakuya_the_ripper.png\": \"./src/assets/images/sakuya_the_ripper.png\",\n\t\"./sanic.png\": \"./src/assets/images/sanic.png\",\n\t\"./sawrunner.png\": \"./src/assets/images/sawrunner.png\",\n\t\"./scavenger.png\": \"./src/assets/images/scavenger.png\",\n\t\"./security.png\": \"./src/assets/images/security.png\",\n\t\"./seek.png\": \"./src/assets/images/seek.png\",\n\t\"./shinto.png\": \"./src/assets/images/shinto.png\",\n\t\"./shiteyanyo.png\": \"./src/assets/images/shiteyanyo.png\",\n\t\"./signus.png\": \"./src/assets/images/signus.png\",\n\t\"./slender.png\": \"./src/assets/images/slender.png\",\n\t\"./sm64_z64.png\": \"./src/assets/images/sm64_z64.png\",\n\t\"./smileghost.png\": \"./src/assets/images/smileghost.png\",\n\t\"./snarbolax.png\": \"./src/assets/images/snarbolax.png\",\n\t\"./solstice.png\": \"./src/assets/images/solstice.png\",\n\t\"./something.png\": \"./src/assets/images/something.png\",\n\t\"./something_wicked.png\": \"./src/assets/images/something_wicked.png\",\n\t\"./sonic.gif\": \"./src/assets/images/sonic.gif\",\n\t\"./specimen_10.png\": \"./src/assets/images/specimen_10.png\",\n\t\"./specimen_2.png\": \"./src/assets/images/specimen_2.png\",\n\t\"./specimen_8.png\": \"./src/assets/images/specimen_8.png\",\n\t\"./spongefly_swarm.png\": \"./src/assets/images/spongefly_swarm.png\",\n\t\"./squidward.png\": \"./src/assets/images/squidward.png\",\n\t\"./starved.png\": \"./src/assets/images/starved.png\",\n\t\"./stgm.png\": \"./src/assets/images/stgm.png\",\n\t\"./sturm.png\": \"./src/assets/images/sturm.png\",\n\t\"./tails_doll.png\": \"./src/assets/images/tails_doll.png\",\n\t\"./tbh.png\": \"./src/assets/images/tbh.png\",\n\t\"./tbh_spy.png\": \"./src/assets/images/tbh_spy.png\",\n\t\"./teuthida.png\": \"./src/assets/images/teuthida.png\",\n\t\"./the_boys.png\": \"./src/assets/images/the_boys.png\",\n\t\"./the_guidance.png\": \"./src/assets/images/the_guidance.png\",\n\t\"./the_lifebringer.png\": \"./src/assets/images/the_lifebringer.png\",\n\t\"./the_navigator.png\": \"./src/assets/images/the_navigator.png\",\n\t\"./the_old_man.png\": \"./src/assets/images/the_old_man.png\",\n\t\"./the_painter.png\": \"./src/assets/images/the_painter.png\",\n\t\"./the_red_mist.png\": \"./src/assets/images/the_red_mist.png\",\n\t\"./the_swarm.png\": \"./src/assets/images/the_swarm.png\",\n\t\"./tiffany.png\": \"./src/assets/images/tiffany.png\",\n\t\"./torens_shadow.png\": \"./src/assets/images/torens_shadow.png\",\n\t\"./toy_enforcer.png\": \"./src/assets/images/toy_enforcer.png\",\n\t\"./tragedy.png\": \"./src/assets/images/tragedy.png\",\n\t\"./try_not_to_touch_me.png\": \"./src/assets/images/try_not_to_touch_me.png\",\n\t\"./twilight.png\": \"./src/assets/images/twilight.png\",\n\t\"./v2.png\": \"./src/assets/images/v2.png\",\n\t\"./voidwalker.png\": \"./src/assets/images/voidwalker.png\",\n\t\"./walpurgisnacht.png\": \"./src/assets/images/walpurgisnacht.png\",\n\t\"./wario_apparition.png\": \"./src/assets/images/wario_apparition.png\",\n\t\"./waterwraith.png\": \"./src/assets/images/waterwraith.png\",\n\t\"./whiteface.png\": \"./src/assets/images/whiteface.png\",\n\t\"./whitenight.png\": \"./src/assets/images/whitenight.png\",\n\t\"./with_many_voices.png\": \"./src/assets/images/with_many_voices.png\",\n\t\"./withered_bonnie.png\": \"./src/assets/images/withered_bonnie.png\"\n};\n\n\nfunction webpackContext(req) {\n\tvar id = webpackContextResolve(req);\n\treturn __webpack_require__(id);\n}\nfunction webpackContextResolve(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\te.code = 'MODULE_NOT_FOUND';\n\t\tthrow e;\n\t}\n\treturn map[req];\n}\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = \"./src/assets/images sync \\\\.(png%7Cgif)$\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/_sync_nonrecursive_\\.(png%257Cgif)$?");
+eval("var map = {\n\t\"./aku_ball.png\": \"./src/assets/images/aku_ball.png\",\n\t\"./akumii-kari.png\": \"./src/assets/images/akumii-kari.png\",\n\t\"./all-around-helpers.png\": \"./src/assets/images/all-around-helpers.png\",\n\t\"./ambush.png\": \"./src/assets/images/ambush.png\",\n\t\"./an_arbiter.png\": \"./src/assets/images/an_arbiter.png\",\n\t\"./angry_munci.png\": \"./src/assets/images/angry_munci.png\",\n\t\"./ao_oni.png\": \"./src/assets/images/ao_oni.png\",\n\t\"./apathy.png\": \"./src/assets/images/apathy.png\",\n\t\"./apocrean_harvester.png\": \"./src/assets/images/apocrean_harvester.png\",\n\t\"./arkus.png\": \"./src/assets/images/arkus.png\",\n\t\"./army_in_black.png\": \"./src/assets/images/army_in_black.png\",\n\t\"./arrival.png\": \"./src/assets/images/arrival.png\",\n\t\"./astrum_aureus.png\": \"./src/assets/images/astrum_aureus.png\",\n\t\"./bacteria.png\": \"./src/assets/images/bacteria.png\",\n\t\"./bad_batter.png\": \"./src/assets/images/bad_batter.png\",\n\t\"./bed_mecha.png\": \"./src/assets/images/bed_mecha.png\",\n\t\"./beyond.png\": \"./src/assets/images/beyond.png\",\n\t\"./bff.png\": \"./src/assets/images/bff.png\",\n\t\"./big_bird.png\": \"./src/assets/images/big_bird.png\",\n\t\"./bigger_boot.png\": \"./src/assets/images/bigger_boot.png\",\n\t\"./black_sun.png\": \"./src/assets/images/black_sun.png\",\n\t\"./bliss.png\": \"./src/assets/images/bliss.png\",\n\t\"./blood_moon.png\": \"./src/assets/images/blood_moon.png\",\n\t\"./cartoon_cat.png\": \"./src/assets/images/cartoon_cat.png\",\n\t\"./censored.png\": \"./src/assets/images/censored.png\",\n\t\"./charlotte.png\": \"./src/assets/images/charlotte.png\",\n\t\"./christian_brutal_sniper.png\": \"./src/assets/images/christian_brutal_sniper.png\",\n\t\"./clockey.png\": \"./src/assets/images/clockey.png\",\n\t\"./cold_night.png\": \"./src/assets/images/cold_night.png\",\n\t\"./comedy.png\": \"./src/assets/images/comedy.png\",\n\t\"./convict_squad.png\": \"./src/assets/images/convict_squad.png\",\n\t\"./corrupted_toys.png\": \"./src/assets/images/corrupted_toys.png\",\n\t\"./cubors_revenge.png\": \"./src/assets/images/cubors_revenge.png\",\n\t\"./decayed_sponge.png\": \"./src/assets/images/decayed_sponge.png\",\n\t\"./deleted.png\": \"./src/assets/images/deleted.png\",\n\t\"./demented_spongebob.png\": \"./src/assets/images/demented_spongebob.png\",\n\t\"./dev_bytes.gif\": \"./src/assets/images/dev_bytes.gif\",\n\t\"./dev_bytes.png\": \"./src/assets/images/dev_bytes.png\",\n\t\"./dev_maulers.png\": \"./src/assets/images/dev_maulers.png\",\n\t\"./dog_mimic.png\": \"./src/assets/images/dog_mimic.png\",\n\t\"./dont_touch_me.png\": \"./src/assets/images/dont_touch_me.png\",\n\t\"./doombox.png\": \"./src/assets/images/doombox.png\",\n\t\"./dr_tox.png\": \"./src/assets/images/dr_tox.png\",\n\t\"./eggmans_announcement.png\": \"./src/assets/images/eggmans_announcement.png\",\n\t\"./express_train_to_hell.png\": \"./src/assets/images/express_train_to_hell.png\",\n\t\"./feddys.png\": \"./src/assets/images/feddys.png\",\n\t\"./fox_squad.png\": \"./src/assets/images/fox_squad.png\",\n\t\"./furnace.png\": \"./src/assets/images/furnace.png\",\n\t\"./fusion_pilot.png\": \"./src/assets/images/fusion_pilot.png\",\n\t\"./garten_goers.png\": \"./src/assets/images/garten_goers.png\",\n\t\"./ghost_girl.png\": \"./src/assets/images/ghost_girl.png\",\n\t\"./glaggle_gang.png\": \"./src/assets/images/glaggle_gang.png\",\n\t\"./haket.png\": \"./src/assets/images/haket.png\",\n\t\"./harvest.png\": \"./src/assets/images/harvest.png\",\n\t\"./hell_bell.png\": \"./src/assets/images/hell_bell.png\",\n\t\"./her.png\": \"./src/assets/images/her.png\",\n\t\"./herobrine.png\": \"./src/assets/images/herobrine.png\",\n\t\"./hoovydundy.png\": \"./src/assets/images/hoovydundy.png\",\n\t\"./horseless_headless_horsemann.png\": \"./src/assets/images/horseless_headless_horsemann.png\",\n\t\"./huggy.png\": \"./src/assets/images/huggy.png\",\n\t\"./hush.png\": \"./src/assets/images/hush.png\",\n\t\"./immortal_snail.png\": \"./src/assets/images/immortal_snail.png\",\n\t\"./imposter.png\": \"./src/assets/images/imposter.png\",\n\t\"./ink_demon.png\": \"./src/assets/images/ink_demon.png\",\n\t\"./joy.png\": \"./src/assets/images/joy.png\",\n\t\"./judas.png\": \"./src/assets/images/judas.png\",\n\t\"./judgement_bird.png\": \"./src/assets/images/judgement_bird.png\",\n\t\"./karol_corpse.png\": \"./src/assets/images/karol_corpse.png\",\n\t\"./killer_fish.png\": \"./src/assets/images/killer_fish.png\",\n\t\"./killer_rabbit.png\": \"./src/assets/images/killer_rabbit.png\",\n\t\"./knight_of_toren.png\": \"./src/assets/images/knight_of_toren.png\",\n\t\"./lain.gif\": \"./src/assets/images/lain.gif\",\n\t\"./legs.png\": \"./src/assets/images/legs.png\",\n\t\"./lisa.png\": \"./src/assets/images/lisa.png\",\n\t\"./living_shadow.png\": \"./src/assets/images/living_shadow.png\",\n\t\"./lords_signal.png\": \"./src/assets/images/lords_signal.png\",\n\t\"./luigi_&_luigi_dolls.png\": \"./src/assets/images/luigi_&_luigi_dolls.png\",\n\t\"./luigi_and_luigi_dolls.png\": \"./src/assets/images/luigi_and_luigi_dolls.png\",\n\t\"./lunatic_cultist.png\": \"./src/assets/images/lunatic_cultist.png\",\n\t\"./malicious_twins.png\": \"./src/assets/images/malicious_twins.png\",\n\t\"./manti.png\": \"./src/assets/images/manti.png\",\n\t\"./mario_has_logged_in.png\": \"./src/assets/images/mario_has_logged_in.png\",\n\t\"./maul-a-child.png\": \"./src/assets/images/maul-a-child.png\",\n\t\"./meatball_man.png\": \"./src/assets/images/meatball_man.png\",\n\t\"./miros_birds.png\": \"./src/assets/images/miros_birds.png\",\n\t\"./mirror.png\": \"./src/assets/images/mirror.png\",\n\t\"./missingno.png\": \"./src/assets/images/missingno.png\",\n\t\"./mona_&_the_mountain.png\": \"./src/assets/images/mona_&_the_mountain.png\",\n\t\"./mona_and_the_mountain.png\": \"./src/assets/images/mona_and_the_mountain.png\",\n\t\"./mope_mope.png\": \"./src/assets/images/mope_mope.png\",\n\t\"./mopemope.png\": \"./src/assets/images/mopemope.png\",\n\t\"./mr_mega.png\": \"./src/assets/images/mr_mega.png\",\n\t\"./mx.png\": \"./src/assets/images/mx.png\",\n\t\"./mystic_moon.png\": \"./src/assets/images/mystic_moon.png\",\n\t\"./nextbots.png\": \"./src/assets/images/nextbots.png\",\n\t\"./nosk.png\": \"./src/assets/images/nosk.png\",\n\t\"./overseer.png\": \"./src/assets/images/overseer.png\",\n\t\"./pale_association.png\": \"./src/assets/images/pale_association.png\",\n\t\"./paradise_bird.png\": \"./src/assets/images/paradise_bird.png\",\n\t\"./parhelion.png\": \"./src/assets/images/parhelion.png\",\n\t\"./parhelions_victims.png\": \"./src/assets/images/parhelions_victims.png\",\n\t\"./peepy.png\": \"./src/assets/images/peepy.png\",\n\t\"./poly.png\": \"./src/assets/images/poly.png\",\n\t\"./prisoner.png\": \"./src/assets/images/prisoner.png\",\n\t\"./punishing_bird.png\": \"./src/assets/images/punishing_bird.png\",\n\t\"./purple_guy.png\": \"./src/assets/images/purple_guy.png\",\n\t\"./rabid_snarbolax.png\": \"./src/assets/images/rabid_snarbolax.png\",\n\t\"./random_flying_knife.png\": \"./src/assets/images/random_flying_knife.png\",\n\t\"./red_bus.png\": \"./src/assets/images/red_bus.png\",\n\t\"./red_fanatic.png\": \"./src/assets/images/red_fanatic.png\",\n\t\"./restless_creator.png\": \"./src/assets/images/restless_creator.png\",\n\t\"./retep.png\": \"./src/assets/images/retep.png\",\n\t\"./roblander.png\": \"./src/assets/images/roblander.png\",\n\t\"./rush.png\": \"./src/assets/images/rush.png\",\n\t\"./sakuya_izayoi.png\": \"./src/assets/images/sakuya_izayoi.png\",\n\t\"./sakuya_the_ripper.png\": \"./src/assets/images/sakuya_the_ripper.png\",\n\t\"./sanic.png\": \"./src/assets/images/sanic.png\",\n\t\"./sawrunner.png\": \"./src/assets/images/sawrunner.png\",\n\t\"./scavenger.png\": \"./src/assets/images/scavenger.png\",\n\t\"./security.png\": \"./src/assets/images/security.png\",\n\t\"./seek.png\": \"./src/assets/images/seek.png\",\n\t\"./shinto.png\": \"./src/assets/images/shinto.png\",\n\t\"./shiteyanyo.png\": \"./src/assets/images/shiteyanyo.png\",\n\t\"./signus.png\": \"./src/assets/images/signus.png\",\n\t\"./slender.png\": \"./src/assets/images/slender.png\",\n\t\"./sm64_z64.gif\": \"./src/assets/images/sm64_z64.gif\",\n\t\"./smileghost.png\": \"./src/assets/images/smileghost.png\",\n\t\"./snarbolax.png\": \"./src/assets/images/snarbolax.png\",\n\t\"./solstice.png\": \"./src/assets/images/solstice.png\",\n\t\"./something.png\": \"./src/assets/images/something.png\",\n\t\"./something_wicked.png\": \"./src/assets/images/something_wicked.png\",\n\t\"./sonic.gif\": \"./src/assets/images/sonic.gif\",\n\t\"./sos.png\": \"./src/assets/images/sos.png\",\n\t\"./spamton.png\": \"./src/assets/images/spamton.png\",\n\t\"./specimen_10.png\": \"./src/assets/images/specimen_10.png\",\n\t\"./specimen_2.png\": \"./src/assets/images/specimen_2.png\",\n\t\"./specimen_5.png\": \"./src/assets/images/specimen_5.png\",\n\t\"./specimen_8.png\": \"./src/assets/images/specimen_8.png\",\n\t\"./spongefly_swarm.png\": \"./src/assets/images/spongefly_swarm.png\",\n\t\"./squidward.png\": \"./src/assets/images/squidward.png\",\n\t\"./starved.png\": \"./src/assets/images/starved.png\",\n\t\"./stgm.png\": \"./src/assets/images/stgm.png\",\n\t\"./sturm.png\": \"./src/assets/images/sturm.png\",\n\t\"./tails_doll.png\": \"./src/assets/images/tails_doll.png\",\n\t\"./tbh.png\": \"./src/assets/images/tbh.png\",\n\t\"./tbh_spy.png\": \"./src/assets/images/tbh_spy.png\",\n\t\"./terror_of_nowhere.png\": \"./src/assets/images/terror_of_nowhere.png\",\n\t\"./teuthida.png\": \"./src/assets/images/teuthida.png\",\n\t\"./the_boys.png\": \"./src/assets/images/the_boys.png\",\n\t\"./the_guidance.png\": \"./src/assets/images/the_guidance.png\",\n\t\"./the_jester.png\": \"./src/assets/images/the_jester.png\",\n\t\"./the_lifebringer.png\": \"./src/assets/images/the_lifebringer.png\",\n\t\"./the_observation.png\": \"./src/assets/images/the_observation.png\",\n\t\"./the_old_man.png\": \"./src/assets/images/the_old_man.png\",\n\t\"./the_origin.png\": \"./src/assets/images/the_origin.png\",\n\t\"./the_painter.png\": \"./src/assets/images/the_painter.png\",\n\t\"./the_plague_doctor.png\": \"./src/assets/images/the_plague_doctor.png\",\n\t\"./the_pursuer.png\": \"./src/assets/images/the_pursuer.png\",\n\t\"./the_rat.png\": \"./src/assets/images/the_rat.png\",\n\t\"./the_red_mist.png\": \"./src/assets/images/the_red_mist.png\",\n\t\"./the_swarm.png\": \"./src/assets/images/the_swarm.png\",\n\t\"./those_olden_days.png\": \"./src/assets/images/those_olden_days.png\",\n\t\"./tiffany.png\": \"./src/assets/images/tiffany.png\",\n\t\"./time_ripper.png\": \"./src/assets/images/time_ripper.png\",\n\t\"./tinky_winky.png\": \"./src/assets/images/tinky_winky.png\",\n\t\"./torens_shadow.png\": \"./src/assets/images/torens_shadow.png\",\n\t\"./toy_enforcer.png\": \"./src/assets/images/toy_enforcer.png\",\n\t\"./tragedy.png\": \"./src/assets/images/tragedy.png\",\n\t\"./tricky.png\": \"./src/assets/images/tricky.png\",\n\t\"./try_not_to_touch_me.png\": \"./src/assets/images/try_not_to_touch_me.png\",\n\t\"./twilight.png\": \"./src/assets/images/twilight.png\",\n\t\"./v2.png\": \"./src/assets/images/v2.png\",\n\t\"./voidwalker.png\": \"./src/assets/images/voidwalker.png\",\n\t\"./waldo.png\": \"./src/assets/images/waldo.png\",\n\t\"./walpurgisnacht.png\": \"./src/assets/images/walpurgisnacht.png\",\n\t\"./warden.png\": \"./src/assets/images/warden.png\",\n\t\"./wario_apparition.png\": \"./src/assets/images/wario_apparition.png\",\n\t\"./waterwraith.png\": \"./src/assets/images/waterwraith.png\",\n\t\"./whiteface.png\": \"./src/assets/images/whiteface.png\",\n\t\"./whitenight.png\": \"./src/assets/images/whitenight.png\",\n\t\"./wild_yet_curious_creature.png\": \"./src/assets/images/wild_yet_curious_creature.png\",\n\t\"./with_many_voices.png\": \"./src/assets/images/with_many_voices.png\",\n\t\"./withered_bonnie.png\": \"./src/assets/images/withered_bonnie.png\",\n\t\"./yan.png\": \"./src/assets/images/yan.png\",\n\t\"./yolm.png\": \"./src/assets/images/yolm.png\"\n};\n\n\nfunction webpackContext(req) {\n\tvar id = webpackContextResolve(req);\n\treturn __webpack_require__(id);\n}\nfunction webpackContextResolve(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\te.code = 'MODULE_NOT_FOUND';\n\t\tthrow e;\n\t}\n\treturn map[req];\n}\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = \"./src/assets/images sync \\\\.(png%7Cgif)$\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/_sync_nonrecursive_\\.(png%257Cgif)$?");
 
 /***/ }),
 
@@ -404,6 +404,28 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/bed_mecha.png":
+/*!*****************************************!*\
+  !*** ./src/assets/images/bed_mecha.png ***!
+  \*****************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABzUlEQVRYhcVXQY6DMAycrnrjguQn8Ebu3HkjT7DUC+fsgTXrOHYIbWktRYiEeJzJ2Ak3AAlftDsAjDQAACY8PgI6oQcAzLwAANJIQ8LGxMeaYN4ApJUIHTNGGvaorAlL2wp8pmRlenWen5kXCGYWgPexB6aB8n7/Wy8YjZlWooyWkYa0EqWVKI00PLVFMk/70RiCWQRgJ7yjeX4F816jt6aJmsm8XDf+tmUMSHsnC3r1FgN2C2wAr4LX/Mn7j6WuleKVKGtn5lrboxHaIwYikR6JV49prIKBmlC28Qcm9OiYM3HOvKBjxoT+sJx7GE0a0NHXmsdCswZqkcrqvX3XfRELEbthAJ7NvFTrfVR2a9acBfoI7Zizs0PeBbympcMsgKrjcLIAKJWv9zeaZ0uwW4hsOkIJqKU62qAif/qZnQUbdZxRWO5reWyLzbxgLugu/Wkf7n1A1CzAkTZax60/6euYUZyG/1GWjuxkPR5dajx/2k6l4RV2OoCI7gl984EUBtDiQCpiNHZkFsPVwJHZ2470TUSnfZk0fGRp5NlGdVlytxs0UEvTCMOrTpe1pvvASMNO8TPCsqb9ufeBb/6a7RqI/oKuMM3C7S+ir9kvmUl1JHE4Kc8AAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/bed_mecha.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/beyond.png":
+/*!**************************************!*\
+  !*** ./src/assets/images/beyond.png ***!
+  \**************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABa0lEQVRYhcVXQY7DIAycVr31UslP4I3cc9837hOQesmZPWzNWoCxoU12JKSIxJmxPUByAZDxj7gBQKQAANjwPIV0wwMA8JW+AQA5Usj4rcRpQ3Ai70SnC2DO67vl1BApYCcq7R1BrUCkkHeiqRZFCiWORy/erECkUEy54dlk0stQXm94iNHGMy4vNbin1JCzWyXYuTtRmbunhEih3NOSkRySs2nBqOw8v9oeVC1oBKwuSe6993lVwAqxNJy3KlPLkA3Hgw0ljSoxMl0Pwwr0MrSy5RhPBUwBNZEUNCq1574pQHO6N0MrMVPA6CWW0bwCls8CbdOZxSGH0d/3RbuT9vDRw4jf52kRPKtgVoTHoKYAzfWWiNGqcQsYHULvVKqed+8DHhEzmbtboLWlJqrJe5lOtaAOqsVIQm1LHsVPe0DL2Oq3ZewlD4xK6o2fEnDkOPy/wIsr4N+zPwnmvPGE9nl1JDnw+i84hVXBDzg1UlJ7T1gDAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/beyond.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/bff.png":
 /*!***********************************!*\
   !*** ./src/assets/images/bff.png ***!
@@ -423,6 +445,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABZElEQVRYhcVXu3LEMAjcu7kmdslnps9HuM9nUioplcLBpygCgezRMaNCMoblsUa+Ach4oTwAYFv2zfsbTXH6+c0AgI+vfZ+3BRmYuwqfyIloOgDxeY+mb1uARL5SiW5PX81AIsqJ6E+JRLd+p9ary9rSh1WC+kwMtgB4zjQA3RJI+oQhKzMS0dHJwN7ViQgrc9NGT8wMaBH0lpbBxvO28V4NvSDq3nADEBBiJOo8kKHnRhyejW4YgLfevfqKjgVOLYEnKi/FrEBUGq7Mx5AYFY2WiegYfKWEm2yEIUbWdBpKo7XKEmVI3eAmAK0HrhzbJoAyTWX00WiHP0RavTwAvNkbvg/0RIZWfRfQrnsmAKHTKBDPdGwCKC+NK/NhqBzBwDPCFrcjMkRDhVLuBnZNQ20ZxsJNGAbQodQ1NIw4t849WQzR8OyQaskl34EzwO7Af3rNEPH5kINtmf9zCgA3/Hbiq+QHZ90uQ/l/Sx8AAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/big_bird.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/bigger_boot.png":
+/*!*******************************************!*\
+  !*** ./src/assets/images/bigger_boot.png ***!
+  \*******************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABzUlEQVRYhcVXu27DMAy8FNmyGOAn+Bu9e/c3+hMEZPHsDgldmj5Sch8uASKpKonH44lSbgBW/KPdAWCQHgAw4nlJ0BEdAGAqMwBgHaRf8WLiMjcxsS4ifnD7/hvg2L4akwIYpLcT/sR1/w9WI60N8KUPb4P0WESwiIRz2B5s7i7b1uwZrVGm6lUGFN2jlO07Q2z/l83TvUZ0eJRSZ8CiZCwoO4vIgalBesrEKQb0fEZZj3hiRLfN00/gpZupzHStZl9lwGfpx2yWng3PFFvLGDiUgPUEFtwHyUB4MCGAbJFvTDZ71rQYKJugft7ef+xUGtVSTe8MqwHVh+rB13sqMxaRTRM2Zki7Z8Ci1wy9Zrx22F52bHcKMhXb7hhlXrOpzLsTAQCHEqh5+vyYDe5LEpXAGi0BiBCZ4mHKEJ2cqDEByTGMvAVU6zGsAohQswBRI2rxUwzUwLXOaWIgWsQoz5pQDUy1E/pNaqJiesiApAwEVO3qHnm2tgkA6/lnFW7BRkw0XUa+1baWgF1UHmj6KNUOpt1Ln1UjnuklZR8t2uWiLmotLUGUXYsGsj3TR2k0ppdJ5rUnPX2SfaeT/dQ15t0iu/rHKfC+ji+JGtgnxeXGsg5qhDQAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/bigger_boot.png?");
 
 /***/ }),
 
@@ -481,6 +514,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/charlotte.png":
+/*!*****************************************!*\
+  !*** ./src/assets/images/charlotte.png ***!
+  \*****************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABw0lEQVRYhcVWQa6EIAx98zM7NyY9Amdkz94zegQSN679C6dYsRXQ+f4mJDAjvNK+V/oCsOAf7Q0AnhwAIGB6BDSgBwAMcQQALJ7cgjUSjw2BiWUmetwBxvy5GkZPDjNRSt8duxSBmSiN1r0S8117W2AlzXbjlbABPTz1iVCl/U0RYKLMRIsnl9Y89+QO/1ln5HPGfH0W6GI0vQ+YknRYql2MZv75pp7c7tYSh+cqCfng/AAG7mLETISAyQyrtlczlQOc64AJA7bCkTviyaX859GQUdjsWOgOEZBVcSWY21XImUi9yRDHNORZvJZpzG1HQkk8KCSS8tNkKIkKhZTISNhUiGqlVpt/QEnBFrKN9VbY5XfSkVpwADjIMM+5lJv2WlryLZkpQwnCJNRuFNDvnL5jBxJydStVOVSQzRrFSqjp2tK69f2ZSczTt6AUgauRqZLhWZm18q6/nOemRsC6eR4VrfBY8+oItLC6RfOaNaVAc0z+Vmo8NKvqiDSHuCcMynf7Yra+qLcdOJZjbsk2AHZwiOMpaG7Flkwb8iW8IlOBea0r5krZuu9rDtwdOxlancpfGmMmEubP8BPgwKcfeATVsF9yBlonn0rwWgAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/charlotte.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/christian_brutal_sniper.png":
 /*!*******************************************************!*\
   !*** ./src/assets/images/christian_brutal_sniper.png ***!
@@ -489,6 +533,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABtUlEQVRYhcVXOZKDMBBsbzkxDvVM5zyCnGcqBEI28LZoxOjCW6arVAhd05oTbgBWXIg7AAzd++X1cF8ROi4eANDP7/d16LAC320iE+vk3OlDJudCa7mIyDxPgPsouIUE995r7TY5t7Md/Wbo6Ds+rOUcQVtb+GkVTtBh46eFmJCiqIFYOG/z9N5cq0Ri0s0EKFwPfT3S68fFB4IkUyJR1ACF19yGgoFNQ5b5qgnw9nozhdp2m98EK5FTBEgi5cUct72+jkhVFJSgBNnnc1w8xsUHIk0EcvFbwtDt95NErK3qRKQHEyrAGicJzlnmLBLgATkntOYss6RwqAW5fM7Cgyj3a1Gy1lrnAFgPPrDldhtP7/H0e6caum089vaa/LGraiyxlhZymtE59kuaNDXQzzikX53TKqh9CzVRlA1DPTju9/M+5pWcrlOiKewcxVJfql9quX1JE1haaAmp1D6OWciGIR0zN1fSkDVW/UkWZ7VUAUolpVQSy2qg9TapNblwbP4qjg/5NCcUnTAVgoSG3eRcaNa3QS4MTQJqt1zBITT9ninhl/6ahSgoFaH/hBao2x+jy/AL7v4yJzLWMZwAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/christian_brutal_sniper.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/clockey.png":
+/*!***************************************!*\
+  !*** ./src/assets/images/clockey.png ***!
+  \***************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABvklEQVRYhcVXPc6DMAx9fOqWBclH4Izs7JyRI1hiYeYbWlPHdRJTJGoJqSGO/fL8RzsAO34oDwAYaQAATFhvcTqhBwDMvAAA9pGGHU8mbnuUT+wb0e0AxOffVTqvyuPsgVK+2LhGpcOTDiTmpuNokk7om0C0z2oOjDTsG1H2eEkb1YPJgSoD9tZCs30n69K+x4b4rOZAyVFLPwe1Yq6cKVaBJJsYLMXUAzXzcrBhbYUB2NtsRJlR2fs81790VzckIQAlxNaQsDKhR2JGYv64fctmtRFF4q6BfAJbXTBa3CrYiAAAifn47Ulr3+pYH4m5zoCIpjgxF2+l9aLSBOBVgF2L45kXjDQ0WdESmgWl/j/SgMQLAFZNK29KQJ2NSzkQka9yQNDb0onE1uq82fPzxgWgY2yTrlZWdk+DqU1HdxrKJNNTLvLp5ul755TP98I60b+9Uasfu+/ZEL0qAMuGRe85KzFk19p+GIAYOvPlXNJvApDblZy1gNT2rW0XQAmEFxYbW4/uiM2sDHXDkK7njVGvpLx3uoNKSdrGlrXiY/y+Wqy012d9xwfMWVs//Wt2MHDmu/+q6I7ZvRD9TP4BRExuUHXqBt4AAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/clockey.png?");
 
 /***/ }),
 
@@ -536,6 +591,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/cubors_revenge.png":
+/*!**********************************************!*\
+  !*** ./src/assets/images/cubors_revenge.png ***!
+  \**********************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABHklEQVRYhe2WMQ7DIAxFX6tsXSL5CJyRnb1n7BEidemcDpSUVgEMtMmSL2Uhhv/B/oYTMLMjBgArBgDHfRNSxwjAdboBMFsxM/4kNvsiTuaHyOYCAue59zh7cQjYXcBQO8GKqbKrY1zs1iXgTXxffJwn1sWd8JbgMk0F4jqEnafWjsezfeAhUtWorJiP9VJrR+NlATXk33NKAqqLMAV/pJ/F5u+YfPq6bWjFJPOsKcQuAaFA10jCDVtCs4CYfM3nWhs2CSiRB+T+NQvQkmt2H1BlQ01fiOekYpts+K729a65Fu8KMeoUWDHJdp0mz6cp4C+tWJumYgocoy86EeXeywX6jeNRegjYX0BN2/wVAudiw9a3Xw85vB6lm7Am8ASzR1fvBxn7rAAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/cubors_revenge.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/decayed_sponge.png":
 /*!**********************************************!*\
   !*** ./src/assets/images/decayed_sponge.png ***!
@@ -547,6 +613,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/deleted.png":
+/*!***************************************!*\
+  !*** ./src/assets/images/deleted.png ***!
+  \***************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABQUlEQVRYhcVXQRKDIAzcdrz14kyewBu5c/eNPoEZLp7pocRSrEIQdGdy0BZZN2QTHwA8bsQAAJoUAMDAXbKpwQgAmOwMAPCalMdHicsi2hN+IbqcAO85SKRbiDbytUCxAgvRT5xJHe/5lDDlt/9eOyxEm5BARKAEKckmBDSpkP98mbIqXNpNCNT4Q+ma5imQolABWV4la7IENKmuFp0l0Ls/FBBIa3/Ey9o1/t03GEXED50wdb/4v5rU5hqJ0x09F9JewPi6nQsK2aCCgwm/xfePIE5Bir2mVNqssgRqu15TJzzCnu12d8I4NQau+I2rCPw7B5waLr/JzmsJ7q3Zg7gMW8yQVQNJD2QJxLIyWs6DRQpMdv4hwaNX7cFLIRrLOf+pDUsjWnvvd8GpQ9gsBXd+mq3dsPfkEyM+0I/A6Da8Aav7ggjm1pfkAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/deleted.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/demented_spongebob.png":
 /*!**************************************************!*\
   !*** ./src/assets/images/demented_spongebob.png ***!
@@ -555,6 +632,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAdJJREFUWEfNVzFyAkEMW8ok5T0zPY9In2dSJilhDCNGp5N318lw5BpgWGxZluXl0Fo7tyc+hwDw8XpD8P6y7ALl8+d0zXP8bu0OID7s+UTRdwBfy9LeTjdU1Sd+q0/EigRg1MVGzisDMwA4UVBYYczFHwL4S8JgBLoKoGCDmUgBuMPVtiiA+KwsWAAQRjUhB+f3HG8KgB6aBYTfxWumD41lGcjE2Ksw8w5V/jQANgluBUCwRiBUVI3vRjFYE6sxBIVwKaZWdYGkfCaqVl9QJvT80AeyKgNQgIgWKAMA4gwIrUjH0AkxknBQVbrqgIWIAuCOMLBpAL0+sxty/9Ul3TSVfIB9HdRHEq5ONcJOiO+cL2xEiL5p8F6FUDXAIWGPiZQB9BtoHX2OEU3qPGXIADycketSguo5IcYX4J33a4tSEbo9kE1GnNXZ5xbivdNDF0BGO48QgO4GINsT2eYcLbJSC2Z66sawd2satoAt1s1x786QOaU6ZLRvswt0xNxazVYwdoNevRisinQDYLTNfnNbKgHgbaUrl//AqGNiJNlL2B8AQmOuGGDlOtdy7KhFs4VnmzC9kFTFhmoz7+9NxmoKRjNb7fvMeeT8H39OZxA/6swF4PlNHwf3REsAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/demented_spongebob.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/dev_bytes.gif":
+/*!*****************************************!*\
+  !*** ./src/assets/images/dev_bytes.gif ***!
+  \*****************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/gif;base64,R0lGODlhIAAgAPMAAAAAAHUTIxt9OPUTE6lCJP99NzzVajWPxBPp/wAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQAkAH/ACwAAAAAIAAgAAAE2BDISau9NYTBu//gp0kBZp5ACQwnglDuya4t8Nq4Oc/YIR0+QBCza7mOMZ2Ed7nBZMta0Oe8FE2vaY4Y5VC8r1sYYDBQyjQaq8iqSl5mM3leVI1SQqTLJ5AI+gB9bCEnZYaGaWsWTBZyZ4k0dmkYZoB9Zmx4eIwVlX50XZCcj3JxoosABQUUqnOdkBsiqbOzqwKHZYJRJgQSBL0AwFyTF6rGxlDEFqsVzMOjE6vAvc5WuxjSvrTPJ6vM3snQEtXj4ScEx6rC1soo7jMq7vKaGiH29xx38/sSEQAh+QQAFAD/ACwAAAAAIAAgAAAE1xDISau9NYTBu//gp0kBZp5ACQwnglDuya4t8Nq4Oc/YIR0+QBCza7mOMZ2Ed7nBZMtaxXkpmqgSbKXIoXQRwN/hZTBQyjQai5t7ms2Ad5qlGqWESJdPIBHwAXxcISdlhYVzaV6EFmZsdYkXZn98jVF0JJCMgH1xiGuWi3BybFsABQUUp50VlTQbIqaxsagChmWBUSYEEgS7AL5EuRinxMRQmRWoycdMFqi+u8rByKm/vLLTzcvKqNJVwhfeEuKl1BMExafA3+YoSnfu8ZgpryH293by+hIRADs=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/dev_bytes.gif?");
 
 /***/ }),
 
@@ -580,6 +668,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/dog_mimic.png":
+/*!*****************************************!*\
+  !*** ./src/assets/images/dog_mimic.png ***!
+  \*****************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABu0lEQVRYhc2XQY6DMAxFX0ezY4PkI+SM2bPnjBwhUjddMwtqcE0CgXaY+VJUStN+x/7+uDdg5A/xDRAlANBxv4S0owWgTwMAY5QwMmXismU4GR8ilwegnF/vpvNdvB2A6ufyAKIEHiKbwtU9W/g+G8Bex0zE+111OgPaSjkcKcvpDAA0KT3T/BpUx52OtspXTgUQJdCngSjhhUSvlXzJUvpsABpE6YQ2A00qkwPcmExhd2MuAE9q0aT07JJ2tlwL5fyYEXW0NCkdPkh1AHriWoUf6YRTz4IoYYwSxofI6lWXve+/r5xVIrSPa59iq3ivg2V/mjvHo7oEtq1yP5brCBtsjhwq27BPA7iaahBbXl86tUdWA1o/vcbVztbZ7s+tLQ0UfUB7+CULLAakNmzdL5u5AnZ9wM9t/jMl1/7v0zDvne7XzZeHnXBrgFX3s+9LqHJCO1Ao8XLKdcqt+Ww9rj2KRlQSEE6o3nhqjK3KiPaGDtXAopM0t6vOCHulXZUgSpiXVb59tQF23HmIrEqk2JsJwZVAPd6n3va7v59L+145zP1/8MfkiGI/BeWcRbg1Yv0WOTyN6BLWAn4AVzbOkJ1iqqQAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/dog_mimic.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/dont_touch_me.png":
 /*!*********************************************!*\
   !*** ./src/assets/images/dont_touch_me.png ***!
@@ -602,6 +701,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/dr_tox.png":
+/*!**************************************!*\
+  !*** ./src/assets/images/dr_tox.png ***!
+  \**************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB5UlEQVRYhcWXPW7DMAyFvxTZshjQEXJG79pzxh7BgBfP7qDQoSlKptE2IWAEEWi9Jz7+yBdg5YN2BRjTHYDM/BbQzADAY/oGYB3TfaVE4m2PYF6AdUmJ2zRtDJeUyAwbQ4lQ1OS9nmnMdUmpYqfXzkQo6qv2rwnI2l9LM6b7tqdgfnmhEcvMp8MPbck8aa7tDX5fEZrIY/pmTHcyMw/jV+kt4feksY/46ceTTvsZzDoHHKcuYBTYI+BKkBlYUvkd0/BcE0nmnZ/WdUzDFuaXtf0Bdn1ANIvUcQGMdVAPWDCrCHjgbaAa2LbZYlPlJ1YR0Jnrhf0IcEwDmZlsummYwB64D1asSPfqHzOZQiIqZajcOMhs3eXsntrfdsKKgOPg/hfAI39NSveWEIFoXVu/XhMLNSK9iXcCC6jXWj4tAu59QEwPJjHJ7P3QGqrE9faTPW/TdHwf6LH3/p+ZG9rf7QO2fF69Yd61WjlJKc+520nlveK7j07o9qMnpD2JXfPyxuaFm4Q6kSwhm2ReFfRuUF7iugSiYzaqd+v9bh84M+97j57/oQgcnSRCxuaCJ6fG7E5DMalXXQEy8WrzMx386ug2Iktmf/uxNx+exI5HMJgPk09+mm0StE70Hyb3CnhK8BbUhv0AHC9LeMceAoAAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/dr_tox.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/eggmans_announcement.png":
 /*!****************************************************!*\
   !*** ./src/assets/images/eggmans_announcement.png ***!
@@ -613,6 +723,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/express_train_to_hell.png":
+/*!*****************************************************!*\
+  !*** ./src/assets/images/express_train_to_hell.png ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABV0lEQVRYhc2XO46EMAyGvxlNR4PkI3BGenrOOEewtA01W7BmgxMyyyvsL0VD4iT+x4/EeQAjN+IF0EoDQMdXEaUdNQC9vgEYW2lGJksUa4FOxkFkHmylGQeRcRBZ9FMk98isbzpxnVm5NS/37ajsudONp2FBoJVmDhCYgsUC1H79/K0y338wmYNKNbnRFej1jel8hYJSadgH31EMmAsqVTpqKtV5vFJdNJubk9n6cMxjkYYkovdopIep6DOrSBbYiQdEVnimJvpJa6b7hL+si9IwJHKWkhB+76QFroRP9eInYdYCd+A0AoPIvQTswNlK5hIXhGRuIbAF/4vAnuv46A166UGUIpf6k9kb7ZP81JrQ2O3N6RzW9oyC0Eqls1GpMojk7wLzWa7ITI19koWKfVwsilJvpo46WvBbhsUBlpOFMF1m6VufZnNVPL0Jyj5O4ccFRbSu4BvvfGDTbNeUuwAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/express_train_to_hell.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/feddys.png":
 /*!**************************************!*\
   !*** ./src/assets/images/feddys.png ***!
@@ -621,6 +742,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABhUlEQVRYhdVX7U7DMAw8wxDPvFKJVOrHU4F4M/NjXOR5+WhaaIWlaJnixNfz2W0EgOJEuwBAGGcAwPvb9ZCgw7QAAELfAQA0jLPixsRhgzEFgKoqRORvH9sZYz7tPSiMM1S3y2g3Awzeuv/XGNhr/xsAy9fPW031lshq2dBYQpxzLeWTG4y5WoSqGhtIqWFZn9KZm0XI4MO0QETuxjAtm7ppUwpIec6vNQWrASQ2ZtfXtPZNAMjCHoDerypCllfoO3g/2wVtO6aP3ettdyfk4SJyN7dra2wTAFWNaldVhL67Y6alEooAck/CWreA7K9frzHSLJzUf9sFG8/KA/DlVALAuffJlST9HlIQlTvOSfVaG6Yl+zHiac+loSpCC+hhre8iCF/GNfDWIh2Wrhr9uVFKgZ0XNZDKWy7/NaDNGlhrNv9WB14Xoe/ayzCFOvUe8B8iNd8UA5cUIouaYoq3mITqS2tAuRGdfjF5BhDk5RVfnx+HAmDMKELecI4YNiWCn1o8y74Bcd317BCGosAAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/feddys.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/fox_squad.png":
+/*!*****************************************!*\
+  !*** ./src/assets/images/fox_squad.png ***!
+  \*****************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABcklEQVRYhe1XPa6DMAz+WnVjqeQj5Izs7JyRI1jqwswbeKaOiUMIal6HZykSyRf/xI7tcAOw4A/pAQA9BQDAgFcTpQOeAICRJwDA0lNYsHqi2VA6scxEzQ0Qnfer7rxK/wbsDJCM8NY9vGRPan1nwFEq5vAa3u8LAZB3s4fX8LgGnBV+hSdpQE0sa+/ODWtVQseMnkK0UWq2J0jwszwjTxCdiSzYCyjFa3gjD8xEWUFykqu46OqY13asaQV96z1cC9bKPFwoeQk75ugUErcc3jFv85GnLG5pa426Lae+j/AaWcW9oASv4Y0MGPBMXqR3uh3hr2hvDtcUuainsMxEuyFPKA8v2aOffkrne2Lfhj2FaO3qXOtIGmCZxHK9rk9iccFy/NYDuzqwxYpoi9dMwGDuicVh4jsf4EJRJdTMsUHxO97iQiLD+8+wOpK9QDba23y2EGne4kLUcnzXf8FRG/0Eic4tC+xjpIVy4DcLmmh16Af3NcQUGHpwyQAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/fox_squad.png?");
 
 /***/ }),
 
@@ -654,6 +786,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABj0lEQVRYhcVXsa6DMAw8nroAoz+TnY9g5zM9AiMd8kxNSEwgaTkJRRA1Od/ZTloBWPEgXgAwNO6lq+knm44LAwD62b2vQ4MV+O0je1YA1okILXOR6Cw1x4W3qPWe60RULCJZz3/0nB7/SkQ8EaGf3TgRbR7ryGUupPRtBYbG/VZGHaU1V0wB8Tmnel45BAQi+UQfIj45mfPtyc4BwNVzV3+8t8aQWmYOWHPi750ckt+YFpz1B1fTLiot/xn0mkkWSHOJkWiZt2dc+OCzBbMTysbSva4iRlx6Rsscr4Kh0eXFySQstUKIKqC/pZwVmrBYEOsPLfO2ZnIZSssNYSI6bJ6KqAXSv/Wi8k2r4Uu+typc9xqmBTqa0DEq74KQTSHVki3oajpEUOreIIgSSPHyasaHsMsBX65Y7xaUuEOeWqCvUd/A7dOwhPxZBELy+6SG5jyXspIwREpIpCq0S8LQplf972pCP8fJ+3tEO6G+4eTCWmdngW48LdvZH1v0DulH/5ptFuzP/+9Cq1T9M3oMb7Cwiv/HJH3CAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/garten_goers.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/ghost_girl.png":
+/*!******************************************!*\
+  !*** ./src/assets/images/ghost_girl.png ***!
+  \******************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABV0lEQVRYhcWXwY7CMAxEH4jbXpD8Cf3G3rnzjXxCJS49l8PudN0oaeMUiiULKMUeT2aacAImvhgXgN46AG48D2l64wrAfXgAMPXWTfwycVi6nkyj2eEA1PO8l8690QSgt47RbJHSUUuElmA0m0azrG4iWlLPS3RyeM4qHs3m73StJaoZ8JOLCZ8EWPiYCOXt2ggDUIMS5VExhgD4pumkrRoIAbgPj8WEa4B2A5C/FfK+9ov//ePKzzAsrq3VyUXWBd7vJe+n6vf3pr/N1Se6F6igB6L3AhC1YQjAFohINgMoLUUrgJALJDK5IRVpa1RNIOr9/X79oyyElsA3KNH/UQDeUv5zoeD7NJAeNPTA0as0sGf9VxnQpGsPo5wtIwxsAsg1S7MFRPNzoJRREG8HkDK0BeQjAFSrpl7TobQm5JDaOMO+E21rqOfMQG/d4X9OAU78CeFb8QLVC64L+su+gQAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/ghost_girl.png?");
 
 /***/ }),
 
@@ -712,6 +855,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/herobrine.png":
+/*!*****************************************!*\
+  !*** ./src/assets/images/herobrine.png ***!
+  \*****************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAjUlEQVRYhe2XMQqAMBAER7GzEe4JeWN6e9/oEwI21rGQiKhoQIzNLlx1Bztss1wFRH5UA+DNAdAzFTHt6QAYwghA9OYiaxLFZudJnM2KAyTP+m2cbyUAAQhAAAJoco68uVNTtiFk7++UlUCqzSNU7v5JakMBCEAAAhDA9quVVPLc6viqUr82B6j4+T1fAG1cfmpeP8K4AAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/herobrine.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/hoovydundy.png":
 /*!******************************************!*\
   !*** ./src/assets/images/hoovydundy.png ***!
@@ -720,6 +874,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABlUlEQVRYhc1XwbKDIAzcvuml9Mhn9u5HcPczOVqPvoMvNuAmUp3RlxlmFDBZNkuQG4AJF9odAFKYX16PeErQfswAgO49v08pYALObSompiHG0wFIzJ+DbB62/wVgiHERpGUpzG2IsWhb33lWaMDTQwrzOJsj/a2CVj4+L54DCd7iWHykgOLZWGgJ4EhwCwSLsbkLJNfAXKCeObcltPIh1o8ZQ4xLEdJGGbCo28OC7qufVwwI6u6NQ8oWHy22oGGrtRS/pXbru/q5YEAjlr3OTPQg49ZczaDHJkW2VQ9q5thqNVM1a3Qb1gD0B0xQTLTWQpzUrgct1LoSegXLA1L3u4dRvfe79+dn4vWI9DyodSTG9r8Yzbes1koDY4ONM5bMFGinVn51ffeol3naX5MIWWPOLcd6vidcE0CN3APlBbeEvYsB5sBrX1ZKjtZiwXPcuvpdDDCAnkZaWFoB2FIyE1Q91sqYK8Jvct1yenppuqMy+Q9gFU1f3Z450+rWj7mogOLHPQ2vvJotDKRw/uUUAG5/iC6zX2X/agxWDn9XAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/hoovydundy.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/horseless_headless_horsemann.png":
+/*!************************************************************!*\
+  !*** ./src/assets/images/horseless_headless_horsemann.png ***!
+  \************************************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABnklEQVRYhe1XO46DQAx9WaVLg+QjcEb66feMewQkGmq2IEYPx/YMoE2atTSCCf48e/yZ3AAs+CDdAWCQHgBQML3FaEEHAPgefwAAyyD9gjUSb1tkE8ss8nYAavPrajiv0iUAs8iWPzWK+E4DGKTHYxxT5UyacB7vqRxgGSs/SL9LbN7rU2Xurd5qiRZ0brnueVaP1dvM+2oEBumXWeQFOXvI8srPMl6Zk0wMwBr3wmm/MUArexiAp4A99FYG6BAAFvYUeN7b7+zEYQDZGWatO4pYdARpH9DsBdam09p4mI91eOQCyIwUTCiYdjz6vi/FqapL6SVE9tz4yQkHJ6ycjDYPLC+iHKglXw1ABPwUgKgUrfEMcMVGPQJRLddW1C2bAHjCtstFTcjzOgLgVoEdOAUdZhHa+3dHroBZZLv7ZZXgArDTy/aDjPR7QbfJraXbtQNQBVzvj3HcKdHLCJP+xsZbGtKhaQiTXNlMyCZi0zRkJdloPQLeArg9N25ImbjNthIfhSW2+f+/ICyRvyS1ud2Kz5zxVeMAcMOzFD5Fv8pM9cVZWbheAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/horseless_headless_horsemann.png?");
 
 /***/ }),
 
@@ -745,6 +910,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/immortal_snail.png":
+/*!**********************************************!*\
+  !*** ./src/assets/images/immortal_snail.png ***!
+  \**********************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABMUlEQVRYhe2WTYqEQAxGXw+9m42QI3hG9+49o0cocOPaWVRH65fK4LQNg4EChaK+ly+p6APY+GA8AQbpARhZLhEd6QCY3AzANki/4Z24bAWabKvI5QCq+XXWzrNxA9wA/wNgkJ5VZF862N4OoMLpBB1ZzCBNgFWk+pwLd/uYVZDTAN/OZc+lzLz4sosqSMuFB34sRkKtCJ0IxWtROls1TT2gtQ6zCa2OQY4ylPakYQI4bM2z1OxKJZjc3IQwApQPqbkAx7e+FU/TLiOQd8PeS/DrEpSFNdu04wfpm040HfCHLtF71AsvkRKEpQxNgLTxJjczRXDptfT7rde6OQfSO++huiy71P5W9qppGkSZ7QGIJUowoeb9U3oDfB7A2s1/Gaq5D6LaVXunOLwG0SWqlfgBKiHmvyM63OwAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/immortal_snail.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/imposter.png":
 /*!****************************************!*\
   !*** ./src/assets/images/imposter.png ***!
@@ -753,6 +929,28 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABkklEQVRYhcVXsbKEIAxcb66BV/KZ9H4EvZ9JqZa+wonmQgDRO82MM4iYXZNswA7AggftDQDBrjfeuFtAhzkCAPppvV+CxQLcezFMLKNztxMgzNfFaF62xwm8jyyiIgX2wvmWFSMQLDA69wEa7H7V3qOrtLbDWhD4izFx4s06P7pdniQhMhkReq+2ljDVFOTAW2yYo0pOzqkpOAreT2kqvHEqeM4SAqV88ZD2EzaC9E6wadhr/hMCvB1zZxq4bKn8uWbafFWG2hcRuFTHGSvKUGPcT2mBXekT2QiQTKRDKdkWcE0FCYFhjlsdaCq4Aq5ZkoKco2GOVXA+p40139lOKL9e65SaUx7mUoQ45rY3B7uO6Z7GvzgvqOcB3gNkU2mRWUv7rsqQSHjjTu8LpwlQPnkkaturbM81+5AhSVDrflye3jh4U3cuSWgqeMkFEpxXdW2j4WSPEEoI5FhK5yUiLVsxUDkRSWJH86r1AT4P7H0gS6DkIEek5csJ8/BumBt/wx79NdtkyE+zvzZexB0e/j3/B2UzcsMtWyTuAAAADmVYSWZNTQAqAAAACAAAAAAAAADSU5MAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/imposter.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/ink_demon.png":
+/*!*****************************************!*\
+  !*** ./src/assets/images/ink_demon.png ***!
+  \*****************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABm0lEQVRYhe1XS66DMAycPnXHJpKPwBnZZ98z9giRumHNW4BTE+zENBVv80ZCCq3xTIw/4QZgwR/iDgATjQCAiNclpBEBAPBITwDAMtG4YI3EZZfgxDITXS6AOX96w9kLl4CJRsxEmImatmzHedUlgIkBYEgpJ08NEQFDSllMS8i9Rh7xQkTI2XoGj/QENh+gserjkIQTjctMpFZHrWIse82X4DwKsMhLp/Ly2LsEaMbfuEqRpgBtN3LH3shYPlwCWuEuCTw2Fs9tu9mVDq/5vgelr5LH3QmHlHbOeu0YzUbETiVBjbxctxpRVQCP57NtWPPxkYC3k+AKq9fulACtFWszwWtXQq0CdtZbAYwhpTxbmlUQEfJ7kzvg8FpT0fqf1zzYNNT6dG4qvNaGi/xN2tYaXPVEFBHEQdV+j63q4GfX8Ot+VAGcTNM2xyPCoUNaGFLa5RFv5NR5ACK0HGrZ7zVbiLDLZ6zhxX7ME1EZCd7dekzT7d+7Djl6LRzKsAbvQdNDLDn/vwtcLfPbYM6chNwqryQHtiS8hNXAL2DQP9mwlno2AAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/ink_demon.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/joy.png":
+/*!***********************************!*\
+  !*** ./src/assets/images/joy.png ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABY0lEQVRYhcVX0W7CMAy8bEz7ZgYSQSrlq0D8mXlgroyxEzeE9iRL0KS+i2M7aQJAWBEbAMjDCAA47LaLkB5PZwBA3v8BACgPI+ERicWMORMAIiKklD67bAXm/Jr7Yh5GEJFpvJUNYigUsigiWyo4ywLmEM8REhLwDnlNRFVAD/KSCOZ0q+Ax3g+Wf7cKZDanlCbjBlLC8XQ255cq5GULZOgY1riGHLPm62ewcoBJNREq+aGfWfNlLrgCrNXolyMCdOJpYfw73AkPu+3U8XrOdwXkYXxKQGkevPmlBHwpw+gKWyF5mg6j3nAFyHp+12owy9Aqp1azKoN9m61Y5kGPiwr70xxuDkRargXrshLxaYbaayiWlU5O2Vm1f0SP45KICHnpOHYFREW0kIcFWCvUDq3/kciFBURCba2+5m+2gOieR/0w5+ofJt8Acvr5xe16WVQAc06NqPTF09ue7pz4T4S1cAfYRwWniNXnUwAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/joy.png?");
 
 /***/ }),
 
@@ -786,6 +984,28 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABkElEQVRYhcVXwXKEIAyNnb2UPeYze/cjuPuZHNGjPdjYGEII2mpmnFlcIC+PlwQHAFjhQXsBAMSwDb4+8Ran05IAAGCct/EaA6wA9z7MJ6wZ8XYA5PPjIpuX7RKAjEfNkJZuA/BOyXQuAf4JAM1RDGUGZcQDQMuaIuT/Z8QiazJit5CbIuSRvlM60Mmjtc7dq4kq+hjKGhFDyYhkRVvXzQCPNiPu0YzzbyXjRlWtZRor5vlRhNocYkNGr+2j6cbFAI+2dqY8evodA+zMxVBnqCnCcd5EqNFea148LT0NzhSh9a52LPRoKausPW50pTO21lbA1yPRUoxvcKYASQAv6/ymJRXikUKcllS8ozXecuyK4uzRdGtAm9Tr3DPf1Qu83UwaVU+PVQHwgiLLsQSaEffnzKWkWYpBZAVlBh/LrGhliKsU82i0iqZVx17r6gVybJVZmtfSgutCwjfkTjUGelnpuhPKzSUYKlwSvMXCAJsgmjdcbWPN5DwCKVOa+3z002zvBdrV+r+MH+Xwg+gx+wYqSUZGr7I+LQAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/karol_corpse.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/killer_fish.png":
+/*!*******************************************!*\
+  !*** ./src/assets/images/killer_fish.png ***!
+  \*******************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABQUlEQVRYhe2WsY6DMBBEX07paJD2E/hGevf3jfcJlmioucKsWRwsbCciDSNFkCgws2PPwANY+CKeAKMMADimS0gdPQC//g+AZZRhIThx2cdwsswilwtQzp937XwXt4BbwNcFPFsvHGXAMcVSga1YalDtwCgDs0hsTXucRZhFYrOWoNgBnZikrh39ixOOCSeCoz915dSBdOIcuXUifA+/nbnxINQinfc70rMHkyW16LxfBfdRkP7fuqGcOwd0DUvJN5LN/pS8857O++w9q1MQJqy9Ko/iFOi66nk4vm5ICHEsjWRTDPciwtoeLUfuvElALgUKnTidXHsh58guBbO0L67d5TZFuS44TIGjX3fssV05Yk2Fpsje62wvHPZAOoUlg7bOT2E573fCW8AtoCr3n4JyxqdhyTvAp8lhLaJLWDP4B+6g+/IEYAT/AAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/killer_fish.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/killer_rabbit.png":
+/*!*********************************************!*\
+  !*** ./src/assets/images/killer_rabbit.png ***!
+  \*********************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABJElEQVRYhe2WPY7DIBCFP6/SubE0R+CM9PQ5Y46AlIbaW8SDyK7jgCfGTZ5EQWHe88ybnwGYOREXAC8OgMC9C2lgAuAabwDMXtzMIxLdTsHJnES6C1DOH2s4rfgKMAlIIiSRp7tWVBcBipK0tZQ/IsDSP0wCtKFYYBKgncyCi/WBMcbFA7GISKz+3uwBL47AnSSyywsmAUpeomsV/CUbY8zCDhewRlI2pcMFwKMM10qxtTp2j+Mk8nRa9oqCs02AF7dJWCtCOYflkg30Dq/yXKaiJgXK+dYDXlw23Ja7r/G2qzM2mVDLLjAxxpijFphMi221B16ZTn3R+hbWnVD/1jKUGlPwv+ZrPbKF71p+voBPrFatUM68Ea3N9qPJAQaWgXAWfgGETilBYiv4JAAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/killer_rabbit.png?");
 
 /***/ }),
 
@@ -833,6 +1053,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/living_shadow.png":
+/*!*********************************************!*\
+  !*** ./src/assets/images/living_shadow.png ***!
+  \*********************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAAB4klEQVRYhcVXS46DMAx9jLpjg+QjcEb27Dljj2CpG9bMAgyOYydBqoqlaFpT8+znTzwdgA0PygsAJhoBADM+PwGdMQAAFn4DALaJxg07Ez87gtkB2FYi9MyutxONRWZsNK2iMbeVyPVwJdpWooQhrbfH/q7ErGC+SlHPGI7IWDHxOaO+WPhcf2nM2JAa85jKHMjB0zRYcK3b7XwnIkkcEKA9N+yCF198On/PiTMfUb7vdkmLnaq768s3wCN7+56qAyXwVqfEiWYGWgxr7dUaSNGBFupbn0fBhCmIDOwAskzUCi6qAXcQWbkuK92GnD2PbGfsM2Jxnv9ZhZ77doJFfe3pxbY2CzIHIvCaLPzObErMaEly7l0sd47tANFFNeCkIJ/1kUw0YiU6j45YPteu88wBTbdHoQa1L5bv1s5ebFrcLrAspFFY0OsmzAI5LqRSPYUb0R7hte14VM4YXF0EqjtDMJMUaCPNguh75kSvr+me+QzCOlvrhurcl66IfmdtWjpJ3pWkoESb3pL01mTF25y8hUYwq1uxdSIHHLIa0YXZM2MlSmxEl9WA7ml9/Kj2vJfA5bOtHStJbqNb7+5yInp5j6dHtA+0npadwDogJ3HgyX/NzklYm9nfFF0P3eHRY/IPnu3ziYwNTeEAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/living_shadow.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/lords_signal.png":
 /*!********************************************!*\
   !*** ./src/assets/images/lords_signal.png ***!
@@ -855,6 +1086,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/luigi_and_luigi_dolls.png":
+/*!*****************************************************!*\
+  !*** ./src/assets/images/luigi_and_luigi_dolls.png ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABf0lEQVRYhdVXy47DIAycrHrLZSV/At/InXu/sZ+AlEvO2UNrOiUQTLJKdkdCocRg48fEHQAsuBA3APDiAAAB0ylKA74BAPf4AAAsXtyCpydOG6QTyyxyugGq8+uoO4/i/xngxWEWWQ1N5D0w5YAXt8wiH7L6m4c1obtywItDwJTKZwsBE2YR8+2bBrDynCfGGNMo7bPgZhFS5eoBL2tPhPS0eUox4BmP4i0UPUyZs1wNqrNpQK6cb5ffNpfZMoJ1/m0mVA94cYkD8idzActb0EVEtWrg972oGqC3U2g8W0o47laGLOZAidWYDfVdaY3PqOUXrdcN0EP5YJ0z/fK6zkvUXTKgSkRjjCkE9/hIrqyVVi6j8y1+ARpMOMaYWE8Vv3nhnZS5DO9vwUTFDDbEynotNImot2e0yDeT0HJoqUp6+4GVAbV5rsjahBjO3vctUCP2tvS/EoIjck0eYOR0WqJXrgQvzlwZ5q9hL3r2XfrXLIVAm88zwF3U8LLoMvwA2sJOhnzm5w8AAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/luigi_and_luigi_dolls.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/lunatic_cultist.png":
 /*!***********************************************!*\
   !*** ./src/assets/images/lunatic_cultist.png ***!
@@ -863,6 +1105,28 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABqklEQVRYhcVXMZLDMAhc36SJU/LM9HmEez9TpeJSV+TwYYQQdjIxM54ktoFlxSJlAFBwol0AYBpfP+5X+krSeUkAgMfz9btMIwrw3YtzDgBKJsItpRXhNG7ZYMTS+Dn7MYtcVc9kzpKJVlSZqGQik5Xe8z1scs4NgF5g7/leECaATyT3QMh7JgAvufdOFICMwd9/vEaRzaibNBMhE2Ea/xvwqDWr0w0n2ZBXhAW9jF0GuKp5SXg8a2l6PvpeJlp9rRhmFbK6aazXNNIbEQZMADq4/rRA9gBof3cJmCY9AWUj9qiPWgVABouOVb2urbFsjfQKgNUk85KqKr2qObF+xyrInQPakbUvu1qbB4wV4QKwaGIQrR5omay4JeMKgHbSdkvJBNlbIm+GmFLqbUDWVLTeg5KsIWl/M+pdMnAUrMxpylA3imetJZHmna4uOvn9SgebLeajpbhhgJEemWzRoaWtOYql5nnf3wMiWsQGgLeWDCoaWILhuK34XRVYkvPOh62tG0o92CvDHhDr3NC6//Yc2MOIxcoGwJl/zdY5EDnzfcpkMw5/iE6zX5ghr0Db3CEYAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/lunatic_cultist.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/malicious_twins.png":
+/*!***********************************************!*\
+  !*** ./src/assets/images/malicious_twins.png ***!
+  \***********************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGKSURBVFhHxZdLbsNQDANzh+QG7RXbm2edRg8egyYof9LAKTCIJVEi7V0vz7/Hh7k8fq5fg/v1egr4LQJMxWksAlSq8Xu77eb39j0fewU8n/QBysRJmunQIdoAew56iKTZIgbY+zb+Jbo916k2BjiCH9ZZMlbG/n8DuEnXd97yBeYjclhnzBNvCYBhHdO3WjN2Xg6AqdZHjCEG4Hg62M2q1l7aTbRfoEww4ln71OABar4nRBsA49GfDDHRWvVeuybRBlAwLLRm7ubgukQMkI5hkmaKzl3LvgZrA/jyEXx3NpuMCzQxgELiFIjZ4qDVSpqtfoFCF3Rx6OUgvzwXqu1YDaBHtLf1TM3uGjEA6FFqevpcM+1Rp5nujJtrX2AazD2Oc4Ra5/oLVTvsxQAu1mOTeO6joe/zetZ97Q1dF6AEHFdYVB3Q93k9t5oUoCixGqdjfjDVtac9pw3g5vSZuVlH0mq9KwALvBHQYyfBfqfbDOCmTmm742vGsAjw8X/Nqigq1RngNwf4HJfHH3lTkXiqp1uqAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/malicious_twins.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/manti.png":
+/*!*************************************!*\
+  !*** ./src/assets/images/manti.png ***!
+  \*************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABoklEQVRYhcWXTY7DIAyFX0bdzSaSj8AZ2bPPGXMEpGxYZxaJwUP4ManaPClqFSi2P2xDJwA7HtQLACwZAIDD9hWjDjMAYPErAGC3ZHYcJL72CJvYA1F3ciAqPnedZ5uvHi5LBg7bBVuSj1t4HdOpSaBHB7ggHSLwc8vlgu5G33WA0X9SaszIkL+TmMKmrgpyoxojrTnqKmAFIjgAv96fb3xj9iFtXnQJ5OM1/COVoK4CSyZGbcmcJMot22FDIIp9QaPp9EagTcrfByL1wqX1Smur+8BIVCPzmw7IHqA5KWXU2pO16cDi12IkNbxHfsxd/GoH2Alp2GFu5gLP13ZQdQ7I07C1eK9SbjsAIJbY4tcLZkbPhrUE1J1w8Stw5kPa6/XfXeD4ftwdtF1Q7YCUwwyHDQvSnucXF62ajaimVo1rI5c2h249sve3xnrnwtCNKBDF0uNSlO8ZP4/Ls0OjJgFLphqNjJQJyN/Jz1sEuORqYhLpj01KwJE7YpWA9L5HoRT92wTys6C0p1ySpfLrEYwEnvxrFhuRzORPS9KaTo8e0x9XCh6KDXv1ZgAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/manti.png?");
 
 /***/ }),
 
@@ -921,6 +1185,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/missingno.png":
+/*!*****************************************!*\
+  !*** ./src/assets/images/missingno.png ***!
+  \*****************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAABJ0AAASdAHeZh94AAACaElEQVRYhcWXsZKzMAyEv9xcl4YZPwLPSE+fZ8wjMENDzV+EhbUs5675L5phEsCy5dVqZW7AzgftG2AqIwAz658sOjMA8FieAOxTGXdeSPzZpTVvwL6Vwn1Z2Eo5o5M9lidTGU90YvRwIejjs/9uWvMrQjOzNoNnVu7L0kDpk8tvK+X098D035/BwYG4UBa1Ioalmdj9ZgDqYP193By8UlDlJbumMu5bKftUxuqSr95l82ylNGvovuKA70qRihcza8UPfw9UyPkYrzBfQ2tWKdDCMyucjsdiAWo3EfjeIZ2Cn0pL4IqEbpkmZES8cj9Ufh6kk/stB2I+PecYFzz3zgdC/j3f8b38v2M0YnLM+ZXr55m/Xv3HNKh6Mmt0QBwQbJrodT+cgVw+V6oc3iygOEaWlhIB8ncl5ynDSo+QsjjHMbblQE8P4qSEXP/03APvciCD6YJQ/eDiRyxJlbAYX/EhjIWkDKcyspXCVMaUTFG0snqPvSDLexpApnRu3jU9YPfPdODdnFATItXt3/7+xBESPlUI+Hkgq/GstISG+zoK8otplVUkPAXjTe6cgI/lyQPYTBpi21bQLwE7NmTzNQjEXh9PN7EfRFJKrBwpISAx6yKgHbrM1p1xraKXbDsCroxXF9RBpbWmDOXgncvPg9k77UySLRMy2THPLZPHVGad7VnnjHP0VJFeFQj6yNb2kDo0YqT7qBO9OWRJCtbrVER71GoPpEP1rCdWmTDJugfGrHlgQhIPqASRyTpifNcg4Du4L4t9mAxVacVy1DiNVdlFqc6OdR/9NDt1YLLPr/9tXqq3I6KP2T/t2gt2DDjnYgAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/missingno.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/mona_&_the_mountain.png":
 /*!***************************************************!*\
   !*** ./src/assets/images/mona_&_the_mountain.png ***!
@@ -929,6 +1204,28 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABy0lEQVRYhcVX2Y7DIAwcVv3pHlKJlOOz2YfGyBnGhFVXrSVUAsYefOEmAAVfpAsA5HkFADzv148onZYNAJAfNwBAyfNa8LLEx4bTiVJK6TIa2SGjkbPRnjt3FGIKvWImBUop64ELAbAiXvN7XqlS5i01BKB3MwWArcYK1HoXQCScwSllas0DiQD8gMhSZEcG4JWm+XE77OV5rekLACmlys/yztL7gN6bjS3jb6D4vJUCczdnGgBeAJvdBx7zKT97mf7cMAD2OQtSgcjEgBlICKAXfH7O7jhznXCLjoHoII9ewWIZCmQDoOc/vmnPOiouVOCGACLfKWGqgClZLHfIBVxyR13Et+24ow2aMxOyL5WLlFv4nAQw8oRG/EqpB6YerwscpZTqvOxldVq22rnYuvHZr61x2fWl2889NW+BCZyWDSklPO/XWvOVEAPKiiKFgT7pm9D0oGjuNSXRGIqBkQDjLHkLQNRkqIfk3UZWAmCGqOX6jy7a5KX945ABO6omK5hHkQVsftwOc94zeTILgL9Fse+OuPvx31FnFMYAhMlszwfnWQX0MjijQgswTctWc753yxE5jQW++desWiDPK0opHxmHbnpH9DX6Ba7uUfj/afEzAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/mona_&_the_mountain.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/mona_and_the_mountain.png":
+/*!*****************************************************!*\
+  !*** ./src/assets/images/mona_and_the_mountain.png ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABuklEQVRYhcVX0XGFMAwTvW7ACMwIQ8CMjMAM6Ucxz+hJIbRXmrvcQV4Sy5ZsPzoABf84PgFg7AcAwLytjxiddnvLtuIjFpdtRQc8MhdytJRvGuQc+6GUfc/YDyX2x5mrs+63dO58SRjMhnkqUMpYqYCwAJwhBSJfHndkQAU+QhKA88wB4Kgp728BcJcrIHwZnysEpBlADi2/c4R4H1OpopPPVEWoIqOy44pCpbEmEaqws9e8Vks59rwJAHOeDTpuVS1wtaQKwImvZtxRcKsOtOQvg3NZou64jACHrZbvjluOmErHSwrYmyveAzQDVqLNNo9uGEN1r7EfMG8rpn7Asq0Y++EFfx/c4Xi9w6sN83jTgKrzHGKuAy0ZwVqyGuDQFpx1cdeo6xVvAJzosg5q7dcBZP6zzW5/QUecTvQ3LbTA3IY+8nn3HO/Y147n7CF7rsLHnroItTQrCUDxz/yp/HZ9wQn7DUCrgJynd6bUwJMjbJ4KUS4woykabl3ti73xrM6eAOQPk3lbT+q9a1R95LgPHytCGI6dBlx23MqCFkGpItPybLPgJyr+7QybhwayAP96ZjFypXx8fAHMOzpFB6ww6wAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/mona_and_the_mountain.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/mope_mope.png":
+/*!*****************************************!*\
+  !*** ./src/assets/images/mope_mope.png ***!
+  \*****************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAABJ0AAASdAHeZh94AAABsklEQVRYhcVXMZKDMAxcbtLRMKMn+L5Ic9e45415gudoqLmCk6MoksGBA80wmURgrXelxWkAzLgwbgDQUwAARIynFI3oAABDugMA5p7CjIWJ0y5RE/NEdDoArvlRS99EhIkoy7Y3qgDIohHjISCqAOgmPQJEtQQ69k7OAQA6N9dTyD1zCABdjL9rGbjwFnZuNQAsEDp6ClWyVAPQwW7Gxa1YQCd3jRcj6inME1G+vuizmJ+IsrNZOdQakabwGz95dx7FciRZpogObfJ3DjhN6OnsFecinBvSHRHdkzxVALY8KHdmjdmWNYBCE7YpFV1OF43oMgPy9b7GRNEH9IP83ZKIc497xvxZ2sjqGGoQvFPdXIvx2OMWMQIUTCY2+YDcwZDuAAVMSvY1qiNGDMbvDZaZdMdFaq2PUgzMKmxNjG7cNqVyD2jt5IIy11N4uZdHUYO3ouhW2u08x9M5az29NmqOZKyx7nKLHc3QWrx1KPXeBXxJRg5hQIfW1/MMHRYz/3Ys1yxw38iab50H5IhJJko+4L3IqgF4xTlXAvK4/9lzLv1rlhmoPcvtCclc84fosvgFciG4lHdp6ucAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/mope_mope.png?");
 
 /***/ }),
 
@@ -951,6 +1248,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABnklEQVRYhcVX7Y7EIAgcL/fS/UhqE2sf2/uxoeUQ0HbvtiRNdRdhGBBtAFDwoHwDQEwZALBMw0ecrtsOAIjzCAAoMeWCFxMfe5hPlFJK98KWrvzfCo7p/S0ATYfPCVAXABK+qDddFgj5bgKIKVdAOnNbRS6D6QLQk08LBDnV7NH4C46s246X3ilyrkmcx2Nr94gaKRcIVu4WrZaCioGYctWQeNQhhCYTMWWUUrrYqhiwROZfY8IrWKcezomkXjOigSBdLTWWPRUAf1t5tmpCAyDtNBmwAMixxo4FTmONv9VtSKcVCRUel2UaqkLj2zamrK6TtlUGLPS8m8l8eszw9c0UWIalEw72znGuAvAKqTfKtwBwhy0QXvT8LLgMgPcCzfAVIFb+XQAtEC2HMvrbNyLvQOpxzncKP4DIlgrAilga9MCQnixYyWoXAC8FHgNSLjMgr09Sp9VstELV5oBxH4jzeH48KDebZRqO3/n/NObtdt32XzpuK9ZyKcdWYXKmLGm2YguA5aBFveW8AvDkp9lRA/we998Pr4lANDwlP/hoV6YcPZuqAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/mr_mega.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/mx.png":
+/*!**********************************!*\
+  !*** ./src/assets/images/mx.png ***!
+  \**********************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABpElEQVRYhcVXwa6EIAwcX7x5Mekn8I3cufuNfgKJF86+g5YtWlBXF5uYZYG143Q6uA2AGS9GCwCWDADAYaqS1KEHAAx+BADMlsyMhYlql8iJORBVB8A5/+7SeTda+SUQxXHnfdQG1+oXcYoBSyaCqQZAsiGBVAMAfKiXJXgaRALAoY9X5/0uOY+fBJGIUBqRW0vg0GPw48+E2GqT7FQcshsGPxYZ0NZK4DcM9Ll9hze0ZIpM8boWp53QkpkD0eF+ttmSxV9yQlkCFqe2Lsfbz+2YIwEQiBCIdhsdprgGpC55N1QGZDdYMui8j615xp41/7gEgBNrNyt5gZw7a14ZBvqs0rUEdyMqMqdann/yvUHtAq49i00eSIGo6BNHotS6AlCccNkwJZ8OUyxLToQlbUgH3f5OtWKOznsEwi65TJQDoj1YDkS2tux82rzUyzcvtaeckKnfPsk27hzTOye0ZBI3zFFaovpK7E7DwY+AEB7w8f6jY1gycdYnGiz1WAX3aTvNjJ40Is6ZMJCedOmpd5XaKyy8+tcsMsCGUyNkZzUrotfiH3kYorxl+JLCAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/mx.png?");
 
 /***/ }),
 
@@ -1020,6 +1328,50 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/parhelion.png":
+/*!*****************************************!*\
+  !*** ./src/assets/images/parhelion.png ***!
+  \*****************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABn0lEQVRYhcVXWa6DMAwcV+/SXaSCxHJs94PndDAOIRTBSBFR4ngmxtkEgOJC/AFA0w0AgPfzfgpp248AgOb1AABo0w2KKRKnFeKEqmpqtOKNVTVsj8SbPx7jfZvNQoANIoOZY+uL4Am4zjZZAd7QC6vBGnkxAl5EiSj3y9iHtwkFRL+hVkwpd4o5kJtBDTyh+eeJZiPApHvIGd5n8Rfw91dyFhFFwb43EEQk7Yq2S/0K82d1EZn13/wA4LtVHgWezDTxL2Rq06TM14+AiCRfnmcWAR+urShFrORrkbH2zaG0HZeSEluXYa1zJlkTWBRQ4zRqj9r8AWf1cBVs+a9tP6aE8rY1+bOIgN80/LZsJZphri+KAnGuCzgSm45jnvlRZ4LBc4QRYEKOyF4RVfcBHyJ/PNeK8PZFAd4gErEXUaSRW4b6v2+3/Yj38z7bx0Uku0Tbfkwl8smnrSE8jIyMB/GjJSLwj5q2H9G8HouxmUMvf3GAy4maa7mNja771B/fCZk893Iqvaiiu2G4DK98mqUkbLoBqnpK4UQUC8NV+AA+i867x8/GhgAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/parhelion.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/parhelions_victims.png":
+/*!**************************************************!*\
+  !*** ./src/assets/images/parhelions_victims.png ***!
+  \**************************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABvklEQVRYhcVXS66DMAycPnXXDZKPwBmzZ88ZewSkbljzFsSRcScmUNRash48OR7jzzi9AVjwQ7kDQJIeADDg9RXQAR0AYJyeAIAlSb9gzcTX1GBimUUiA/p+BIj5N//jAdjDNXDvnD3XfIcBKOAsUtRngYHbc9720gx45/pun60dK0NTADXVrER9oaA122oArc3mASKNSnDLL3hME1SS9BinZ+EHKzq7VphdzVZFMe9Vi+zAOq85jIBapDoFkX5KXor5txddkr6o/+okPWYRzCLVMnhfXmgPHJUk/e4eGdBtSmUx36bAdq+f7T1l09FMRAy85uSqHtiUYBYpq3JN2zatPo1a0zNTQEvAqHQvEy2sGGWAToF2tv0ymxmflfXvK5yIaEreth3bZrYv2Bf5TJ1qQrbDLfiZVO+VYEPFAzok6fDIJLM24dqI4/QEGsjmqLgActfnZTQGBxkzXhCAjtlUQAa8aAMqYLERoQB+dL1QKlY+0IOeH2oOo+t9ExX7uyAIH+CCBrSYbzywprTLDck34JXSdCGxwPaZUbXaHBGaboAvHLaUWu6E4aX0lz/NSglaLhVXiZ2oW47oZ/IP78AqrJcNMekAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/parhelions_victims.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/peepy.png":
+/*!*************************************!*\
+  !*** ./src/assets/images/peepy.png ***!
+  \*************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABgUlEQVRYhe1WO66EMAycfdqOBslHyBnp6TnjHiFSmtR5RXAwIQ7R8si+Yi1FfALM2M4MeQAI+GA8AWAiAwCY4bqAzhgBAIt9AQDCRCYgVqLbEJgInqg7Acb8uVrOq/El8D8JeCJ4os8R6BlFAoO1GKxNBnV3VH1gIhMmMsETpfEXxiUwdQI5sHxOkqgR5AQ0AtU1MMNhsDZ5Nx+B6OPcIvZ0+Z4namrhU5uIL7tVDS59GGQSIF/H8yNxwIpvlUOtgPZnLGUnn+VzKeO8Qk0EzqL00Zw0+8mbFRir9zhDvVIjZozrGnJVEqoK8vtylefqyJVyJtdGFWwZb7umeI/NqlQpnufMa9ZeVQFLLZbZHeYjoWMLPNFKzKX5eG3bCexBRrHoNmkt9oWlQCj2v21/+UDsx6rbMgFNRpPwBEAuzH1bSu8zZpVAS2itkDvfUiKMWW1BKzgD7jPdu2DNjC7tirWfzdlo+hveOb7b8h0Bzc3uDMZMKtgcrx84sBpRF1QlfgH5uaMgyb08KgAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/peepy.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/poly.png":
+/*!************************************!*\
+  !*** ./src/assets/images/poly.png ***!
+  \************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABnElEQVRYhcWXTY6DMAyFX0fdsUHyEXLG7LPnjBwhEhvWdME447pOSCgTLKGm4Sf252cHHgA23GhPAPDkAAABS5dFA0YAwBRnAMDmyW3YSXQ7xJrYVqLuDvCaP9/i/NZOOeDJJd1cYdUp8OS2lejtOKuf5hR4cghYEDAmFe/jJZ3/VwKe3Ee0XQkELJjijJUIK1EiIO0MhSoHdvx/i8kxNxM9bnHmMAV8XuK20Lek41QfmOKcIpPRWnYpAUuApahqntlMgKNfiVJ0MsouZchlp8uPx3KulkCTA/x7JEB28hIHuOUeOZajkdNOlQNHfT+3WItgsyKUzUe+wVg7oSxPT85sSKUdNEuA863Fp6lY8zJ1JZEWCXAkQ4xvJAJGDDGmeabA83LH1ISqCORyzZGWyk1GK3Vj7aSwRGiVEP/XaPW9elwq3WwK+KVDI2NRMlruitYuaYm0ZB8EpKc6Gguvvk9TzD3TTIF1yAdKPZRSltPRYQos9PqlQ14zxRlDjFWbUXMfOKKSm7NEV6ieez/NnhJP749TAHj8enSbvQDIwATYOKO+PwAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/poly.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/prisoner.png":
 /*!****************************************!*\
   !*** ./src/assets/images/prisoner.png ***!
@@ -1064,6 +1416,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/random_flying_knife.png":
+/*!***************************************************!*\
+  !*** ./src/assets/images/random_flying_knife.png ***!
+  \***************************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABc0lEQVRYhcVWMW7DMAy8BNm6GOAT9Ebt2vvGPsFAFs3q4NJlVEqk7FglYARWZN/xdDr5BqDgH+sBAJECACDhOQU0YQEAfK5fAIASKRRsSky7BCZKJppOgDHvZ+X0VCZq/nc5gR745QQy0W646QQY3NpZlxCoO++p4CYQKZjrKcF5j1s1pEDCsoeWBzzhaXoAUHIgUiiZSA2oVmjV8yOF/V57xswBNlDdsSatJrs31lUCvxJu8o3Ibs3Xyoxir+z1eO+MEZjHzoJMpD4nSXk8cIgAm9RSxKOAuQ3r9eT7j3V9Ge/tf8sTXQVYaktO7R1vUYCLt1XdYaSAhOWPIt4yCcgkq6OYpW3FrieOb9jkMDuQ4L258vuyN48x3UsgX5aJmsaqQ8xTXRPWgcKG086PkY9blwk3g71muuxMqsCdj8ZwU4Heidi6WgE1rEArbDw1svZc6nrK3yuu04fRuwjcj8p2thjzwQOa468GB36ScApqo74BHP8FHRBlTmcAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/random_flying_knife.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/red_bus.png":
 /*!***************************************!*\
   !*** ./src/assets/images/red_bus.png ***!
@@ -1072,6 +1435,39 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABj0lEQVRYhcVXO7LDIAzcZNIYlxzTvQ9BzzFVJpRO4ac8GYMQiePsjGf8ZRdJLPIFwIIf4gYAwa0X0+BPIY2JAADzY71egsMCnHsITix3708XwJy3ntBxqqzgELegRiC49bk8rCnT3mtGIDi9KHuiEZwejU0EWjPOr7Xz2jM1AnLWMZE5jy3UxtkJiIkwDR4jkXlwmY5SarQUXPMblhlPg0dw9jqYH/V3dwIYvUuuNY45Aox8BQQH3P3xVl0UwF4tiT/dJ7pSwOHSiHsF1eqgmoJ3MD/+xctzWQe5iC4BMRFGos0SlURWkSYBsg6Y+ChTkrhgtcWi8dTu8zMpsgUOv6yvkejYGsgxDdsi/rgGeEmyH8jBczK285FoJ6JbgPSCUiHWyBgxUdUH1I4oJnrNtpTv2r11ZVDThhm7jijf/5Ht8dwTaPt/6xDjtlsy+VFPS2YRoLZkbDLcnpUaFMuuqaWg6AOtHs5KrJEzZzEC0sN7Z/yOW/70x+QKlJfTt8GcrxS0/gO+QQ78FeEprBU8AYb4tVfA7zaiAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/red_bus.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/red_fanatic.png":
+/*!*******************************************!*\
+  !*** ./src/assets/images/red_fanatic.png ***!
+  \*******************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA8klEQVRYhe2WPQ6DMAyFPyo2FiQfIWfMnp0zcoRILJnp0AaBmmBaBFQiT/JCTPzin5dUwMiFqAGsGAAcwylBHS0Ane8BGK2YkVcmTrNZTMYgcjqBGPOxN517UQgUApsJWDEEkUkzfvVJYfMYWjGrvkFks6bM9rm5DtS5BStm9W5wtJOWf+ObQrIEWj3n/6yVMNc3ag9ofRFEFqb55r6pPRBHa25xzBrvabxX/TRcWoJsBhxttrFSJ8ud1jFMD5AUslPQ+R7EECS1Gjf1C7JOPp21CYC7C1EhUAgUAv9BYE0qj0KMOUmx9qg4IjhAxftRcBWetDtfou3eyqsAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/red_fanatic.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/restless_creator.png":
+/*!************************************************!*\
+  !*** ./src/assets/images/restless_creator.png ***!
+  \************************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAFxGAABcRgEUlENBAAABVUlEQVRYhcWX0U7DMAxF79C+ha/jgVcGiCJ15a8xD2AUvGvHTlAbycqWLb43J27TngAIDmxnAFjWDQDw9vy0i+j79QMAsLxcAACyrJvgm8Ru0WhCRMQO/n6OxrI9G1NNmC8CQB7uX296NlbpbbgGWILPR7kJNWWjZyIkoD8y8TaJHbd9ZKZEQEW8QmLiWRNdAmzlGRNsq1rxbhGq897q22CC1lyJQHb1nhAzWCJQNWBFMgb/lUDGhG5niUCvBtg9wZtTIpAtQq/ypwlUtiF7tZQJVClERtutSRNoTcxQsHfHIQKjFJj4EAHPRFSA3vmQJpAx4SW3c0oE2iTeQRNVNxPXOVMEWGJb4XZbmHiJgGeCnXLWJBMfItCa8MxksJcJMBKeGa/avcexIQI9M94T0DSBiERUK718IYHZPvOfPwaOfDW7w09b1g0iskvoyzAAnBTDUe0LsBy3AhiR2EsAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/restless_creator.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/retep.png":
+/*!*************************************!*\
+  !*** ./src/assets/images/retep.png ***!
+  \*************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABZ0lEQVRYhc1XQY7DIAycrPbWSyU/gTdyzz1vzBOQcuFMD1mog5xgkzbZkZBIQ/FgPAMZACTciF8A8OQAACOWS4KOeAIApjADAJInl7Bm4rKWYw4AUiTCIwTTKnLW+Eos4DFTJOpif6axmDYCOXgkSp5c8uRK/xICEomeOU5lIBKV4LxvyUKOaS7CSARglZIkW8s8jxBWH+jBiKXomf9mRTeBOmBNRosf7cC3W74D5X7ejvzMPUKDZhFKxcULUJJhqyDVKtBUNh+jVYKKAF+lZtKaxBEZFQGe4pbb1e9axPM7dRF+C4cELDqXTkStNFUq0NQC34bWWPUWRKLum5LGD5oEpDTWE/NnybCO0LTiKczAJsATU5jhybHMLAC5Ugee9TUw1cCeLK0XE/N9YI9E/r/1VmT2gb2UWg+eGv/biGr0nvkfIyCR6PkmqKE+7fbuBa0xUtuo4M5Ps2JEW2P5Lvg2Dn+MbsMLcXNjAIq6gPIAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/retep.png?");
 
 /***/ }),
 
@@ -1218,14 +1614,14 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
-/***/ "./src/assets/images/sm64_z64.png":
+/***/ "./src/assets/images/sm64_z64.gif":
 /*!****************************************!*\
-  !*** ./src/assets/images/sm64_z64.png ***!
+  !*** ./src/assets/images/sm64_z64.gif ***!
   \****************************************/
 /***/ ((module) => {
 
 "use strict";
-eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABP0lEQVRYhd1X7Q6CMAy8Gl9aIHEmcz52/aElBdaVKYOES5oYGbt+3A4gAIwDcQWAEBMA4N7fdiF9PF8AgDB0AAAOMTE+ndgthJMAMDODiNqWPYNwXnZlzeDcCYSYwMyL0GiqgTnZSErUXgNytD0064BVPbBDB9ZWD3ydsGYjca8Sco4q7pcD86dfC5eyonQ9xMQeNOfmGpDZe/sJ52IEIaaxzaUR6HVz1BRTFGEYulUzt8jFiH5OQDbRCVlg5unamHDvb0XxuQnUkBPRZE0YukU3ciMtHsNcMjUjmejJ0gs2OgW1CWrOTX1gbazygV+d8O8ObBFel5o54RxWF4XznC+lUrXngioZXwO5p5z35BMdaD3Ib8XpJ1ASlEWs78klU5VA6brVGX2fJpf/Jgkc+Wk2itB6h28R+miStOEovAH1+JiOUGD1GwAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/sm64_z64.png?");
+eval("module.exports = \"data:image/gif;base64,R0lGODlhIAAgAPEAAAAAAICEhv///wAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQACAD/ACwAAAAAIAAgAAACkISPqZsRAqOcdDoTmN4gA8GFCYiQ4mmY6Kau3fS5JdzKDz3KKRW7N55DOIYay4Vk8jQUP+ChFoJwSJ7hpRNkYYRXZaNFPRC3qarA2wt3ruRa5gomW6upZVbEXiDFC/S0zjW2sqfj14Myd6inUwToowgI9RLRRImF5aZgVIapufhlCfIGosbIhFFZoUqRZ8pQAAAh+QQACAD/ACwAAAAAIAAgAAACkISPqZsRAqOcdDoTmN4gA8GFCfiJZomeHEmqxyOlLiUbrQvHt1nVeL97OS4MyyXoaShyE59zFbRJO5ihJzldsDCIIXfxGAmTScHVLAYTv8iOJ4q6WtnKNJyx1maxL9W2OzeThaP3ZGKV8eeioaiSqBAEx8QUkcE32DciQYTmhLRZYglCcrnYVVWRqgqRZ7pRAAAh+QQACAD/ACwAAAAAIAAgAAACk4SPqZsRAqOcdDoTmN4gA8GFCfiJZomeHEmqxyOlRut+E0KrcJyfFdoT7XijhuPCsCBnr4UHMSS6IElmB3P0PK2LHGl7xDAe1Sv2+RRo1UVzuCkTI1niTrae23L3oeWmpVdnknc3xXcSGBeEWHhYg/OY0UPnJBEFkaGl6KSgNJMJ2akwJHlFlvhY51DB2oqJmppQAAAh+QQACAD/ACwAAAAAIAAgAAACkYSPqZsRAqOcdDoTmN4gA8GFCfiJZomeHEmqxyOhrftNqQrHM13b+33K6UYNx4VhubQ8DYVwyKshOxgj80Wcoq5GDOORPZCYXa9B4HlcEeMq9+zseNry8rwZDh21iLXZ9CNWVKYSKOInE+WmpKhgaJLx84gh8QSRkQaEx1Y5h6kp6OhUWYIJgqiYZlnBmtTIUQAAIfkEAAgA/wAsAAAAACAAIAAAAoaEj6mbEQKjnHQ6FJjevCvxeeIogolJHo+UnhOAHjG5sq1RwWFb25hzYVguM50ho0BiKkUPRLhDAoNKHKcKPDIep6gqCFAKpOOFFBy2NsLIoumcTRtVt+/GTU/W2XES/la195P1J2iYUSizJdETkSG19cHY9jinuLPkqPPYJIjVyBQ6abhRAAA7\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/sm64_z64.gif?");
 
 /***/ }),
 
@@ -1295,6 +1691,28 @@ eval("module.exports = \"data:image/gif;base64,R0lGODlhIAAgAPEAAAAAAIoKAPUTEwAAA
 
 /***/ }),
 
+/***/ "./src/assets/images/sos.png":
+/*!***********************************!*\
+  !*** ./src/assets/images/sos.png ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABbElEQVRYhc2WTa6DMAyEP6ru3qaSj8AZ2bN/Z+wRIrFhTRfUxYSEJPy1IyFoSzPO2B6nAga+iDtAIzUALd0lpC0PAP7dE4ChkXpgVOKyy3Ay9CKXB6Cct71y7sVvB9BITS9CL/Ip1DMQrIFG6lNrw6wdDkC/00CO7hRd/56Sp6XjzznAFcmai2gNqFnovRcpWrikfg7PtabNXv472Snw0YvQ8pjZtqo0PndAZxTU53AKiwNQ8rEuFG4W3OjxLqt1i41IyW1NaL4n8nwUK6DQIFQRn7yR2sgfxy4rXiNXpBTZHIDdYegcoanKqYOiNlRH9N0x5Jz6e8hFN7fhtPu5vFNhzvOeUmBTF8Ayt9OxbtkJqTrITkFsQvoDy95jQyw5DWN/8heMTcu1/G8KwN+99fsYydoILw7AkqWIU+SWs3p/8Lx9CWu9KXfLsWPlzG7D0PA5Ar99Kr4sgFROz4ByfmpAh8uV5AAV7178Fl4Qf+5RhAAUEQAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/sos.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/spamton.png":
+/*!***************************************!*\
+  !*** ./src/assets/images/spamton.png ***!
+  \***************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABhElEQVRYhcVXMY7DMAxjDt2yHKAn+I3es/eNfYKBLp5zQ6tA50qW4gSpgAy245AWJbqdAKz4YtwAIFMCACx4XgK64BcAcC8PAMCaKa14ZeKyR2BirUSXE2DM20gKWTIrOLXRcDOQKZ0uk8D8JCDBRoG9fS6BM07d29+tgXt5IFNStcyU3HadS+muy/jRJhm8LbYIOABUojABwChCTYJKpMpViT7ejdaAKoGVfuDlYvXfAZ+YS0ElYBEnn4OtqErA6W8lmEvZ1eOeX5gEJJG9HxwJ04hkHbDWUb2jNTC9B27rVKLtFuNO4HEbct2SjDFVAloRMgGe39tq7RUsMbtWLOcsCbR3e+sNpu0D2iZJQo6j5MIEJJH2ctIMqf2wd5eECXjERk5/CoGjD2N2jUgLaUaZEioRKtE2P2JW4Qz0usN7z8qAS0BqbAFIt7T2WARcCVq301IsTUuuW07ZxnAX9Mbec7gLWkMa2Y+RLuBovf1IfPWv2faTLPqD84yQxTm9GX0t/gBsBOKRKDocIwAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/spamton.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/specimen_10.png":
 /*!*******************************************!*\
   !*** ./src/assets/images/specimen_10.png ***!
@@ -1314,6 +1732,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABoUlEQVRYhc1XMZLCMAxcbmgIpZ9Jn0ek55kuScpcYRaEIsmCOeB2xiPiyJG8kiWzA7Dii9gDwDS0h9OhfMToeakAgHFuz+s0YAU+O4RNrJdSPu4Abe6ztF2KHZ7zUm9UvoLd1Rsca928nIaWF4yZBeaNtT6CtGmGYBrafCY/qBu913PU/4l2dqyNXp6SCBFLEVwHJDIxHudtnmjHvY1s6HuGfhi0IqBe65oMkH4N7iATEuDOXLQuDIH+ADOe0nPkGUdDB3ol2nPkmbpgOsCMPh3KZjeWpCNclw0RcG1GHpgH45yTryB1DN+J/+2A14Be1Us7IJNqGpqBSOp1gJ+0FsxGIuf425OsePKZc1LK+W4zOi/1Ri2PlyfZB3oNaZy3NcU9hq2Y1Ie+zQKjJY1nCpB2sluKJRMal1JM41bljNp66k7I7sjhdUudFzDiL/XSd0Lu4r5Lu+brK3evLP95IZIXE23ca2rdEPTo9tZE33CPIQuMHN6NlwnKMQ33XR9rTbfph8TJ3m49RjwdrS/sfPev2e0UyIvFuyGL0e7q0dfwC5W+BKdRu/HpAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/specimen_2.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/specimen_5.png":
+/*!******************************************!*\
+  !*** ./src/assets/images/specimen_5.png ***!
+  \******************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABYUlEQVRYheVXOw6DMAx9rdi6VPIRcsbs7D1jjxCpC3M6tIaQOD9DYailLJDEz8/2M1wAeJxoAwBYMgCAEa9DnI64AwAe7gkA8JaMx4eJw1bgE34iOhwA+xw0FE5ECaVMZ69dew9wvYTOR7yS5z8DkLPDGCh1ioaFXRjgttLYbin4XwBb1bNbB7jt4rxbMqpOSBioVfLDPWcQe9lKintk2ZLxloxKyoMzegBbFvsRi7BVUMJ9lsxqTUSYiKp3be4CdhbWBNcJgOqcUAHgKD/dsDiOQdycq4JIANQqnB3nLH53c654ZxcDS9Sy9vPzOFrWB4mFLABpM0cRC04MSIo2B1oxjpfi6rEcCyIAKWd8sFVuW1u5yEB4SZz7lPZlRvR8H6g+SoEvE/MAciuwPUMpy4CUBinvsRCVel4ClgCIN5VyGe4Nqe8BUayBVlHK1UOrnfprNhdhTWL3tJCxyxfRafYGH3A4hUlApwwAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/specimen_5.png?");
 
 /***/ }),
 
@@ -1416,6 +1845,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/terror_of_nowhere.png":
+/*!*************************************************!*\
+  !*** ./src/assets/images/terror_of_nowhere.png ***!
+  \*************************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABsElEQVRYhcWXQa6DMAxEH1/dsUHyETgje/Y9Y49gqRvW/EVrcEIIodAyEmqhOJ54xklaASMX4gbQSQtAz/MnSXsaAO76AGDspB15VeJnl8vJOIj8nIDlvB0tp4dJCXN5t/D3jeR7sZCgk3a6OFDmXLzlDCqQmsWRmZXIEBCwgFL9zsKlXXCaCbfQScsgwiASPD+1CyxByjdrq2wxgZIEtWqQzGJyRg4I5F62QWvV5Gxsfe9pJiJx7BomQwwi0/dO2uDenvnPrcvi/VgWmzVhJy09z2lWVpVvtGmSgE9u90DWA2suD8dtFs+Sm1HqRUOtyiDQLxK9SKf0vusDMkZceMBrnPJF7AWvaxwb+yX2QEAgtQHFgxiJmPjezSt7HvCme7XU3FZWzuGtgNfcm9Mf82JJ/XvVmw21amAu07Kn+cj1Riw+//nfa9WQgIe1oiH+PQcf62fvSVjOVQmOnpDnlXEmEq8nELVh6ng+z6C8And9uLFmIik5FxXYMs0eEkBAJDXOwgPxKleafO+JeNOEpUl9uT22SFjOQweStc1pr2SX/jWbTHhG65XCm7x6M7oM/7oK8nK8t93OAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/terror_of_nowhere.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/teuthida.png":
 /*!****************************************!*\
   !*** ./src/assets/images/teuthida.png ***!
@@ -1449,6 +1889,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/the_jester.png":
+/*!******************************************!*\
+  !*** ./src/assets/images/the_jester.png ***!
+  \******************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABZ0lEQVRYhe2WQXKDMAxFXzrZsWFGR+CM7NlzxhzBM2xY0wW1K1TZOIWSLqIZTwiW9T/yl+wbsPBCuwP00gEwMF0COtACMIYHAEsv3cKaicuGwmSZRS4nEDE/jqbzqL0JvJzAvTR5pDxtqeXsxqpImhA2wGf2BB07msZ0y7CXrro/RN9ZZLOmtF5h5gnY/7NIGrn5GsJVBHLAdmgiOo7NhPWvbkR7WvDmo3i1iJsQXC0UCcQA32BtUnfJzyPWS+f6uVUQbRbZgFuAldAK1ISQlK3X6fc2dhPC7xuRBq/xzVk1AQu2rw1/u6wVO6EOlnvnEdFzgwgwMR4jMKnnNu1/yb8JgREt0J8ag50t+Cm8Nv1aUtZvFqGXjjE8iudBkUBuoU2751ez/7sEbCBPiBYofnWOmGenngXPHka79wH9NVsl+8f3wAROx3s6A3893rfi/0WgtmbPtIiZquDsi2gNOHzdBy5Bzdgnm8WNdUZyq9wAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/the_jester.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/the_lifebringer.png":
 /*!***********************************************!*\
   !*** ./src/assets/images/the_lifebringer.png ***!
@@ -1460,14 +1911,14 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
-/***/ "./src/assets/images/the_navigator.png":
-/*!*********************************************!*\
-  !*** ./src/assets/images/the_navigator.png ***!
-  \*********************************************/
+/***/ "./src/assets/images/the_observation.png":
+/*!***********************************************!*\
+  !*** ./src/assets/images/the_observation.png ***!
+  \***********************************************/
 /***/ ((module) => {
 
 "use strict";
-eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABdElEQVRYhcVX7W7CMAy8TLz0GNKKVMpjez8mR8a1nctg1FKkkg/f5ewEpwEQHGgnAFjWDQDw/fX5FtDr7Q4AWC5nAIAs6yb4VeJtTTEbABERtNb+d9vOFPNjduGybhARqmloCTJCSaY2ChkTUoM5JqDglWNL0Fq2ZooAs+uIzMsUYBTyKvj1vl+/qVOQjS/r1s+yztMz3udczn299eO+ZbcjK7t+Z3G1v6Nxu34YAguu/d5p5DAC9KHxPnYEPLjvj/IiSs5qfkmgkprJ7EgFgtBegUzimbNehbDMgQyw2mGlQjaPIpDtPEssJheGBFhpM2UKoLkkHO0wyxE2VCGB6NxWDjKFmDAMc8BnsQWslBmAzSWh7WfrgWj8KQKz9SJzC9IEZm+/DHCgSn0PMLJn/36kKnUSTtZ3dBhSAjPFJxnjUBUdP8GYltHX2/2h0hmZr4KivmiOWmfzlxdSdVNWfQ8hOPJp1l9GMy+eZ5t9MTWV4Sj7ASqP9xUxcpkMAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/the_navigator.png?");
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABdklEQVRYhcVX2Y7DMAgcr/rT3a7UVErTz6YPCVmKAeOkSpCsKD5gPBy2CwDCiXIBgGGcAAD32/UQo4/nCwAw/P0CAGgYJ8LMxGFN2AQRkTuJiGgYp3UB91ki58i1lm62WZYflFJmWsYJ99t1pclyC49pieayzpV2YbNiwNqlZqH19djRDHwAiBbqr/al7GewkT4TgEYoFUUgIkAMwouBDwAWVXsyxNIlbbku6NlxLxPaBVUWAP+FiSN2r1j62KYJ4Ahhmz/WICP+pkQ6zSjN+D07x5rnpqGn1Or3lGd0hHUgY0wWGasItZhpFiJrgd6BFA2sxVSTAW+3GoA2aLESMXCpYzKf/4/nK32JiWpLRaFH2VYXRAxUALy2NQhbFxIXQOZQyqZhVx3obVtPyzSAbx7HTQCZFNozJgPWBZAJwsjvrUoYAjDua6mUzFS/wEZ/DOjc1/89MeDeB+ZxW6x3gfdWWHYY3wfOfJqtDPCuj2iSjbIgOk3euS9MbUGvBtkAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/the_observation.png?");
 
 /***/ }),
 
@@ -1482,6 +1933,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/the_origin.png":
+/*!******************************************!*\
+  !*** ./src/assets/images/the_origin.png ***!
+  \******************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABwElEQVRYhcVXQY6DMAycrnrrBclP4I2559437hMiceHMHtIBN7EToN3WUqRSgsce20O4AFjwRbsCQJARABAxfQQ0YgAA3NMvAGAJMi7ITHxsKUwss8jHAyDmz6t0lhZkxCyyrp5d3wmce+hYH70cgAfMRgsyrM321gB6wHqi7g0/pwLItd0ACLpdPwcVZHRZONyE1AwCa3ANEjHglhJuKTX15XAAZSYRUwVwSwn39Ps0BTrw0g7rQJBxmUWq5e237r+kAx7VluVmHcx7wIkSaGAG0xMclsgqw+kANAtW9lTE3guuCkBLKYCmpEYMmEUQZFyz84AjbEEyGdA1a9WPDgnmARN8Vwk2pzZwyYilfPyf41j6bgZgWY+FLDbDupfAzLj1LgAMHbBmnHt6M4+dB5yuDjxLaan1PiNWxrpBdzNgZUUF7GVHBjRr5bNNBqwM2WTlzOsR5HXEVGXtidHlEY0rpTRrj3ZG2luaoUuj/bmUe791Y5YN17sPVGX234a647Vj9oP1zN5Fv+6JKNO7KRwwVR8URyyrZC3HbgCxOHLlB9t9csbMAJj9O4Fb2vHVT7OVge2Y/f+m2bg8Ivqa/QFUK/ixAKl8CQAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/the_origin.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/the_painter.png":
 /*!*******************************************!*\
   !*** ./src/assets/images/the_painter.png ***!
@@ -1490,6 +1952,39 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABcUlEQVRYhcVXQQ6DIBCcNr2AR57JvY/g7jM5Wo/2QFYXCuxajU5CGq0y09llKA8AC27ECwCCTRfeuEtIxzkCAN6fdL0EiwW4djBOLJNzlwsgzudBNw/jdgEvzUOTS805xLg2LLA10RGIDhA5gIy8dn26AE5OS+dsqErQIvfGwZv83hD3Ce0KqBFLYTU5t0uEygFNQv5boqaAYGVi/kt5v3ijL0VVAHX3EGM2cYv0SIN2SxDs79rnpERcOnVJD9TuSe7UgksMInKhhyHGTj+0g0wlQCLV2N0ToSqBxgU+edm84xxX+0sBVQf+2WT4siXBNPh85dyqEpQvBZvqTANI5LXlGGx/02oKIFL6JLJaQE0uJ/dme5YLqaHbA+9Pbu04x2Y6euOqwSWhWwKuukeuxanLUANNMzcFXHVW6G5GHFKN6bvy0CFhVwlagTTOv8Jo+UlCVElISOXY4rcsUysHJNx6NFsd0PwDOgvcqQduPp5/AWRjEZBr3MDnAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/the_painter.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/the_plague_doctor.png":
+/*!*************************************************!*\
+  !*** ./src/assets/images/the_plague_doctor.png ***!
+  \*************************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABpklEQVRYhcVXMa7DIAx9/erWJZKPwBnZ2XPGHAGpS+Z0SJ1vHAyBqIklpKYB/PxsP7cPAAtutCcAeHIAgID3JU4DBgDAGCcAwOLJLViZuGwJn1hmossBsM/nWTo9uSR1TC8b01yyLgY8uWUmMpdMay7FwmcbAOnYqh3eUwLRBSB3ce/eLgBHncv91t38/V+1Qr62FtuQFJUnt2lIznRBWnaIAR29jo7fMfXWuW4GgLSlODqpotySAUORmWYGdFT6Xem9VQfNDFj5HOO0RV0yi5EGAOmg0hdaxcnArEF3WIrXi2Li/B/EOwtqJkKo3Ns9C7T+e9pHym0biI4BWBEPxQFiDR8+Mya7YzWQpAYChq2dLGPnAQNeMW6OOe8t7ce2tQS3FC8Y7VabdPpcToy6Z0FO/XrOVAHkRm7rMNLR67t2APRmqXD681EQJWaglVCqGReXFBLW+DFOmIkOFZwnh5mouL9rGtZ+Gclcny7C0rA5m4KdEjLF8hkAXjEvKqU0SI2Qz9qK0ZXobV3VLsht/NW/pgTAnX/NthrQQ+aXJtv98UV0m30AwRL7C8N/sXEAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/the_plague_doctor.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/the_pursuer.png":
+/*!*******************************************!*\
+  !*** ./src/assets/images/the_pursuer.png ***!
+  \*******************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACCklEQVRYhcVXQY7DMAicrnrrJRJP8Btz9z1vzBMs+eJz9pDgYAKuq9WmSFFkF2wYBkgfADZ8UZ4AMFMAAETkWy6NmAAAS1oBANtMYcOOxG2PuBNbIbrdAb7zZxS2QjSq+pEMOwCcXLnFASviiGw68Rd0ugjIyyImREyVuT1duVeI6uMhaJKwEG2F6G2FzBSqntT17Pkufj+96HWtshSiAw3uGfnQP95EeKVUz2D7M/prrzERYM9HegSjIKP07Hkt9Mf6AF8ymhZrT6bJTUERELbQoe7PNFXmczqslM0U6lq2+eVdCjhSK3oNsYZVRmmRskvCk2C83qNm718pHYjkJtKIjAUncbWwjSVNH2jZva9nCocT0+FgFo60oiumdXKqj5YLg70UaF0ogsFJgzxTk/DSCTlaFiabJCZwknOmUFErTQ/I9beIqZ5rfXN0y1BGr0klo9dnaOJqu6FxLKOXA6edEbkpQ122GjnNAbcVs3JEBigg4iTVklaAAgrZh/YDyk0feGCH4+Kpjsaagt4Yts6ybFmvyadkq9d29eT79Hd5J9TiMmItQ6sLWkOnR26XhNxsvJLhfesDQ36ASGK+k24KdFQ9WL10DKfAGxjSyJr1Oude9xtKAcMs3wwvd7QlrRf4ZZUsaa09YCQNFwTeQGaSzyKmZWem4Jt/zWonlEPlv0Wm5XF49DX5BW+l9SkGekIcAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/the_pursuer.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/the_rat.png":
+/*!***************************************!*\
+  !*** ./src/assets/images/the_rat.png ***!
+  \***************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABKElEQVRYhd2XMY6DMBBFX1bptllpjuAzuk/PGTmCpTTUpNiYJcTGMzbrRBlpGjxmPp8/33ACZl4YZwAvDoAL1y5NL/wAMIQRgNmLm/lloluuejJPIt0BxJ5frXS2xucC8OKYRJaMQu8GYDtRuQn7FwC5p1UBKFG3XU/VWf3kYQwnkaeMa17cci3lHV7cQ81e7eq+egC5m6VA7NWse541FP3Re13sMxel9W08aSD6dCq+QzAJTBsqKy5Ra7XzKisewsgkklxrYUeN/shTMzsFvfJzT8MaHZhewZ4OLBpp0kBsFG3XsrcJwPYJc15vsWI1AOsIlupNU1AjrCGM6n1FBg54z/UMtB4+mv1FpLUWvDclb+OEUKHwIzL2XL6IvLjuP6cApzuil8UNK2A58FnZIWgAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/the_rat.png?");
 
 /***/ }),
 
@@ -1515,6 +2010,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/those_olden_days.png":
+/*!************************************************!*\
+  !*** ./src/assets/images/those_olden_days.png ***!
+  \************************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABm0lEQVRYhcVXS66DMAycPnXXDZKPkDNmz54z5giRusmaLop5brDzo6KWIkGAzHj8SbgBWPFDuwOAJwcAmPG8BHTGBABYYgAArJ7circSlw2BiTURXU6AMf9GJPTkkIgOg0PZY10EGNjKldEcagqBJ7cmIjVf+Jn1XBtdIWBpHzHumStNm2u1ewv4GYAWM0PQU54cgp73UQtBq+f/jWxqdXq3oTLMTWZ/bymqBHoWGan9KoHWevbkTu8fBwKtHklwGXue8+Sa1joQkAtYwIkIwLsvWLbEgCWGJhIf5SO7Wj5KXbDUKbVhluESw6GcHjF+dEEpr/Z+7nVtsyo2EE/O9ErOWyrkilYV0BTRPM+91ZqQlahdCmhxlarIa6kC3/OcnM8w6wRKCShJ5ED5dxqB6m44Y8ISAxIByHZGrcxmPDe541amdqkWQyDZa3KXlNA8thQwCeQx06S2wmZ9350DI6dlq+ykUnLtr5yIZB7IzYlzoWS3jY3a17mOSz1fI8FWIi4xf/9jMnKUOmuMuefANw4XveDAlgOXoBr2AiGzXRX4/Kk/AAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/those_olden_days.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/tiffany.png":
 /*!***************************************!*\
   !*** ./src/assets/images/tiffany.png ***!
@@ -1523,6 +2029,28 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABo0lEQVRYhcVXMZKDMAzc3NCcU/qZ1/MI9zzTJVCSgogTQhJyMgma8QwYYa9W0mJuABZcaB0AlLTe/P3mr2w6zBUA0E/r/VISFuC7g+2JZcy56UUNsDVvDbZnHEBJ577RtcjvJ5g2AGuN3Gs9zJcEjPm1+mkCQDbmvBUuAaPCesWaafNS8dEUkPUTdqkgNjgrZGPOu6H5NKGmSpcVT6zweXmvMdBxJCX9i9Ew100oyIa5Pp/vn1mRawWrmZtPGYUWqccO+cu1mnTAeXknQtp8oFiP1c2HFqXFgBa1F5TJAEUkF7KAyUglGK0Qm1KgAbEY4GC8b0OYAe0lj4HWtQ4AtP7mxef1u4xeW+u0CCOpsMB4wiNBhKSYvnI0uN1r3SSZi1I/wZVdzdQi1MTD8uWRaR3kdUF3gMMiJBZIfmm+JBxkmvsQE8Aq3Zp8nzIgWeA5l7Ibyb0mavB0wNrImosWcgjAWUS8xTSRehuAt7F23dqKfM/mQ6lm/Dx4r7XpBycMYMzxg+cw1/d1AIJ6z8fq8/Dn+Mpfs02I+Hnw08ZTeXsiusweYCSJ5nM4YroAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/tiffany.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/time_ripper.png":
+/*!*******************************************!*\
+  !*** ./src/assets/images/time_ripper.png ***!
+  \*******************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABxklEQVRYhcVWO47EIAx9WU03TSQfgTPSp88ZcwQkmtTZInHWYWwD2d0ZS2jCAPbz8wcGABs+KA8AiBQAABPyW4xOGAEAc1oAAFuksGFn4m1D2MS2Eqkb7gBrPcM2HxpFkQImZDxT6qb3jlwYYA9Woi4GrHOWjgYG9qScHeTX5M0ABQB5nx9r3Qz0ssB7WIf8rp0DsH15yCaMbmlKBiaMiBQwp+Uss9sM9LCgrbXkjrBZB9BCae9wk1CKFwYuV+2MJdz9pJgeMgtlWTErPO40rGoIPMM1g1YfkN9NAOQhy3AJTLZwT29TGbLssR4v8YsUsBKdcyvukcJZrpoMBxq173NdW8LnViITgHWn8FmTAc+49NwTbkoeA+Zd4Hn+TOlQms/fO3oA6AyUsWYP+Psa+2z2Cv7PY+ACQBrSwFgGa156624SMhipQIu/l4heHr0kocfAz833akSjeEKuMgMoOSCVaUC067YMC89bRX2SafcAjA4oHyXe/morLjf99rmugVLatP0kK0HVWCmHZEhbg3UXzGm51H/ZF8o5/65EWInUpPR6gfsi8hgoY1p6W+aJxgB6KP3LwTbPu8B6Xv2HyBIdDkQfk2/v18Uo4eVSFQAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/time_ripper.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/tinky_winky.png":
+/*!*******************************************!*\
+  !*** ./src/assets/images/tinky_winky.png ***!
+  \*******************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABj0lEQVRYhcVXMa7DIAx9+erWBclHyBmzs/eMPQISS+b8gTihqY1NqjZPQkrA8nsYY2AAsOBC3ABgohEAEJF/QhoRAACP9AQALBONC0okftYqTiwzkWr0LXEVpy7gSzO2BXhmzdGZiV6aN2LMOaw/uKcECxON7kSV/E00bonHnH+SkQaJnDPa44fJa7wJ0FBmH3BPaWtMLvV7I/UmQFLZGtOIIkIzmjXMXaAlVivxOEE1nzzmWoJWVCxYUXAJkJwc+7zhPiUgIr8QaNuRbepxKxlvFnlxmhGREYnWXt3pTPQ2Xu//I9zb8AjeglxwzuaJKUArPtw/b1EpIurCVOzkQsUwl8ASVSKQKjG89jtxKzrOJJRnEREwE21NsnukZ3OHOJYgiP+l5ObDWO4uxe4l2Ot+Xr+T6wS1cKoSejI+IrjsurbhPnvbrgfuK1mPnXUz6jqMPsGpw8g6aLwHT6sE1xBDewwh//dcWLWxA2f7XSA5tkRY5G4BZ5p2O2q+C658mm2VsOfO/ynqWjKsii7DP7HS+I5Vk4BzAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/tinky_winky.png?");
 
 /***/ }),
 
@@ -1556,6 +2084,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABi0lEQVRYhcVX2W7EMAgcqv50D6mJlOOz2YcWi7KDTbLaDZKlOMYwHsZ2IgAUF9o7AEzLBgD4+fp4SdJ53QEA0/cnAECnZVP8MvGy5nJCVZUNtObHK63ibz7y14GIPM7tAbOcb2cnm5l+/Ls4Vog3pqxXmmnZ/j0znxhnWIKsLPaerRhAGxuVdFiCLPm87i35vO4QEYhI21o94DQPCiL04xXfbAEsZkmERuu0bGnguEJVTVft7Q5AVC4LxAIbMCuFlaZiw12gqsPT0sazHRFzuD4HELdYD6RPzhL24g9F6EV15MQcibEkwnjiiUj3dLOx6gno8uSX0eiiio2VYXDB5SL0gjrT4vzk+R6p9b2xVY4YyeaXGehtv8p3w0MA4sRq/eOcjL3TDFRoZ/3sPZiTJc608TQAvRIwgJGRnmAjmxSAd2aBRrpgPodFaMYOpN4KWUIDxMTYLUGvJAxcD3x2GFEAWRJPLat9LB1bUJkBlsQDyBiIPoc0cOWvWbuOp2Vrn1/Pbv66FqPhKrsBsYMODClraS4AAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/tragedy.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/tricky.png":
+/*!**************************************!*\
+  !*** ./src/assets/images/tricky.png ***!
+  \**************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB00lEQVRYhcVXMa6DMAx9VN1YkHwEzsienTP2CJFYmPkDNTiOnQS1v1hCFQmx33uxnbQDsOFGewLARCMAIGD5SdCAAQAwxxcAYJto3LAr8bNHxMS2Ev0cAMd8SGlWomM7/sMmGrESJWMP/VHAgpUoATPReAmY/p4DByzH/rN12OVAHyMmGo9EDBjMpAwYjuSxArckch8jOGaigHTsBWeFPIaWSdZagQTAWY7pRxoUA2ktX5a+jzFTL9kCNp0ovuMhA6DB6zkGIGNmZTjRuK1Eya+cs/oGj69Ehz/Ph4z51KzkNrB0AQvm9zwzyOUvJGylgkwFtBqasWRiPRZbayzrA8ySGXol12p7adpJDRiNSC8G/Kqw5uR7CwkXgN5r6dTqilaZzfGV+OEO2wRAO9Cm2XmAeexM6FSxrApq5gE6maXVIIN7az8+jjnzrZr3fBerQFvpNORx2UmvWLUKSocMYO99KW80EReA3DvObi/BZNBSWXpE3E7l9XzvW+9u6a2BdyeU7bcGggOXLralw8gE4LG3gNSCy3lJrArAY1+StRT80hbI95q0VsAWBb+igAaqg7eAL5ZhrfQChuxw4ZbL61vs1r9mx2HUeqf/hsnm1L0R3WZ/q3CSwuTenCgAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/tricky.png?");
 
 /***/ }),
 
@@ -1603,6 +2142,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/waldo.png":
+/*!*************************************!*\
+  !*** ./src/assets/images/waldo.png ***!
+  \*************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABhklEQVRYhcVXPa6GIBAcX77OxmSPwBnp6T2jR9jExtpX6OqKCisa3YQEBZlh/60AjPhQfgDgyQEAAvpXQAMaAEDLHQBg9ORGTJp4bShMjAPR6wQE8++uOu9KkoAnt/iHJ4eBaDdk/XECcnDLHTy5UwcN6G+R+Fk2BfQ7z90KP09Abg4ANTMAXswwkWpODz0meZGAPmg1QZ8ELpGsCQRcA1+5oUWSeWAgGgeiTbKSuf7uajJT36YJeHKbw4WQzEuzqJxRzQ+zo+UlDjkdngGN2Twa05SKPbnl9np//C5ez2kg64QSdjV3CPNcS6y51VltGs0S0AcK2JQP4vUpOkoixGyCs/clzmiOghRobPsSApfLsSeHlrtF9TXz7YpYrAHJEa+bQJOwht3jBO6Ox1oy3TWViKkh0WDAthrGca/JWHKCuRbkbik1IaAx1QfBNGtAA+jn473Nroc4E5MPxLfXeeBIWu5QM5tMYNbAWgfW5rQ93Hm9Qf3012zRQKr3f1q0+aqZ0WfyD4BgH/8aBo4hAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/waldo.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/walpurgisnacht.png":
 /*!**********************************************!*\
   !*** ./src/assets/images/walpurgisnacht.png ***!
@@ -1611,6 +2161,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 "use strict";
 eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAADXUAAA11AFeZeUIAAABt0lEQVRYhcVX2Y7DMAgcV/3pHFISKcdnsw8tXkzAuLttimRFdmwzDEdIAkD4otwBYF53AMA0dJcoXbYDADCPPQCA5nUnPJi4bAidICLKi/O6kxRekyC1yHe1O+Re1nlrpYrpskS+q+0Dzm6+1V62XMgg9Rlr3RKXgWU7XOXycm9PBDwE0GJ5ZKV+b+03AbTSF4FkV0TpnSNSR7QeOrqtLLCGzgS0ZoFC6VoyDR2IKBc0LRGjJ1SR5driFjY8BpoASNFzeUbPPUOkrtAFktaUUn6mlHImEBGI6LdwrXte89zS7AJJ7V+lxkABgP0n63YktczQACxjTRe867O8bEd2m1yTUi3F09CFKVTb02JIAYArm0btAeRgnMe+CMziThWEVvU8+QmwKxjPrb1y6BiSPYCOgXtoKkqaLQu8VONzNVekJ5oHleueFVh9YstHivdLxfJu1sXPaiGS1vKFnjXcNXEcsPUcT/PYu0wVdUDWAl0XvFjxhu4ldV8J61tgFSV9+NWhjQkBaGXvatslkCoASfWn/hlMAJ4bLgXA80//LRWFSOd3Syn+r7DOXAdkE/HpUTQ5T0q+Jj93tWcP1JgEQAAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/walpurgisnacht.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/warden.png":
+/*!**************************************!*\
+  !*** ./src/assets/images/warden.png ***!
+  \**************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB8UlEQVRYhcVWMa7DIAx9rbplieQj5IzZs+eMPQJSF+b8oXVkzDOgVr9FQqXE2Mbv2fgC4MAPxw0AVlkAABseXzG6YQYA7OkOADhWWQ48I/G1aWziyCLnZhY5Z+SY7o84bnVaebVZOGCN6xy4QbhmOr0D1x5eyg+/Vvx0rd/svh2Ku9UBAFcmpL9+qKEsck5mWPe8sQ0zdbDgAAh2cOG0si2YWlBSDvSc8P89saKzqyyUGwCOGwuzDZ/CkQUAHgaeVEFlz2pNicJOIehNexO/9jfvpWgIQVQDVDFzasT5IQd6hah3a3+OOUfIi4pUrCCNKGtlhoemScIdLIcf2ETM/5JcWQRTuiO/ZOz5JyH5Q3d5eYMppbCaeWesYj2n6yyCDTN9Wa3TahNAXQdY3sKFnYWf1YVeHagcaBlVWWvcG4y44rnUzYIoDaNawPS0LqXfCw5kQzKO+Vy8fAAqIo5UPpWdUkLlQI9ArH3z5NK98nxZmikJfdgiTFt5P1pHKAStpmKVpbqlhU1vY+Xt8DrV5pUJsbxvfWPdzp7uVZOi04+h17DXG1i5ni5ns34LrLJWY8GKT6+j9g5UHIgywENhh2X0qI6wFEdlmRUmFjUPT+tcBUFURt9tOlrvSuHAuwY+mWrz7Aci7P5jWD5cXh79bPwBG/u9K8xIBAoAAAAASUVORK5CYII=\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/warden.png?");
 
 /***/ }),
 
@@ -1658,6 +2219,17 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/wild_yet_curious_creature.png":
+/*!*********************************************************!*\
+  !*** ./src/assets/images/wild_yet_curious_creature.png ***!
+  \*********************************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABv0lEQVRYhcVXS66DMAycPnXXDZKPwBmzz75n7BEiscmatwCD48QhoahYQpR8PBN/0weAGTfKEwAcjQAAj+knoB4DAOAdPgCA2dE4Y7HEzx6BiTkS/ZwAY/59a85v5RICjsYtjnrleQZMyhK4S/B6IngMW3BdSsDRmIBZ4jEBNDaTaHLBDt4mHlOzSw4JlMA5j/ltkbiEgFSkAUtmlmtarFAlsFfI/KTaCnJNzTJdBDwmeAzbm5W/w2c7fckKcuzICk1ZwCReIRTnXyHA0dCdglUCC3M7kCJRQqhGsCamC46imMHYxGfAqwQWEmkwaX/ydyRKxuJaEU8TkEDsU44DntdkIlFCRO/vImBt9hgQiUylMmN6Kmd2H4hE2ZijcY5E2xtGn5fr5LccU5gpAa3gqkfrPSSgN1tK5ZxeJ0+vLWsSsE5vWUaaWv4+2nt4JZNRvqTVXo5LWQLsbZjHOCWBvG6wJJVQVj+pxFsslRS75UrI6gmZBUpK3uGTpZWlUF5G9LuRQDl/925Yni8VLNk1Owjkfma/yjjQazQJnuc1Vvs2g1D6TSuuiQSQoK4SC7f+NduyoPfm+41ISz5WRrfJP8NVzbZ4jOV2AAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/wild_yet_curious_creature.png?");
+
+/***/ }),
+
 /***/ "./src/assets/images/with_many_voices.png":
 /*!************************************************!*\
   !*** ./src/assets/images/with_many_voices.png ***!
@@ -1680,6 +2252,28 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 
 /***/ }),
 
+/***/ "./src/assets/images/yan.png":
+/*!***********************************!*\
+  !*** ./src/assets/images/yan.png ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABiUlEQVRYhcVX0W7DMAg8V/3pZZHmSmn62exhdUTxgUm3JUiWWmPDAYftFACCE+UKAHVZAQBfnx+HOL3dHwCAOk8AAKnLKvjJxGGj+SwARERQSvnfsI00n5dDvRIZAmj80P9FhA62NiMiImGd9BhJxobxyQFEG0XkRV+X1QUQBeICaAYjANn5prMgQgBsw28AsIBcAFH07wJgQbkAougbQKb35r3AdgPQRBtJtD8EkCGfdeTJqAxtTXcQtYsiI3Wedh3hzHYHIHsjamNZ0Mz2hS3wjtDb/YFSyha1PI9gANu8Bya68rd6aC5g0GbRb8YBW3tKQqKkJNTGLIE9AIGPvgtGl5DVZdZY27QL6jy5NWTzdVkpXyIb7Rmm5QWxTqXNhI7Cipc9zx4tgVWODDIQbG3k4+qlSp7t1aV9nmgaIxERtyzuo7R7Xu10OtqvfbrMtunOPN+ze0IOWIPacLt2Wf0tESPAaQA2KsZ21h2jbO0CMEpztjwugDM/zbaTMPrg+OuhO6S0NJwl3xXaYA6BDotMAAAAAElFTkSuQmCC\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/yan.png?");
+
+/***/ }),
+
+/***/ "./src/assets/images/yolm.png":
+/*!************************************!*\
+  !*** ./src/assets/images/yolm.png ***!
+  \************************************/
+/***/ ((module) => {
+
+"use strict";
+eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABuklEQVRYhcWXQc6DIBCFvzbduWkyR/CM7t17Ro9A4sa1/0KnTmFQrP3rS0gAgXkMjxm8ARMX4gHQSA1Ay/AToy1PALrQAzA1Uk/MnvhZMTaZRpGfE1Cb97PuPIuvE1A9XUZAoUQaqRlFGEVcco9PF8/fmAGkpgs9o8jcBqoQgECzfLM4JMJG6mkUyd4c/a5jtE4kPtN3jMCW8RxRJWHJHLoF9jyBxIUe7BgNPHEdDmqgZVgWCIXj3w3PpNK52SNQV3tnWVpyR1asgT3R7ZXc/CICOlnH2NJIXUzKrnOIgDUUE9g7tg2XH7sFquZYvXG7BF4kdAms74PVSBd6qhCoQtg07l3ROXI+3eh5jwdatAwu61wc8MZuh+0oDnShXydIDQy0DFQhJIt7JLy+NXbkkcRqK6QStcffS4So9dvSeO1Sd2yxl+Pjnet6OlfXtP22/nbXS3ezVXIe9TyQ5AK7Gy93e/2ph1bR6Tsgh9MvIiWzxot30eVeQorNbKi3IueFGKt+gumLU/FGNvTO+4gG9pKaNzY5AvuInN905Wh5JvNL1rn+x+STxHIWavMlwr2Y/R/GAW4sj4Kr8AddbnBiFaph9gAAAABJRU5ErkJggg==\";\n\n//# sourceURL=webpack://my-webpack-project/./src/assets/images/yolm.png?");
+
+/***/ }),
+
 /***/ "./src/data.json":
 /*!***********************!*\
   !*** ./src/data.json ***!
@@ -1687,7 +2281,7 @@ eval("module.exports = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgC
 /***/ ((module) => {
 
 "use strict";
-eval("module.exports = /*#__PURE__*/JSON.parse('{\"wikis\":{\"ton-jp.wiki\":{\"name\":\"ton-jp.wiki\",\"url\":\"https://ton-jp.wiki\",\"terrorsLink\":\"https://www.ton-jp.com/html/terrors/$terror.html\"},\"wikiwiki.jp\":{\"name\":\"wikiwiki.jp\",\"url\":\"https://wikiwiki.jp/ton_jp/\",\"terrorsLink\":\"https://wikiwiki.jp/ton_jp/$terror\"},\"terror.moe\":{\"name\":\"terror.moe\",\"url\":\"https://terror.moe\",\"terrorsLink\":\"https://terror.moe/terrors/$terror\"}},\"terrors\":[{\"name\":\"Huggy\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Corrupted Toys\",\"type\":\"normal\"},{\"name\":\"Demented Spongebob\",\"type\":\"normal\",\"mystic\":true,\"mysticName\":\"SPONGEBOB\"},{\"name\":\"Specimen 8\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"HER\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Tails Doll\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Black Sun\",\"type\":\"normal\"},{\"name\":\"Aku Ball\",\"type\":\"normal\"},{\"name\":\"Ao Oni\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Toren’s Shadow\",\"type\":\"normal\"},{\"name\":\"[CENSORED]\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"WhiteNight\",\"type\":\"normal\",\"mystic\":true,\"mysticName\":\"FOLLOWER\"},{\"name\":\"An Arbiter\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Squidward\",\"type\":\"normal\"},{\"name\":\"Comedy\",\"type\":\"normal\"},{\"name\":\"Purple Guy\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Spongefly Swarm\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Hush\",\"type\":\"normal\"},{\"name\":\"MopeMope\",\"type\":\"normal\"},{\"name\":\"Sawrunner\",\"type\":\"normal\"},{\"name\":\"Imposter\",\"type\":\"normal\"},{\"name\":\"Something\",\"type\":\"normal\"},{\"name\":\"Starved\",\"type\":\"normal\"},{\"name\":\"The Painter\",\"type\":\"normal\"},{\"name\":\"The Guidance\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"With Many Voices\",\"type\":\"normal\"},{\"name\":\"Nextbots\",\"type\":\"normal\"},{\"name\":\"Harvest\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Smileghost\",\"type\":\"normal\"},{\"name\":\"Karol_Corpse\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Mario Has Logged In\",\"type\":\"normal\",\"mystic\":true,\"mysticName\":\"MARIO\"},{\"name\":\"Big Bird\",\"type\":\"normal\"},{\"name\":\"Dev Bytes\",\"type\":\"normal\",\"mystic\":true,\"mysticName\":\"DEVBYTE_N\"},{\"name\":\"Luigi & Luigi Dolls\",\"type\":\"normal\",\"mystic\":true,\"mysticName\":\"LUIGI\",\"links\":{\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/Luigi%20-%20Luigi%20Dolls\"}},{\"name\":\"V2\",\"type\":\"normal\"},{\"name\":\"Withered Bonnie\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"The Boys\",\"type\":\"normal\"},{\"name\":\"Something Wicked\",\"type\":\"normal\"},{\"name\":\"Seek\",\"type\":\"normal\"},{\"name\":\"Rush\",\"type\":\"normal\"},{\"name\":\"Sonic\",\"type\":\"normal\",\"mystic\":true,\"mysticName\":\"FAKER\"},{\"name\":\"Bad Batter\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Signus\",\"type\":\"normal\"},{\"name\":\"Mirror\",\"type\":\"normal\"},{\"name\":\"Legs\",\"type\":\"normal\"},{\"name\":\"The Old Man\",\"type\":\"normal\"},{\"name\":\"Judgement Bird\",\"type\":\"normal\"},{\"name\":\"Slender\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Maul-A-Child\",\"type\":\"normal\"},{\"name\":\"Garten Goers\",\"type\":\"normal\"},{\"name\":\"Don’t Touch Me\",\"type\":\"normal\"},{\"name\":\"Specimen 2\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Specimen 10\",\"type\":\"normal\"},{\"name\":\"The Lifebringer\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Pale Association\",\"type\":\"normal\"},{\"name\":\"Toy Enforcer\",\"type\":\"normal\"},{\"name\":\"TBH\",\"type\":\"normal\"},{\"name\":\"DOOMBOX\",\"type\":\"normal\"},{\"name\":\"Christian Brutal Sniper\",\"type\":\"normal\"},{\"name\":\"Nosk\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Apocrean Harvester\",\"type\":\"normal\"},{\"name\":\"Arkus\",\"type\":\"normal\"},{\"name\":\"Cartoon Cat\",\"type\":\"normal\"},{\"name\":\"Wario Apparition\",\"type\":\"normal\"},{\"name\":\"Shinto\",\"type\":\"normal\"},{\"name\":\"Hell Bell\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Security\",\"type\":\"normal\"},{\"name\":\"The Swarm\",\"type\":\"normal\"},{\"name\":\"Shiteyanyo\",\"type\":\"normal\"},{\"name\":\"Bacteria\",\"type\":\"normal\"},{\"name\":\"Tiffany\",\"type\":\"normal\"},{\"name\":\"HoovyDundy\",\"type\":\"normal\"},{\"name\":\"Haket\",\"type\":\"normal\"},{\"name\":\"Akumii-Kari\",\"type\":\"normal\"},{\"name\":\"Lunatic Cultist\",\"type\":\"normal\"},{\"name\":\"Sturm\",\"type\":\"normal\"},{\"name\":\"Punishing Bird\",\"type\":\"normal\"},{\"name\":\"Prisoner\",\"type\":\"normal\"},{\"name\":\"Red Bus\",\"type\":\"normal\"},{\"name\":\"Waterwraith\",\"type\":\"normal\"},{\"name\":\"Astrum Aureus\",\"type\":\"normal\"},{\"name\":\"Snarbolax\",\"type\":\"normal\"},{\"name\":\"All-Around-Helpers\",\"type\":\"normal\"},{\"name\":\"Sakuya Izayoi\",\"type\":\"normal\"},{\"name\":\"Arrival\",\"type\":\"normal\"},{\"name\":\"Miros Birds\",\"type\":\"normal\"},{\"name\":\"BFF\",\"type\":\"normal\"},{\"name\":\"Scavenger\",\"type\":\"normal\"},{\"name\":\"lain\",\"type\":\"normal\"},{\"name\":\"Feddys\",\"type\":\"alternate\"},{\"name\":\"TBH SPY\",\"type\":\"alternate\"},{\"name\":\"Tragedy\",\"type\":\"alternate\"},{\"name\":\"Voidwalker\",\"type\":\"alternate\"},{\"name\":\"Paradise Bird\",\"type\":\"alternate\"},{\"name\":\"Overseer\",\"type\":\"alternate\"},{\"name\":\"Lord’s Signal\",\"type\":\"alternate\"},{\"name\":\"Rabid Snarbolax\",\"type\":\"alternate\"},{\"name\":\"MR MEGA\",\"type\":\"alternate\"},{\"name\":\"Eggman’s Announcement\",\"type\":\"alternate\"},{\"name\":\"Knight of Toren\",\"type\":\"alternate\"},{\"name\":\"Decayed Sponge\",\"type\":\"alternate\"},{\"name\":\"Mona & The Mountain\",\"type\":\"alternate\",\"links\":{\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/Mona%20-%20the%20Mountain\",\"terror.moe\":\"https://terror.moe/terrors/mona_and_the_mountain\"}},{\"name\":\"Furnace\",\"type\":\"alternate\"},{\"name\":\"Army In Black\",\"type\":\"alternate\"},{\"name\":\"Bliss\",\"type\":\"alternate\",\"links\":{\"ton-jp.wiki\":\"https://www.ton-jp.com/html/terrors/Lone%20Agent%20-%20Bliss.html\"}},{\"name\":\"Glaggle Gang\",\"type\":\"alternate\"},{\"name\":\"WHITEFACE\",\"type\":\"alternate\"},{\"name\":\"sm64.z64\",\"type\":\"alternate\",\"image\":\"sm64_z64\",\"links\":{\"terror.moe\":\"https://terror.moe/terrors/sm64_z64\"}},{\"name\":\"The Red Mist\",\"type\":\"alternate\"},{\"name\":\"Sanic\",\"type\":\"alternate\"},{\"name\":\"S.T.G.M\",\"type\":\"alternate\"},{\"name\":\"Convict Squad\",\"type\":\"alternate\"},{\"name\":\"Fusion Pilot\",\"type\":\"alternate\"},{\"name\":\"Dev Maulers\",\"type\":\"alternate\"},{\"name\":\"Lisa\",\"links\":{\"terror.moe\":\"https://terror.moe/terrors/lisa\"},\"type\":\"alternate\"},{\"name\":\"Apathy\",\"type\":\"alternate\"},{\"name\":\"Angry Munci\",\"type\":\"alternate\"},{\"name\":\"Ambush\",\"type\":\"alternate\"},{\"name\":\"Roblander\",\"type\":\"alternate\"},{\"name\":\"Walpurgisnacht\",\"type\":\"alternate\"},{\"name\":\"Sakuya The Ripper\",\"type\":\"alternate\"},{\"name\":\"Teuthida\",\"type\":\"alternate\"},{\"name\":\"Judas\",\"type\":\"alternate\"},{\"name\":\"The Navigator\",\"type\":\"alternate\"},{\"name\":\"Try Not To Touch ME\",\"type\":\"alternate\"},{\"name\":\"Meatball Man\",\"type\":\"special\",\"links\":{\"ton-jp.wiki\":\"https://www.ton-jp.com/html/terrors/MeetballMan.html\",\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/The MeatBallMan\"}},{\"name\":\"Mystic Moon\",\"type\":\"special\",\"links\":{\"ton-jp.wiki\":\"https://www.ton-jp.com/html/terrors/MysticMoon.html\",\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/Psychosis\"}},{\"name\":\"Twilight\",\"type\":\"special\",\"links\":{\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/Apocalypse%20Bird\"}},{\"name\":\"Blood Moon\",\"type\":\"special\",\"links\":{\"ton-jp.wiki\":\"https://wikiwiki.jp/ton_jp/BloodMoon\",\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/Virus\"}},{\"name\":\"Solstice\",\"type\":\"special\"}]}');\n\n//# sourceURL=webpack://my-webpack-project/./src/data.json?");
+eval("module.exports = /*#__PURE__*/JSON.parse('{\"wikis\":{\"wikiwiki.jp\":{\"name\":\"wikiwiki.jp\",\"url\":\"https://wikiwiki.jp/ton_jp/\",\"terrorsLink\":\"https://wikiwiki.jp/ton_jp/$terror\"},\"terror.moe\":{\"name\":\"terror.moe\",\"url\":\"https://terror.moe\",\"terrorsLink\":\"https://terror.moe/terrors/$terror\"},\"ton-jp.wiki\":{\"name\":\"ton-jp.wiki\",\"url\":\"https://ton-jp.wiki\",\"terrorsLink\":\"https://www.ton-jp.com/html/terrors/$terror.html\"}},\"terrors\":[{\"name\":\"Huggy\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Corrupted Toys\",\"type\":\"normal\"},{\"name\":\"Demented Spongebob\",\"type\":\"normal\",\"mystic\":true,\"mysticName\":\"SPONGEBOB\"},{\"name\":\"Specimen 8\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"HER\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Tails Doll\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Black Sun\",\"type\":\"normal\"},{\"name\":\"Aku Ball\",\"type\":\"normal\"},{\"name\":\"Ao Oni\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Toren’s Shadow\",\"type\":\"normal\"},{\"name\":\"[CENSORED]\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"WhiteNight\",\"type\":\"normal\",\"mystic\":true,\"mysticName\":\"FOLLOWER\"},{\"name\":\"An Arbiter\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Squidward\",\"type\":\"normal\"},{\"name\":\"Comedy\",\"type\":\"normal\"},{\"name\":\"Purple Guy\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Spongefly Swarm\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Hush\",\"type\":\"normal\"},{\"name\":\"MopeMope\",\"type\":\"normal\"},{\"name\":\"Sawrunner\",\"type\":\"normal\"},{\"name\":\"Imposter\",\"type\":\"normal\"},{\"name\":\"Something\",\"type\":\"normal\"},{\"name\":\"Starved\",\"type\":\"normal\"},{\"name\":\"The Painter\",\"type\":\"normal\"},{\"name\":\"The Guidance\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"With Many Voices\",\"type\":\"normal\"},{\"name\":\"Nextbots\",\"type\":\"normal\"},{\"name\":\"Harvest\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Smileghost\",\"type\":\"normal\"},{\"name\":\"Karol_Corpse\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Mario Has Logged In\",\"type\":\"normal\",\"mystic\":true,\"mysticName\":\"MARIO\"},{\"name\":\"MX\",\"type\":\"normal\"},{\"name\":\"Big Bird\",\"type\":\"normal\"},{\"name\":\"Dev Bytes\",\"type\":\"normal\",\"mystic\":true,\"mysticName\":\"DEVBYTE_N\"},{\"name\":\"Luigi & Luigi Dolls\",\"type\":\"normal\",\"mystic\":true,\"mysticName\":\"LUIGI\",\"links\":{\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/Luigi%20-%20Luigi%20Dolls\"}},{\"name\":\"V2\",\"type\":\"normal\"},{\"name\":\"Withered Bonnie\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"The Boys\",\"type\":\"normal\"},{\"name\":\"Something Wicked\",\"type\":\"normal\"},{\"name\":\"Seek\",\"type\":\"normal\"},{\"name\":\"Rush\",\"type\":\"normal\"},{\"name\":\"Sonic\",\"type\":\"normal\",\"mystic\":true,\"mysticName\":\"FAKER\"},{\"name\":\"Bad Batter\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Signus\",\"type\":\"normal\"},{\"name\":\"Mirror\",\"type\":\"normal\"},{\"name\":\"Legs\",\"type\":\"normal\"},{\"name\":\"Mona & The Mountain\",\"type\":\"alternate\",\"links\":{\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/Mona%20-%20The%20Mountain\",\"terror.moe\":\"https://terror.moe/terrors/mona_and_the_mountain\"}},{\"name\":\"The Old Man\",\"type\":\"normal\"},{\"name\":\"Judgement Bird\",\"type\":\"normal\"},{\"name\":\"Slender\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Maul-A-Child\",\"type\":\"normal\"},{\"name\":\"Garten Goers\",\"type\":\"normal\"},{\"name\":\"Don’t Touch Me\",\"type\":\"normal\"},{\"name\":\"Specimen 2\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Specimen 10\",\"type\":\"normal\"},{\"name\":\"The Lifebringer\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Pale Association\",\"type\":\"normal\"},{\"name\":\"Toy Enforcer\",\"type\":\"normal\"},{\"name\":\"TBH\",\"type\":\"normal\"},{\"name\":\"DOOMBOX\",\"type\":\"normal\"},{\"name\":\"Christian Brutal Sniper\",\"type\":\"normal\"},{\"name\":\"Nosk\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Apocrean Harvester\",\"type\":\"normal\"},{\"name\":\"Arkus\",\"type\":\"normal\"},{\"name\":\"Cartoon Cat\",\"type\":\"normal\"},{\"name\":\"Wario Apparition\",\"type\":\"normal\"},{\"name\":\"Shinto\",\"type\":\"normal\"},{\"name\":\"Hell Bell\",\"type\":\"normal\",\"mystic\":true},{\"name\":\"Security\",\"type\":\"normal\"},{\"name\":\"The Swarm\",\"type\":\"normal\"},{\"name\":\"Shiteyanyo\",\"type\":\"normal\"},{\"name\":\"Bacteria\",\"type\":\"normal\"},{\"name\":\"Tiffany\",\"type\":\"normal\"},{\"name\":\"HoovyDundy\",\"type\":\"normal\"},{\"name\":\"Haket\",\"type\":\"normal\"},{\"name\":\"Akumii-Kari\",\"type\":\"normal\"},{\"name\":\"Lunatic Cultist\",\"type\":\"normal\"},{\"name\":\"Sturm\",\"type\":\"normal\"},{\"name\":\"Punishing Bird\",\"type\":\"normal\"},{\"name\":\"Prisoner\",\"type\":\"normal\"},{\"name\":\"Red Bus\",\"type\":\"normal\"},{\"name\":\"Waterwraith\",\"type\":\"normal\"},{\"name\":\"Astrum Aureus\",\"type\":\"normal\"},{\"name\":\"Snarbolax\",\"type\":\"normal\"},{\"name\":\"All-Around-Helpers\",\"type\":\"normal\"},{\"name\":\"Sakuya Izayoi\",\"type\":\"normal\"},{\"name\":\"Arrival\",\"type\":\"normal\"},{\"name\":\"Miros Birds\",\"type\":\"normal\"},{\"name\":\"BFF\",\"type\":\"normal\"},{\"name\":\"Scavenger\",\"type\":\"normal\"},{\"name\":\"Tinky Winky\",\"type\":\"normal\"},{\"name\":\"Tricky\",\"type\":\"normal\"},{\"name\":\"Yolm\",\"type\":\"normal\"},{\"name\":\"Red Fanatic\",\"type\":\"normal\"},{\"name\":\"Dr. Tox\",\"type\":\"normal\"},{\"name\":\"Ink Demon\",\"type\":\"normal\"},{\"name\":\"Retep\",\"type\":\"normal\"},{\"name\":\"Those Olden Days\",\"type\":\"normal\"},{\"name\":\"S.O.S\",\"type\":\"normal\"},{\"name\":\"Bigger Boot\",\"type\":\"normal\"},{\"name\":\"The Pursuer\",\"type\":\"normal\"},{\"name\":\"Spamton\",\"type\":\"normal\"},{\"name\":\"Immortal Snail\",\"type\":\"normal\"},{\"name\":\"Charlotte\",\"type\":\"normal\"},{\"name\":\"Herobrine\",\"type\":\"normal\"},{\"name\":\"Peepy\",\"type\":\"normal\"},{\"name\":\"The Jester\",\"type\":\"normal\"},{\"name\":\"Wild Yet Curious Creature\",\"type\":\"normal\"},{\"name\":\"Manti\",\"type\":\"normal\"},{\"name\":\"Horseless Headless Horsemann\",\"type\":\"normal\"},{\"name\":\"Ghost Girl\",\"type\":\"normal\"},{\"name\":\"Cubor’s Revenge\",\"type\":\"normal\"},{\"name\":\"The Origin\",\"type\":\"normal\"},{\"name\":\"Beyond\",\"type\":\"normal\"},{\"name\":\"Terror of Nowhere\",\"type\":\"normal\"},{\"name\":\"Deleted\",\"type\":\"normal\"},{\"name\":\"Poly\",\"type\":\"normal\"},{\"name\":\"Dog Mimic\",\"type\":\"normal\"},{\"name\":\"Warden\",\"type\":\"normal\"},{\"name\":\"Express Train To Hell\",\"type\":\"normal\"},{\"name\":\"Killer Fish\",\"type\":\"normal\"},{\"name\":\"FOX Squad\",\"type\":\"normal\"},{\"name\":\"Time Ripper\",\"type\":\"normal\"},{\"name\":\"Malicious Twins\",\"type\":\"normal\"},{\"name\":\"Parhelion’s Victims\",\"type\":\"normal\"},{\"name\":\"Bed Mecha\",\"type\":\"normal\"},{\"name\":\"Killer Rabbit\",\"type\":\"normal\"},{\"name\":\"Random Flying Knife\",\"type\":\"normal\"},{\"name\":\"MissingNo\",\"type\":\"normal\"},{\"name\":\"Living Shadow\",\"type\":\"normal\"},{\"name\":\"The Plague Doctor\",\"type\":\"normal\"},{\"name\":\"The Rat\",\"type\":\"normal\"},{\"name\":\"Waldo\",\"type\":\"normal\"},{\"name\":\"Clockey\",\"type\":\"normal\"},{\"name\":\"lain\",\"type\":\"normal\"},{\"name\":\"Feddys\",\"type\":\"alternate\"},{\"name\":\"TBH SPY\",\"type\":\"alternate\"},{\"name\":\"Tragedy\",\"type\":\"alternate\"},{\"name\":\"Voidwalker\",\"type\":\"alternate\"},{\"name\":\"Paradise Bird\",\"type\":\"alternate\"},{\"name\":\"Restless Creator\",\"type\":\"alternate\"},{\"name\":\"Lord’s Signal\",\"type\":\"alternate\"},{\"name\":\"Rabid Snarbolax\",\"type\":\"alternate\"},{\"name\":\"Joy\",\"type\":\"alternate\"},{\"name\":\"MR MEGA\",\"type\":\"alternate\"},{\"name\":\"Eggman’s Announcement\",\"type\":\"alternate\"},{\"name\":\"Knight of Toren\",\"type\":\"alternate\"},{\"name\":\"Decayed Sponge\",\"type\":\"alternate\"},{\"name\":\"Parhelion\",\"type\":\"alternate\"},{\"name\":\"얀샋ㄷ요무\",\"type\":\"alternate\",\"image\":\"yan\",\"links\":{\"terror.moe\":\"https://terror.moe/terrors/yan\",\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/%2CD%40%3BQ7Y\"}},{\"name\":\"Army In Black\",\"type\":\"alternate\"},{\"name\":\"Bliss\",\"type\":\"alternate\",\"links\":{\"ton-jp.wiki\":\"https://www.ton-jp.com/html/terrors/Lone%20Agent%20-%20Bliss.html\"}},{\"name\":\"Glaggle Gang\",\"type\":\"alternate\"},{\"name\":\"WHITEFACE\",\"type\":\"alternate\"},{\"name\":\"SM64.Z64\",\"type\":\"alternate\",\"image\":\"sm64_z64\",\"links\":{\"terror.moe\":\"https://terror.moe/terrors/sm64_z64\"}},{\"name\":\"The Red Mist\",\"type\":\"alternate\"},{\"name\":\"Sanic\",\"type\":\"alternate\"},{\"name\":\"S.T.G.M\",\"type\":\"alternate\"},{\"name\":\"Convict Squad\",\"type\":\"alternate\"},{\"name\":\"Fusion Pilot\",\"type\":\"alternate\"},{\"name\":\"Dev Maulers\",\"type\":\"alternate\"},{\"name\":\"Lisa\",\"type\":\"alternate\",\"links\":{\"terror.moe\":\"https://terror.moe/terrors/lisa\"}},{\"name\":\"Apathy\",\"type\":\"alternate\"},{\"name\":\"Angry Munci\",\"type\":\"alternate\"},{\"name\":\"Ambush\",\"type\":\"alternate\"},{\"name\":\"Roblander\",\"type\":\"alternate\"},{\"name\":\"Walpurgisnacht\",\"type\":\"alternate\"},{\"name\":\"Sakuya The Ripper\",\"type\":\"alternate\"},{\"name\":\"Teuthida\",\"type\":\"alternate\"},{\"name\":\"Judas\",\"type\":\"alternate\"},{\"name\":\"Try Not To Touch Me\",\"type\":\"alternate\"},{\"name\":\"The Observation\",\"type\":\"alternate\"},{\"name\":\"Meatball Man\",\"type\":\"special\",\"links\":{\"ton-jp.wiki\":\"https://www.ton-jp.com/html/terrors/MeetballMan.html\",\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/The MeatBallMan\"}},{\"name\":\"Mystic Moon\",\"type\":\"special\",\"links\":{\"ton-jp.wiki\":\"https://www.ton-jp.com/html/terrors/MysticMoon.html\",\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/Psychosis\"}},{\"name\":\"Twilight\",\"type\":\"special\",\"links\":{\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/Apocalypse%20Bird\"}},{\"name\":\"Blood Moon\",\"type\":\"special\",\"links\":{\"ton-jp.wiki\":\"https://wikiwiki.jp/ton_jp/BloodMoon\",\"wikiwiki.jp\":\"https://wikiwiki.jp/ton_jp/Virus\"}},{\"name\":\"Solstice\",\"type\":\"special\"}]}');\n\n//# sourceURL=webpack://my-webpack-project/./src/data.json?");
 
 /***/ })
 
