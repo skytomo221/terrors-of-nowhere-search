@@ -68,16 +68,10 @@ export default function App() {
     if (terror.links && terror.links[selectedWiki]) {
       return terror.links[selectedWiki];
     }
-    if (selectedWiki === "terror.moe") {
-      return wikis[selectedWiki].terrorsLink.replace(
-        "$terror",
-        toSnakeCase(terror.name),
-      );
-    }
     if (selectedWiki === "wikiwiki.jp") {
       return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name.replaceAll("’", "'"));
     }
-    return wikis[selectedWiki].terrorsLink.replace("$terror", terror.name);
+    return wikis[selectedWiki].terrorsLink.replace("$terror", toSnakeCase(terror.name));
   };
 
   return (
