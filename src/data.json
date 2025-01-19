@@ -1,10 +1,5 @@
 {
   "wikis": {
-    "ton-jp.wiki": {
-      "name": "ton-jp.wiki",
-      "url": "https://ton-jp.wiki",
-      "terrorsLink": "https://www.ton-jp.com/html/terrors/$terror.html"
-    },
     "wikiwiki.jp": {
       "name": "wikiwiki.jp",
       "url": "https://wikiwiki.jp/ton_jp/",
@@ -14,6 +9,11 @@
       "name": "terror.moe",
       "url": "https://terror.moe",
       "terrorsLink": "https://terror.moe/terrors/$terror"
+    },
+    "ton-jp.wiki": {
+      "name": "ton-jp.wiki",
+      "url": "https://ton-jp.wiki",
+      "terrorsLink": "https://www.ton-jp.com/html/terrors/$terror.html"
     }
   },
   "terrors": [
