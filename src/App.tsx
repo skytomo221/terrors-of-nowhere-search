@@ -39,7 +39,7 @@ export default function App() {
   const { terrors, wikis } = data;
   const [searchWord, setSearchWord] = React.useState("");
   const [selectedWiki, setSelectedWiki] =
-    React.useState<keyof typeof wikis>("ton-jp.wiki");
+    React.useState<keyof typeof wikis>("wikiwiki.jp");
   const [hoveredMysticMoon, setHoveredMysticMoon] = React.useState(false);
   const [twoDigitRandomNumber, setTwoDigitRandomNumber] = React.useState("");
   const [sixDigitRandomNumber, setSixDigitRandomNumber] = React.useState("");
