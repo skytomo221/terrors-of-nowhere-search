@@ -160,6 +160,10 @@
       "mysticName": "MARIO"
     },
     {
+      "name": "MX",
+      "type": "normal"
+    },
+    {
       "name": "Big Bird",
       "type": "normal"
     },
@@ -225,6 +229,14 @@
     {
       "name": "Legs",
       "type": "normal"
+    },
+    {
+      "name": "Mona & The Mountain",
+      "type": "alternate",
+      "links": {
+        "wikiwiki.jp": "https://wikiwiki.jp/ton_jp/Mona%20-%20The%20Mountain",
+        "terror.moe": "https://terror.moe/terrors/mona_and_the_mountain"
+      }
     },
     {
       "name": "The Old Man",
@@ -404,6 +416,182 @@
       "type": "normal"
     },
     {
+      "name": "Tinky Winky",
+      "type": "normal"
+    },
+    {
+      "name": "Tricky",
+      "type": "normal"
+    },
+    {
+      "name": "Yolm",
+      "type": "normal"
+    },
+    {
+      "name": "Red Fanatic",
+      "type": "normal"
+    },
+    {
+      "name": "Dr. Tox",
+      "type": "normal"
+    },
+    {
+      "name": "Ink Demon",
+      "type": "normal"
+    },
+    {
+      "name": "Retep",
+      "type": "normal"
+    },
+    {
+      "name": "Those Olden Days",
+      "type": "normal"
+    },
+    {
+      "name": "S.O.S",
+      "type": "normal"
+    },
+    {
+      "name": "Bigger Boot",
+      "type": "normal"
+    },
+    {
+      "name": "The Pursuer",
+      "type": "normal"
+    },
+    {
+      "name": "Spamton",
+      "type": "normal"
+    },
+    {
+      "name": "Immortal Snail",
+      "type": "normal"
+    },
+    {
+      "name": "Charlotte",
+      "type": "normal"
+    },
+    {
+      "name": "Herobrine",
+      "type": "normal"
+    },
+    {
+      "name": "Peepy",
+      "type": "normal"
+    },
+    {
+      "name": "The Jester",
+      "type": "normal"
+    },
+    {
+      "name": "Wild Yet Curious Creature",
+      "type": "normal"
+    },
+    {
+      "name": "Manti",
+      "type": "normal"
+    },
+    {
+      "name": "Horseless Headless Horsemann",
+      "type": "normal"
+    },
+    {
+      "name": "Ghost Girl",
+      "type": "normal"
+    },
+    {
+      "name": "Cubor’s Revenge",
+      "type": "normal"
+    },
+    {
+      "name": "The Origin",
+      "type": "normal"
+    },
+    {
+      "name": "Beyond",
+      "type": "normal"
+    },
+    {
+      "name": "Terror of Nowhere",
+      "type": "normal"
+    },
+    {
+      "name": "Deleted",
+      "type": "normal"
+    },
+    {
+      "name": "Poly",
+      "type": "normal"
+    },
+    {
+      "name": "Dog Mimic",
+      "type": "normal"
+    },
+    {
+      "name": "Warden",
+      "type": "normal"
+    },
+    {
+      "name": "Express Train To Hell",
+      "type": "normal"
+    },
+    {
+      "name": "Killer Fish",
+      "type": "normal"
+    },
+    {
+      "name": "FOX Squad",
+      "type": "normal"
+    },
+    {
+      "name": "Time Ripper",
+      "type": "normal"
+    },
+    {
+      "name": "Malicious Twins",
+      "type": "normal"
+    },
+    {
+      "name": "Parhelion’s Victims",
+      "type": "normal"
+    },
+    {
+      "name": "Bed Mecha",
+      "type": "normal"
+    },
+    {
+      "name": "Killer Rabbit",
+      "type": "normal"
+    },
+    {
+      "name": "Random Flying Knife",
+      "type": "normal"
+    },
+    {
+      "name": "MissingNo",
+      "type": "normal"
+    },
+    {
+      "name": "Living Shadow",
+      "type": "normal"
+    },
+    {
+      "name": "The Plague Doctor",
+      "type": "normal"
+    },
+    {
+      "name": "The Rat",
+      "type": "normal"
+    },
+    {
+      "name": "Waldo",
+      "type": "normal"
+    },
+    {
+      "name": "Clockey",
+      "type": "normal"
+    },
+    {
       "name": "lain",
       "type": "normal"
     },
@@ -428,7 +616,7 @@
       "type": "alternate"
     },
     {
-      "name": "Overseer",
+      "name": "Restless Creator",
       "type": "alternate"
     },
     {
@@ -437,6 +625,10 @@
     },
     {
       "name": "Rabid Snarbolax",
+      "type": "alternate"
+    },
+    {
+      "name": "Joy",
       "type": "alternate"
     },
     {
@@ -456,16 +648,17 @@
       "type": "alternate"
     },
     {
-      "name": "Mona & The Mountain",
-      "type": "alternate",
-      "links": {
-        "wikiwiki.jp": "https://wikiwiki.jp/ton_jp/Mona%20-%20the%20Mountain",
-        "terror.moe": "https://terror.moe/terrors/mona_and_the_mountain"
-      }
+      "name": "Parhelion",
+      "type": "alternate"
     },
     {
-      "name": "Furnace",
-      "type": "alternate"
+      "name": "얀샋ㄷ요무",
+      "type": "alternate",
+      "image": "yan",
+      "links": {
+        "terror.moe": "https://terror.moe/terrors/yan",
+        "wikiwiki.jp": "https://wikiwiki.jp/ton_jp/%2CD%40%3BQ7Y"
+      }
     },
     {
       "name": "Army In Black",
@@ -487,7 +680,7 @@
       "type": "alternate"
     },
     {
-      "name": "sm64.z64",
+      "name": "SM64.Z64",
       "type": "alternate",
       "image": "sm64_z64",
       "links": {
@@ -520,10 +713,10 @@
     },
     {
       "name": "Lisa",
+      "type": "alternate",
       "links": {
         "terror.moe": "https://terror.moe/terrors/lisa"
-      },
-      "type": "alternate"
+      }
     },
     {
       "name": "Apathy",
@@ -558,11 +751,11 @@
       "type": "alternate"
     },
     {
-      "name": "The Navigator",
+      "name": "Try Not To Touch Me",
       "type": "alternate"
     },
     {
-      "name": "Try Not To Touch ME",
+      "name": "The Observation",
       "type": "alternate"
     },
     {
